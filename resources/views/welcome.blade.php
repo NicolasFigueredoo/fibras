@@ -9,8 +9,11 @@
 <body>
     <div id="app">
         <h1>Bienvenido a mi aplicación</h1>
+        <Home></Home>
+        Demo
     </div>
 
     
-    @vite('resources/js/app.js')</body>
+    @vite('resources/js/app.js')
+</body>
 </html>
