@@ -8,9 +8,9 @@
 </head>
 <body>
     <div id="app">
-        <h1>Bienvenido a mi aplicación</h1>
+
         <Home></Home>
-        Demo
+        <panelview></panelview>
     </div>
 
     
