@@ -21,13 +21,13 @@
                 <label class="form-label">Portada (Tamaño recomendado 704x306)</label>
                 <input type="file" ref="fotoSlider" class="form-control" id="imgs" @change="guardarFoto()">
             </div>
-            <div class="mb-3 mt-3">
+            <!-- <div class="mb-3 mt-3">
                 <label for="exampleInputPassword1" class="form-label">Texto</label>
                 <textarea class="summernote" id="editor"></textarea>
-            </div>
+            </div> -->
 
 
-            <div class="w-100 d-flex justify-content-end">
+            <div class="w-100 d-flex justify-content-end mt-3">
                 <button @click="updateServicio()" type="button" class="btn"
                     style="background-color: #7F7F7F; color: white;">Actualizar</button>
             </div>

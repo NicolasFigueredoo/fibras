@@ -12,11 +12,7 @@
                     <input type="text" class="form-control" id="nombre">
 
                 </div>
-                <div class="col-md-2 d-flex flex-column align-items-center">
-                    <label class="form-check-label" for="checkbox3">Destacado</label>
-                    <input type="checkbox" class="form-check-input" id="destacado">
-                </div>
-                <div class="col-md-2">
+                <div class="col-md-4">
                     <label class="form-label">Orden</label>
                     <input type="text" class="form-control" id="orden">
                 </div>
@@ -27,70 +23,73 @@
                 <textarea class="summernote" id="editor"></textarea>
             </div>
 
-            <div class="tabla table-responsive">
-                <p class="presupuestoText">AGREGAR TABLA PRODUCTO</p>
-                <table class="table">
-                    <thead style="height: 40px">
-                        <tr>
-                            <th scope="col" class="encabezado">Código</th>
-                            <th scope="col" class="encabezado">Tamaño</th>
-                            <th scope="col" class="encabezado">Pack</th>
-                            <th scope="col" class="encabezado">Código de barras</th>
-                            <th class="encabezado"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td style="padding-left: 0px;">
-                                <input type="text" class="form-control" id="codigo" v-model="codigo">
+        <div class="row">
 
-                            </td>
-                            <td>
-                                <input type="text" class="form-control" id="tamaño" v-model="tamaño">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control" id="pack" v-model="pack">
+            <div class="row col-lg-6">
+                <div class="d-flex flex-column col-md-6">
+                        <label class="form-label">Seleccionar Categorias</label>
+                        <select @change="categoriaSelect()" id="categoriaSelect" class="form-select"
+                            aria-label="Default select example" style="height: 50px;">
+                            <option selected>Seleccionar</option>
+                            <option v-for="categoria in categorias" :key="categoria.id" :value="categoria.id">{{categoria.nombre}}</option>
+    
+                        </select>
+                    
+                        <label class="form-label mt-3">Categorias</label>
+                        <div id="contenedorCategorias w-100">
+                            <button v-for="cat in catSelect" :key="cat.id" type="button" class="btn"
+                                style="background-color: #7F7F7F; color: white; margin-bottom:10px">
+                                {{ cat.nombre }}
+                                <svg xmlns="http://www.w3.org/2000/svg" height="14" width="15.75" viewBox="0 0 576 512"
+                                    @click="deleteCat(cat.id)">
+                                    <path fill="#ffffff"
+                                        d="M576 128c0-35.3-28.7-64-64-64H205.3c-17 0-33.3 6.7-45.3 18.7L9.4 233.4c-6 6-9.4 14.1-9.4 22.6s3.4 16.6 9.4 22.6L160 429.3c12 12 28.3 18.7 45.3 18.7H512c35.3 0 64-28.7 64-64V128zM271 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
 
-                            </td>
-                            <td>
-                                <input type="text" class="form-control" id="codigoBarra" v-model="barraCodigo">
+            </div>
 
-                            </td>
-
-                            <td id="buttonAgregar" style="padding-right: 0px; padding-left: 0px">
-                                <button id="agregar" type="button"  class="btn btn-primary"
-                                    @click="agregarSubProducto">
-                                    Agregar
-                                </button>
-                            </td>
-                        </tr>
+            <div class="row col-lg-6">
 
 
-                        <tr v-for="(subProducto, index) in subProductos" :key="index">
+                <div class="d-flex flex-column col-md-6">
+                    <label class="form-label">Seleccionar Litros</label>
+                    <select @change="litroSelect()" id="litroSelect" class="form-select"
+                        aria-label="Default select example" style="height: 50px;">
+                        <option selected>Seleccionar</option>
+                        <option v-for="litro in litros" :key="litro.id" :value="litro.id">{{litro.cantidad}}L</option>
 
-                            <td>{{ subProducto.codigo }}</td>
-                            <td>{{ subProducto.tamaño }}</td>
-                            <td>{{ subProducto.pack }}</td>
-                            <td>{{ subProducto.codigobarra }}</td>
-                            <td id="botonAgregar" style="padding-right: 0px; padding-left: 0px">
-                                <button type="button" class="btn btn-danger"
-                                    @click="deleteSubProducto(subProducto.idSubProducto)">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white"
-                                        class="bi bi-trash" viewBox="0 0 16 16">
-                                        <path
-                                            d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
-                                        <path
-                                            d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
-                                    </svg>
-                                </button>
-                            </td>
+                    </select>
+                
+                    <label class="form-label mt-3">Litros</label>
+                    <div id="contenedorAplicaciones" style="width: 50%;">
+                        <button v-for="lit in litSelect" :key="lit.id" type="button" class="btn"
+                            style="background-color: #7F7F7F; color: white; margin-bottom: 10px">
+                            {{ lit.cantidad }}L
+                            <svg xmlns="http://www.w3.org/2000/svg" height="14" width="15.75" viewBox="0 0 576 512"
+                                @click="deleteLit(lit.id)">
+                                <path fill="#ffffff"
+                                    d="M576 128c0-35.3-28.7-64-64-64H205.3c-17 0-33.3 6.7-45.3 18.7L9.4 233.4c-6 6-9.4 14.1-9.4 22.6s3.4 16.6 9.4 22.6L160 429.3c12 12 28.3 18.7 45.3 18.7H512c35.3 0 64-28.7 64-64V128zM271 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                        </tr>
+        <div class="row mt-2">
+                <div class="col-md-6">
+                    <label class="form-label">Ficha técnica</label>
+                    <input @change="guardarFoto()" type="file" ref="fotoProduct" class="form-control" id="imagen">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label mt-2">Hoja de seguridad</label>
+                    <input @change="guardarFoto2()" type="file" ref="fotoProduct2" class="form-control" id="imagen">
+                </div>
 
 
-
-                    </tbody>
-                </table>
             </div>
 
 
@@ -123,7 +122,12 @@ export default {
             pack: null,
             barraCodigo: null,
             subProductos: [],
-            subProductoCount: 1
+            subProductoCount: 1,
+            categorias: [],
+            litros: [],
+            litSelect: [],
+            catSelect: [],
+
 
         }
 
@@ -135,48 +139,43 @@ export default {
     },
     methods: {
 
-        resetCampos(){
+        litroSelect() {
+            let lit = this.litros.find(litro => litro.id == $('#litroSelect').val());
+            let existingLitro = this.litSelect.find(litro => litro.id == lit.id);
+            if (!existingLitro) {
+            let litro = { id: lit.id, cantidad: lit.cantidad }
+            this.litSelect.push(litro);
+        }
+        },
+        categoriaSelect() {
+            let cat = this.categorias.find(categoria => categoria.id == $('#categoriaSelect').val());
+            let existingCategoria = this.catSelect.find(categoria => categoria.id == cat.id);
+            if (!existingCategoria) {
+            let categoria = { id: cat.id, nombre: cat.nombre }
+            this.catSelect.push(categoria);}
+        },
+        resetCampos() {
             $('#nombre').val('')
             $('#destacado').prop('checked', false)
             $('#orden').val('')
         },
-        deleteSubProducto(id){
-            this.subProductos = this.subProductos.filter(subProducto => subProducto.idSubProducto !== id);
-
+        deleteLit(id) {
+            this.litSelect = this.litSelect.filter(lit => lit.id !== id);
         },
-        agregarSubProducto() {
-
-            if (this.codigo && this.tamaño && this.pack && this.barraCodigo) {
-
-                const nuevoSubproducto = {
-                    idSubProducto: this.subProductoCount,
-                    codigo: this.codigo,
-                    tamaño: this.tamaño,
-                    pack: this.pack,
-                    codigobarra: this.barraCodigo,
-                };
-
-                this.subProductos.push(nuevoSubproducto);
-                this.subProductoCount += 1;
-                this.codigo = '';
-                this.tamaño = '';
-                this.pack = '';
-                this.barraCodigo = '';
-
-            }
-
-
+        deleteCat(id) {
+            this.catSelect = this.catSelect.filter(cat => cat.id !== id);
         },
+     
         crearProducto() {
 
 
-     
+
             let destacado = $('#destacado').prop("checked");
 
 
             if (destacado === true) {
                 this.productoDestacado = 1;
-            }else{
+            } else {
                 this.productoDestacado = 0;
             }
 
@@ -185,7 +184,7 @@ export default {
             axios.post('/api/crearProducto', {
                 orden: $('#orden').val(),
                 nombre: $('#nombre').val(),
-                texto:$('#editor').summernote('code').toString(),
+                texto: $('#editor').summernote('code').toString(),
                 destacado: this.productoDestacado,
                 subproductos: this.subProductos
 
@@ -214,26 +213,46 @@ export default {
 
         },
         summerNote() {
-                if (this.getSummer === null && this.getSummer !== true) {
-                    $('#editor').summernote({
-                        height: 300,
-                    });
-                    var noteBar = $('.note-toolbar');
-                    noteBar.find('[data-toggle]').each(function () {
-                        $(this).attr('data-bs-toggle', $(this).attr('data-toggle')).removeAttr('data-toggle');
-                    });
+            if (this.getSummer === null && this.getSummer !== true) {
+                $('#editor').summernote({
+                    height: 300,
+                });
+                var noteBar = $('.note-toolbar');
+                noteBar.find('[data-toggle]').each(function () {
+                    $(this).attr('data-bs-toggle', $(this).attr('data-toggle')).removeAttr('data-toggle');
+                });
 
-                    this.$store.commit('setSummer', true);
-                }
+                this.$store.commit('setSummer', true);
+            }
 
 
-                $('#editor').summernote('code', '');
+            $('#editor').summernote('code', '');
 
         },
+        obtenerCategorias() {
+            axios.get('/api/obtenerCategorias')
+                .then(response => {
+                    this.categorias = response.data
+                    
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        },
+        obtenerLitros() {
+            axios.get('/api/obtenerLitros')
+                .then(response => {
+                    this.litros = response.data;
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        }
     },
 
     mounted() {
-
+        this.obtenerCategorias();
+        this.obtenerLitros();
         this.summerNote();
         this.resetCampos();
 
@@ -274,6 +293,4 @@ h1 {
     border: none;
 
 }
-
-
 </style>

@@ -8,7 +8,7 @@
         <form class="mt-3">
             <div class="row">
                 <div class="col-lg-6">
-                    <label class="form-label">Imagen (Tamaño recomendado 950x470) </label>
+                    <label class="form-label">Imagen (Tamaño recomendado 804x650) </label>
                     <input type="file" ref="fotoBanner" class="form-control" @change="guardarFoto()">
                 </div>
                 <div class="col-lg-6">
@@ -26,7 +26,7 @@
                 <textarea class="summernote" id="editor" :value="bannerTexto"></textarea>
             </div>
 
-            <div v-if="this.seccion === 'home'" class="row mt-2">
+            <!-- <div v-if="this.seccion === 'home'" class="row mt-2">
                 <div class="col-lg-6">
                 <label class="form-label">Texto boton</label>
                 <input type="text" class="form-control" id="txtBoton" :value="this.txtBoton" >
@@ -36,7 +36,7 @@
                 <input type="text" class="form-control" id="linkBoton" :value="this.linkBoton" >
                 </div>
 
-            </div>
+            </div> -->
 
             <div class="w-100 d-flex justify-content-end mt-3">
                 <button @click="updateBanner()" type="button" class="btn"
@@ -119,7 +119,7 @@ export default {
 
         },
         summerNote() {
-            if (this.getSummer === null && this.getSummer !== true) {
+            if (this.getSummer === null && this.getSummer !== true && this.getSummer === undefined) {
                 $('#editor').summernote({
                     height: 300,
                 });
@@ -142,7 +142,7 @@ export default {
                         this.seccion = response.data[0].seccion
                         this.txtBoton = response.data[0].textoboton
                         this.linkBoton = response.data[0].link
-                    } else {
+                    } else if(this.idComponente === 120) {
                         this.bannerTexto = response.data[1].texto
                         this.bannerTitulo = response.data[1].titulo
                         this.idBanner = response.data[1].id
@@ -150,6 +150,26 @@ export default {
                         this.seccion = response.data[1].seccion
                         this.txtBoton = response.data[1].textoboton
                         this.linkBoton = response.data[1].link
+                    }
+
+                    else if(this.idComponente === 121) {
+                        this.bannerTexto = response.data[2].texto
+                        this.bannerTitulo = response.data[2].titulo
+                        this.idBanner = response.data[2].id
+                        this.imagen = response.data[2].imagen
+                        this.seccion = response.data[2].seccion
+                        this.txtBoton = response.data[2].textoboton
+                        this.linkBoton = response.data[2].link
+                    }
+
+                    else if(this.idComponente === 122) {
+                        this.bannerTexto = response.data[3].texto
+                        this.bannerTitulo = response.data[3].titulo
+                        this.idBanner = response.data[3].id
+                        this.imagen = response.data[3].imagen
+                        this.seccion = response.data[3].seccion
+                        this.txtBoton = response.data[3].textoboton
+                        this.linkBoton = response.data[3].link
                     }
 
                     $('#editor').summernote('code', this.bannerTexto);

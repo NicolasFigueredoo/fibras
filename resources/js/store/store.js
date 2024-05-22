@@ -18,11 +18,23 @@ export default createStore({
     idMetadato:null,
     videoId:null,
     idUsuario: null,
+    idCategoria: null,
+    idSector:null,
+    idLitro: null,
     inputValue: localStorage.getItem('inputValue') || false,
     summer: null,
 
   },
   mutations: {
+    setLitroId(state,idLitro){
+      state.idLitro = idLitro
+    },
+    setSectorId(state,idSector){
+      state.idSector = idSector
+    },
+    setCategoriaId(state,idCategoria){
+      state.idCategoria = idCategoria
+    },
     setUsuarioId(state,idUsuario){
       state.idUsuario = idUsuario
     },
@@ -86,6 +98,15 @@ export default createStore({
   },
  
   getters: {
+    getIdLitro(state) {
+      return state.idLitro;
+    },
+    getIdSector(state) {
+      return state.idSector;
+    },
+    getIdCategoria(state) {
+      return state.idCategoria;
+    },
     getIdUsuario(state) {
       return state.idUsuario;
     },

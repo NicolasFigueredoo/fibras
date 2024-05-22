@@ -2,10 +2,10 @@
     <div class="container" >
 
         <div class="w-100 border-bottom d-flex justify-content-between">
-            <h1>SERVICIOS</h1>
+            <h1>CATEGORIAS</h1>
 
-            <button @click="crearServicio()" type="button" class="btn mb-1"
-                 id="crearServicio"   style="background-color:  #7F7F7F; color: white;">Crear Servicio</button>
+            <button @click="crearCategoria()" type="button" class="btn mb-1"
+                 id="crearCategoria"   style="background-color:  #7F7F7F; color: white;">Crear Categoria</button>
         </div>
         <div class="input-group mb-3 mt-2">
             <input type="text" class="form-control" placeholder="Buscar..." v-model="search" style="border-radius: 0%;">
@@ -14,34 +14,18 @@
             <thead>
                 <tr>
                     <th scope="col" class="col-lg-1 encabezado">Orden</th>
-                    <th scope="col" class="col-lg-2 encabezado">Título</th>
-                    <th scope="col" class="col-lg-1 encabezado">Imagen</th>
+                    <th scope="col" class="col-lg-2 encabezado">Nombre</th>
                     <th scope="col" class="col-lg-1 encabezado">Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="servicio in filteredServicios" :key="servicio.id">
-                    <td>{{ servicio.orden }}</td>
-                    <td>{{ servicio.titulo }}</td>
-                    <td class="d-flex justify-content-center align-items-center" >
-                        <div style="width: 50px; height: 50px;">
-
-                            <div :style="{
-                            backgroundImage: `url(${getImagen(servicio.imagen)})`,
-                            backgroundSize: 'cover',
-                            backgroundPosition: 'center',
-                            backgroundRepeat: 'no-repeat',
-                            width: '100%',
-                            height: '100%'
-                        }">
-                        </div>
-                        </div>
-                    </td>
-
+                <tr v-for="categoria in filteredCategorias" :key="categoria.id">
+                    <td>{{ categoria.orden }}</td>
+                    <td>{{ categoria.nombre }}</td>
                     <td >
                         <div class="d-flex justify-content-center">
                             <button type="button" class="btn btn-sm" style="background-color: #7F7F7F; "
-                                @click="editarServicio(53, servicio.id)">
+                                @click="editarServicio(192, categoria.id)">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="15" height="15"
                                     style="cursor: pointer">
                                     <path fill="white"
@@ -49,7 +33,7 @@
                                 </svg>
                             </button>
     
-                            <button type="button" class="btn btn-sm btn-danger" style="margin-left: 15px;  border:0px " @click="eliminarServicio(servicio.id)">
+                            <button type="button" class="btn btn-sm btn-danger" style="margin-left: 15px;  border:0px " @click="deleteCategoria(categoria.id)">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="15" height="15"
                                     style="cursor: pointer;">
                                     <path fill="white"
@@ -77,7 +61,7 @@ export default {
 
     data() {
         return {
-            servicios: [],
+            categorias: [],
             search: ''
         }
     },
@@ -86,9 +70,9 @@ export default {
         idComponente() {
             return this.$store.getters['getMostrarComponente'];
         },
-        filteredServicios() {
-            return this.servicios.filter(servicio => {
-            return servicio.titulo.toLowerCase().includes(this.search.toLowerCase());
+        filteredCategorias() {
+            return this.categorias.filter(categoria => {
+            return categoria.nombre.toLowerCase().includes(this.search.toLowerCase());
     });
   }
     },
@@ -100,37 +84,31 @@ export default {
             }
         },
 
-        eliminarServicio(idServicio){
-        axios.post('/api/deleteServicio',{
-            idServicio: idServicio
+        deleteCategoria(idCategoria){
+        axios.post('/api/deleteCategoria',{
+            idCategoria: idCategoria
         })
                 .then(response => {
                     this.$store.commit('setMostrarAlerta', true);
                     this.$store.commit('setClaseAlerta', 1);
-                    this.$store.commit('setMensajeAlerta', 'Servicio eliminado con éxito');  
-                    this.obtenerServicios();
+                    this.$store.commit('setMensajeAlerta', 'Categoria eliminada con éxito');  
+                    this.obtenerCategorias();
                 })
                 .catch(error => {
                     console.error(error);
                 });
     },
-        crearServicio(){
-            this.$store.commit('mostrarComponente', 52);
+        crearCategoria(){
+            this.$store.commit('mostrarComponente', 191);
         },
-        getImagen(fileName) {
-            if(fileName){
-                const filePath = fileName.split('/').pop();
-                return '/api/getImage/' + filePath
-            }
-        },
-        editarServicio(idComponente, idServicio) {
-            this.$store.commit('setServicioId', idServicio);
+        editarServicio(idComponente, idCategoria) {
+            this.$store.commit('setCategoriaId', idCategoria);
             this.$store.commit('mostrarComponente', idComponente);
         },
-        obtenerServicios() {
-            axios.get('/api/obtenerServicios')
+        obtenerCategorias() {
+            axios.get('/api/obtenerCategorias')
                 .then(response => {
-                    this.servicios = response.data
+                    this.categorias = response.data
                     
                 })
                 .catch(error => {
@@ -139,7 +117,7 @@ export default {
         }
     },
     mounted() {
-        this.obtenerServicios();
+        this.obtenerCategorias();
     }
 }
 </script>
@@ -169,10 +147,9 @@ h1 {
 .imagen {
     width: 100%;
     height: 100%;
-    background-size: contain;
 }
 
-#crearServicio{
+#crearCategoria{
     font-size: 16px;
     color: black;
     font-family: "Montserrat", sans-serif;

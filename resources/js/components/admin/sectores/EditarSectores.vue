@@ -1,33 +1,31 @@
 <template>
-    <div class="container" >
+    <div class="container">
 
         <div class="w-100 border-bottom">
-            <h1>CREAR SERVICIO</h1>
+            <h1>EDITAR SECTOR</h1>
         </div>
 
         <form class="mt-3">
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-4">
                     <label class="form-label">Orden</label>
-                <input type="text" class="form-control" id="orden">
+                <input type="text" class="form-control" id="orden" v-model="this.orden">
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-8">
                     <label class="form-label">Título</label>
-                <input type="text" class="form-control" id="titulo">
+                <input type="text" class="form-control" id="titulo" v-model="this.titulo">
                 </div>
             </div>
+  
             <div class="mt-3">
-                <label class="form-label">Imagen (Tamaño recomendado 704x306)</label>
+                <label class="form-label">Imagen (Tamaño recomendado 288x376)</label>
                 <input type="file" ref="fotoSlider" class="form-control" id="imgs" @change="guardarFoto()">
             </div>
-            <!-- <div class="mb-3 mt-3">
-                <label for="exampleInputPassword1" class="form-label">Texto</label>
-                <textarea class="summernote" id="editor"></textarea>
-            </div> -->
+
 
             <div class="w-100 d-flex justify-content-end mt-3">
-                <button @click="crearServicio()" type="button" class="btn"
-                    style="background-color: #7F7F7F; color: white;">Crear</button>
+                <button @click="updateSector()" type="button" class="btn"
+                    style="background-color: #7F7F7F; color: white;">Actualizar</button>
             </div>
 
         </form>
@@ -48,51 +46,49 @@ export default {
 
     data() {
         return {
-            jsonCodigoSlider: '',
             foto: null,
             orden: null,
-            slider: ''
+            titulo: null,
+            sector: ''
         }
 
     },
-
     computed: {
+        idSector() {
+            return this.$store.getters['getIdSector'];
+        },
+        idComponente() {
+            return this.$store.getters['getMostrarComponente'];
+        },
         getSummer() {
             return this.$store.getters['getSummer'];
         }
     },
     methods: {
-        resetCampos(){
-            $('#orden').val('');
-            $('#titulo').val('');
-        },
         guardarFoto() {
             const file = this.$refs.fotoSlider;
             this.foto = file.files[0]
         },
-        crearServicio() {
+        updateSector() {
             let formData = new FormData();
+            formData.append('idSector', this.idSector);
             formData.append('foto', this.foto);
-            formData.append('texto', $('#editor').summernote('code').toString());
-            formData.append('orden', $('#orden').val());
-            formData.append('titulo', $('#titulo').val());
+            formData.append('orden', this.orden);
+            formData.append('titulo', this.titulo);
 
-            axios.post('/api/crearServicio', formData, {
+
+            axios.post('/api/updateSector', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
             })
                 .then(response => {
-                    console.log(response.data)
+
                     this.$store.commit('setMostrarAlerta', true);
                     this.$store.commit('setClaseAlerta', 1);
-                    this.$store.commit('setMensajeAlerta', 'Servicio creado con éxito');
-                    this.$store.commit('mostrarComponente', 50);
-                    $('#editor').summernote('code', '');
-                    this.resetCampos();
-
-
-
+                    this.$store.commit('setMensajeAlerta', 'Sector modificado con éxito');
+                    this.$store.commit('mostrarComponente', 195);
+                  
                 })
                 .catch(error => {
                     console.error(error);
@@ -103,37 +99,28 @@ export default {
 
 
         },
-        summerNote() {
-            if (this.getSummer === null && this.getSummer !== true) {
-                $('#editor').summernote({
-                    height: 300,
+        obtenerSector() {
+            axios.get(`/api/obtenerSector/${this.idSector}`)
+                .then(response => {
+                    this.sector = response.data;
+                    this.orden = response.data.orden;
+                    this.titulo = response.data.titulo;
+
+                })
+                .catch(error => {
+                    console.error(error);
                 });
-                var noteBar = $('.note-toolbar');
-                noteBar.find('[data-toggle]').each(function () {
-                    $(this).attr('data-bs-toggle', $(this).attr('data-toggle')).removeAttr('data-toggle');
-                });
-
-                this.$store.commit('setSummer', true);
-            }
-
-
         }
-
     },
 
     mounted() {
-
-        this.summerNote();
-        this.resetCampos();
-
-
+        this.obtenerSector();
     }
 
 }
 </script>
 
 <style scoped>
-
 .form-check-input:checked {
     background-color: #7F7F7F;
     border-color: #7F7F7F;

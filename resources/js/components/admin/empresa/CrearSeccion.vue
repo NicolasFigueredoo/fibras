@@ -94,7 +94,7 @@ export default {
 
         },
         summerNote() {
-            if (this.getSummer === null && this.getSummer !== true) {
+            if (this.getSummer == null && this.getSummer != true && this.getSummer == undefined) {
                 $('#editor').summernote({
                     height: 300,
                 });

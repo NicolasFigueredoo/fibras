@@ -28,4 +28,5 @@ export default defineConfig({
             'vue': 'vue/dist/vue.esm-bundler.js'
         },
     },    
+    
 });

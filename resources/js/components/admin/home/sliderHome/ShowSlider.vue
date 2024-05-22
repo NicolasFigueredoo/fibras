@@ -2,7 +2,7 @@
     <div class="container">
 
         <div class="w-100 border-bottom d-flex justify-content-between">
-            <h1>SLIDER</h1>
+            <h1>HOME</h1>
 
             <button @click="crearSlider()" type="button" class="btn mb-1"
                  id="crearSlider"   style="background-color:  #7F7F7F; color: white;">Crear Slider</button>

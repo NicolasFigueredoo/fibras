@@ -3,8 +3,20 @@
     <div class="row justify-content-center align-items-center vh-100">
       <div class="col-md-3 formulario">
         <form>
-          <div class="mb-3 justify-content-center align-items-center">
-            <!-- <img style="width: 100%;" class="imgKotex" src="../../../../img/logoelroble.png" alt="" /> -->
+          <div class="mb-3 d-flex justify-content-center align-items-center">
+            <div style="width: 100px; height: 150px;">
+              <div style="
+              background-image: url('../../../img/quimicaLogo.png');
+              background-size: contain;
+
+              background-repeat: no-repeat;
+              width: 100%;
+              height: 100%;
+              ">
+  
+              </div>
+
+            </div>
           </div>
           <div class="mb-3">
             <label style="font-size: 14px" class="form-check-label"
@@ -59,8 +71,8 @@ export default {
     };
   },
   computed: {
-    usuarioRecordar() {
-      const user = this.$store.getters.getUsuarioRecordar;
+    getIdUsuario() {
+      const user = this.$store.getters.getIdUsuario;
       return user;
     },
   },
@@ -75,19 +87,14 @@ export default {
             contraseña: this.contraseña,
           })
           .then((response) => {
-            if (typeof response.data === "number") {
-                let recordarUsuario = {
-                  usuario: this.usuario,
-                  contraseña: this.contraseña,
-                };
-                this.$store.commit("setUsuarioRecordar", recordarUsuario);
-        
+            if (typeof response.data === "number") {  
+
               let mensaje = "Bienvenido " + this.usuario;
               this.$store.commit("setLoginId", response.data);
               this.$store.commit("setMostrarAlerta", true);
               this.$store.commit("setClaseAlerta", 1);
               this.$store.commit("setMensajeAlerta", mensaje);
-              this.$router.push("/admin/panel");
+              this.$router.push("/panel");
             } else {
               $(".mensaje").html(
                 `<p class="text-danger ">${response.data}</p>`
@@ -95,7 +102,7 @@ export default {
             }
           })
           .catch((error) => {
-            $(".mensaje").html(`<p class="text-danger ">${response.data}</p>`);
+            $(".mensaje").html(`<p class="text-danger ">Error ingresar Admin:</p>`);
             console.error("Error ingresar Admin:", error);
           });
       } else {
@@ -106,6 +113,7 @@ export default {
     },
   },
   mounted() {
+    
   },
 };
 </script>
