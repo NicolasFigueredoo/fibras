@@ -8,9 +8,10 @@
 </head>
 <body>
     <div id="app">
-
-        <Home></Home>
-        <panelview></panelview>
+        <x-navbar></x-navbar>
+        <!-- -->
+         @yield('content')
+        {{-- <x-footer></x-footer> --}}
     </div>
 
     
