@@ -15,10 +15,12 @@ class ProductosController extends Controller
 
     public function index()
     {
-        $productos = Producto::with(['imagenes' => function ($query) {
+        $productos = Producto::with(['categorias' => function ($query) {
             $query->orderBy('orden', 'asc');
-        }])->with(['SubProductos' => function ($query) {
-            $query->orderBy('codigo', 'asc');
+        }])->with(['imagenes' => function ($query) {
+            $query->orderBy('orden', 'asc');
+        }])->with(['litros' => function ($query) {
+            $query->orderBy('cantidad', 'asc');
         }])->orderBy('orden', 'asc')->get();
         return response()->json($productos);
     }
@@ -29,20 +31,44 @@ class ProductosController extends Controller
         $producto->orden = $request->orden;
         $producto->nombre = $request->nombre;
         $producto->texto = $request->texto;
-        $producto->destacado = $request->destacado;
+
+        if ($request->hasFile('hojaSeguridad')) {
+
+            if (!Storage::exists('public/fotos')) {
+                Storage::makeDirectory('public/fotos');
+            }
+
+            $photoPath = $request->file('hojaSeguridad')->store('fotos');
+            $producto->hojaseguridad = $photoPath;
+        }
+
+
+        if ($request->hasFile('fichaTecnica')) {
+
+            if (!Storage::exists('public/fotos')) {
+                Storage::makeDirectory('public/fotos');
+            }
+
+            $photoPath = $request->file('fichaTecnica')->store('fotos');
+            $producto->fichatecnica = $photoPath;
+        }
         $producto->save();
 
 
-        if($request->subproductos){
-            foreach ($request->subproductos as $subProductoJson) {
-                $subProducto = new SubProducto();
-                $subProducto->producto_id = $producto->id;
-                $subProducto->codigo = $subProductoJson['codigo'];
-                $subProducto->tamaño = $subProductoJson['tamaño'];
-                $subProducto->pack = $subProductoJson['pack'];
-                $subProducto->codigobarra = $subProductoJson['codigobarra'];
-                $subProducto->save();
-            }
+        if($request->categorias){
+            $categoriasIds = array_map(function($categoria) {
+                return $categoria['id'];
+            }, $request->categorias);
+        
+            $producto->categorias()->sync($categoriasIds);
+        }
+        
+        if($request->litros){
+            $litrosIds = array_map(function($litro) {
+                return $litro['id'];
+            }, $request->litros);
+        
+            $producto->litros()->sync($litrosIds);
         }
         
         
@@ -56,22 +82,45 @@ class ProductosController extends Controller
         $producto->orden = $request->orden;
         $producto->nombre = $request->nombre;
         $producto->texto = $request->texto;
-        $producto->destacado = $request->destacado;
-        $producto->save();
         
-        foreach ($producto->subproductos as $subProductoJson) {
-            $subProducto = SubProducto::find($subProductoJson['id']);
-            $subProducto->delete();
+        if ($request->hasFile('hojaSeguridad')) {
+
+            if (!Storage::exists('public/fotos')) {
+                Storage::makeDirectory('public/fotos');
+            }
+
+            $photoPath = $request->file('hojaSeguridad')->store('fotos');
+            $producto->hojaseguridad = $photoPath;
         }
 
-        foreach ($request->subproductos as $subProductoJson) {
-            $subProducto = new SubProducto();
-            $subProducto->producto_id = $producto->id;
-            $subProducto->codigo = $subProductoJson['codigo'];
-            $subProducto->tamaño = $subProductoJson['tamaño'];
-            $subProducto->pack = $subProductoJson['pack'];
-            $subProducto->codigobarra = $subProductoJson['codigobarra'];
-            $subProducto->save();
+
+        if ($request->hasFile('fichaTecnica')) {
+
+            if (!Storage::exists('public/fotos')) {
+                Storage::makeDirectory('public/fotos');
+            }
+
+            $photoPath = $request->file('fichaTecnica')->store('fotos');
+            $producto->fichatecnica = $photoPath;
+        }
+
+
+        $producto->save();
+        
+        if($request->categorias){
+            $categoriasIds = array_map(function($categoria) {
+                return $categoria['id'];
+            }, $request->categorias);
+        
+            $producto->categorias()->sync($categoriasIds);
+        }
+        
+        if($request->litros){
+            $litrosIds = array_map(function($litro) {
+                return $litro['id'];
+            }, $request->litros);
+        
+            $producto->litros()->sync($litrosIds);
         }
         
         
@@ -88,12 +137,12 @@ class ProductosController extends Controller
 
     public function obtenerProducto($idProducto)
     {
-        $producto = Producto::with(['imagenes' => function ($query) {
-            $query->orderBy('orden', 'asc');
-        }])->with(['SubProductos' => function ($query) {
-            $query->orderBy('codigo', 'asc');
-        }])->find($idProducto);
         
+        $producto = Producto::with(['categorias' => function ($query) {
+            $query->orderBy('orden', 'asc');
+        }])->with(['litros' => function ($query) {
+            $query->orderBy('cantidad', 'asc');
+        }])->find($idProducto);;
 
         return response()->json($producto);
     }

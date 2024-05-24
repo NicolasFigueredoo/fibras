@@ -82,11 +82,11 @@
         <div class="row mt-2">
                 <div class="col-md-6">
                     <label class="form-label">Ficha técnica</label>
-                    <input @change="guardarFoto()" type="file" ref="fotoProduct" class="form-control" id="imagen">
+                    <input @change="guardarFichaFile" type="file" ref="guardarFicha" class="form-control" id="imagen">
                 </div>
                 <div class="col-md-6">
                     <label class="form-label mt-2">Hoja de seguridad</label>
-                    <input @change="guardarFoto2()" type="file" ref="fotoProduct2" class="form-control" id="imagen">
+                    <input @change="guardarHojaFile" type="file" ref="guardarHoja" class="form-control" id="imagen">
                 </div>
 
 
@@ -116,18 +116,12 @@ export default {
 
     data() {
         return {
-            productoDestacado: null,
-            codigo: null,
-            tamaño: null,
-            pack: null,
-            barraCodigo: null,
-            subProductos: [],
-            subProductoCount: 1,
             categorias: [],
             litros: [],
             litSelect: [],
             catSelect: [],
-
+            guardarHoja: null,
+            guardarFicha: null
 
         }
 
@@ -139,6 +133,15 @@ export default {
     },
     methods: {
 
+        guardarHojaFile() {
+            const file = this.$refs.guardarHoja;
+            this.guardarHoja = file.files[0]
+        },
+        guardarFichaFile() {
+            const file = this.$refs.guardarFicha;
+            this.guardarFicha = file.files[0]
+
+        },
         litroSelect() {
             let lit = this.litros.find(litro => litro.id == $('#litroSelect').val());
             let existingLitro = this.litSelect.find(litro => litro.id == lit.id);
@@ -165,29 +168,16 @@ export default {
         deleteCat(id) {
             this.catSelect = this.catSelect.filter(cat => cat.id !== id);
         },
-     
         crearProducto() {
-
-
-
-            let destacado = $('#destacado').prop("checked");
-
-
-            if (destacado === true) {
-                this.productoDestacado = 1;
-            } else {
-                this.productoDestacado = 0;
-            }
-
-
-
             axios.post('/api/crearProducto', {
                 orden: $('#orden').val(),
                 nombre: $('#nombre').val(),
                 texto: $('#editor').summernote('code').toString(),
                 destacado: this.productoDestacado,
-                subproductos: this.subProductos
-
+                categorias: this.catSelect,
+                litros: this.litSelect,
+                hojaSeguridad: this.guardarHoja,
+                fichaTecnica: this.guardarFicha
             },
                 {
                     headers: {

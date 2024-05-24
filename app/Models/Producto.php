@@ -10,13 +10,20 @@ class Producto extends Model
     use HasFactory;
     protected $table = 'productos';
 
-    protected $fillable = ['orden', 'nombre', 'texto', 'destacado'];
+    protected $fillable = ['orden', 'nombre', 'texto', 'hojaseguridad','fichatecnica'];
 
 
-    public function SubProductos()
+    public function categorias()
     {
-        return $this->hasMany(SubProducto::class);
+        return $this->belongsToMany(Categoria::class, 'categoria_producto');
     }
+
+    
+    public function litros()
+    {
+        return $this->belongsToMany(Litro::class, 'litro_producto');
+    }
+
 
     public function imagenes()
     {

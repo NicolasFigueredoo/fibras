@@ -362,11 +362,6 @@
                                 <a @click="mostrarComponenteF(99)" class="nav-link">Mostrar</a>
                             </nav>
                         </div>
-                        <div v-if="this.admin == 1" id="collapseUsuario" class="collapse">
-                            <nav class="sidenav-menu-nested nav accordion">
-                                <a @click="mostrarComponenteF(100)" class="nav-link ">Crear</a>
-                            </nav>
-                        </div>
                     </li>
 
                     <!-- <li class="sidebar-item">
@@ -484,7 +479,7 @@
                     </nav>
 
                 </div>
-                <div class="componentesV" style=" max-height: 850px; overflow-y: auto;">
+                <div class="componentesV" style="max-height: 500px; overflow-y: scroll; overflow-x: hidden;">
 
                     <Alerta style="position: fixed; z-index: 5;" v-if="mostrarAlerta === true" />
                     <!--COMPONENTES SLIDER -->

@@ -11,4 +11,10 @@ class Litro extends Model
     protected $table = 'litros';
 
     protected $fillable = ['imagen', 'cantidad'];
+
+
+    public function productos()
+    {
+        return $this->belongsToMany(Producto::class, 'litro_producto');
+    }
 }
