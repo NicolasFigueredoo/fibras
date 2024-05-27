@@ -7,7 +7,7 @@
                 <a class="sidebar-brand">
                     <!-- <img src="../../../../img/logoelroble.png" class="w-75"> -->
                 </a>
-                <ul class="sidebar-nav nav accordion">
+                <ul class="sidebar-nav nav ">
                     <li class="sidebar-header text-uppercase">
                         Administrador EL ROBLE
                     </li>
@@ -32,12 +32,12 @@
                             </div>
                         </a>
                         <div id="collapseHome" class="collapse">
-                            <nav class="sidenav-menu-nested nav accordion">
+                            <nav class="sidenav-menu-nested nav ">
                                 <a @click="mostrarComponenteF(180)" class="nav-link ">Header</a>
                             </nav>
                         </div>
                         <div id="collapseHome" class="collapse">
-                            <nav class="sidenav-menu-nested nav accordion">
+                            <nav class="sidenav-menu-nested nav ">
                                 <a @click="mostrarComponenteF(7)" class="nav-link ">Banner</a>
                             </nav>
                         </div>
@@ -81,17 +81,17 @@
                             </div>
                         </a>
                         <div id="collapseServicio" class="collapse">
-                            <nav class="sidenav-menu-nested nav accordion">
+                            <nav class="sidenav-menu-nested nav ">
                                 <a @click="mostrarComponenteF(120)" class="nav-link ">Banner 1</a>
                             </nav>
                         </div>
                         <div id="collapseServicio" class="collapse">
-                            <nav class="sidenav-menu-nested nav accordion">
+                            <nav class="sidenav-menu-nested nav ">
                                 <a @click="mostrarComponenteF(50)" class="nav-link ">Servicios</a>
                             </nav>
                         </div>
                         <div id="collapseServicio" class="collapse">
-                            <nav class="sidenav-menu-nested nav accordion">
+                            <nav class="sidenav-menu-nested nav ">
                                 <a @click="mostrarComponenteF(121)" class="nav-link ">Banner 2</a>
                             </nav>
                         </div>
@@ -170,12 +170,12 @@
                             </div>
                         </a>
                         <div id="collapseEmpresa" class="collapse">
-                            <nav class="sidenav-menu-nested nav accordion">
+                            <nav class="sidenav-menu-nested nav ">
                                 <a @click="mostrarComponenteF(122)" class="nav-link ">Banner</a>
                             </nav>
                         </div>
                         <div id="collapseEmpresa" class="collapse">
-                            <nav class="sidenav-menu-nested nav accordion">
+                            <nav class="sidenav-menu-nested nav ">
                                 <a @click="mostrarComponenteF(32)" class="nav-link ">Valores</a>
                             </nav>
                         </div>
@@ -200,7 +200,7 @@
                             </div>
                         </a>
                         <div id="collapseProductos" class="collapse">
-                            <nav class="sidenav-menu-nested nav accordion">
+                            <nav class="sidenav-menu-nested nav ">
                                 <a @click="mostrarComponenteF(25)" class="nav-link">Mostrar</a>
                             </nav>
                         </div>
@@ -358,7 +358,7 @@
                             </div>
                         </a>
                         <div id="collapseUsuario" class="collapse">
-                            <nav class="sidenav-menu-nested nav accordion">
+                            <nav class="sidenav-menu-nested nav ">
                                 <a @click="mostrarComponenteF(99)" class="nav-link">Mostrar</a>
                             </nav>
                         </div>
@@ -383,7 +383,7 @@
                             </div>
                         </a>
                         <div id="collapseClientes" class="collapse">
-                            <nav class="sidenav-menu-nested nav accordion">
+                            <nav class="sidenav-menu-nested nav ">
                                 <a @click="mostrarComponenteF(105)" class="nav-link">Mostrar</a>
                             </nav>
                         </div>
@@ -407,12 +407,12 @@
                             </div>
                         </a>
                         <div id="collapseSuscripciones" class="collapse">
-                            <nav class="sidenav-menu-nested nav accordion">
+                            <nav class="sidenav-menu-nested nav ">
                                 <a @click="mostrarComponenteF(17)" class="nav-link">Mostrar</a>
                             </nav>
                         </div>
                         <div id="collapseSuscripciones" class="collapse">
-                            <nav class="sidenav-menu-nested nav accordion">
+                            <nav class="sidenav-menu-nested nav ">
                                 <a @click="mostrarComponenteF(18)" class="nav-link">Enviar Mensaje</a>
                             </nav>
                         </div>

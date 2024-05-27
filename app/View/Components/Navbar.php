@@ -23,7 +23,7 @@ class Navbar extends Component
      */
     public function render(): View|Closure|string
     {
-        $variable = 'hola';
+        $variable = 'chau';
         return view('components.navbar', ['variable' => $variable]);
     }
 }

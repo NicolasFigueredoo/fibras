@@ -4,6 +4,7 @@ use App\Http\Controllers\WebsiteController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EmailsController;
 use App\Http\Controllers\ExcelController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImagenController;
 use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\SuscripcionController;
@@ -15,7 +16,8 @@ use Illuminate\Support\Facades\Storage;
 
 
 //RUTAS
-Route::get('/',[WebsiteController::class,'home']);
+Route::get('/',[WebsiteController::class,'home'])->name('home');
+
 
 Route::get('/admin', function () {
     return view('admin.admin');
@@ -27,6 +29,13 @@ Route::middleware(['auth'])->group(function () {
         return view('admin.admin');
     })->name('admin.admin');
 });
+
+
+//Home
+Route::get('/', [HomeController::class, 'index']);
+
+//mostrar imagenes
+Route::get('/getImage/{fileName}', [ImagenController::class, 'getImage']);
 
 
 
