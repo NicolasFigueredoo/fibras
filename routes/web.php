@@ -6,6 +6,7 @@ use App\Http\Controllers\EmailsController;
 use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImagenController;
+use App\Http\Controllers\NosotrosController;
 use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\SuscripcionController;
 use App\Http\Controllers\UserController;
@@ -16,9 +17,6 @@ use Illuminate\Support\Facades\Storage;
 
 
 //RUTAS
-Route::get('/',[WebsiteController::class,'home'])->name('home');
-
-
 Route::get('/admin', function () {
     return view('admin.admin');
 });
@@ -32,8 +30,17 @@ Route::middleware(['auth'])->group(function () {
 
 
 //Home
-Route::get('/', [HomeController::class, 'index']);
-
+Route::get('/', [WebsiteController::class, 'home']);
+//nosotros
+Route::get('/nosotros', [WebsiteController::class, 'nosotros']);
+//servicios
+Route::get('/servicios', [WebsiteController::class, 'servicios']);
+//sectores
+Route::get('/sectores', [WebsiteController::class, 'sectores']);
+//clientes
+Route::get('/clientes', [WebsiteController::class, 'clientes']);
+//calidad
+Route::get('/calidad', [WebsiteController::class, 'calidad']);
 //mostrar imagenes
 Route::get('/getImage/{fileName}', [ImagenController::class, 'getImage']);
 
@@ -229,3 +236,11 @@ Route::get('/api/obtenerLitro/{idLitro}', [AdminController::class, 'obtenerLitro
 Route::post('/api/crearLitro', [AdminController::class, 'crearLitro']);
 Route::post('/api/updateLitro', [AdminController::class, 'updateLitro']);
 Route::post('/api/deleteLitro', [AdminController::class, 'deleteLitro']);
+
+
+//CLIENTES EMPRESA
+Route::get('/api/obtenerClientesEmpresa', [AdminController::class, 'obtenerClientesEmpresa']);
+Route::post('/api/crearClienteEmpresa', [AdminController::class, 'crearClienteEmpresa']);
+Route::post('/api/deleteClienteEmpresa', [AdminController::class, 'deleteClienteEmpresa']);
+Route::post('/api/updateClienteEmpresa', [AdminController::class, 'updateClienteEmpresa']);
+Route::get('/api/obtenerClienteEmpresa/{idCliente}', [AdminController::class, 'obtenerClienteEmpresa']);

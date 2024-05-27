@@ -4,7 +4,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Banner;
+use App\Models\Categoria;
 use App\Models\Logo;
+use App\Models\Sector;
 use App\Models\Slider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -15,6 +18,12 @@ class HomeController extends Controller
     {
         $slider = Slider::all();
         $logo = Logo::all();
+        $categorias = Categoria::where('destacado', 1)
+        ->orderBy('orden')
+        ->get();
+        $seccion = Banner::where('seccion','home')->get();
+        $sectores = Sector::orderBy('orden')->get();
+
 
         $contentType = 'imagen';
         if ($slider->isNotEmpty()) {
@@ -28,6 +37,6 @@ class HomeController extends Controller
             }
         }
 
-        return view('home', compact('slider', 'contentType', 'logo'));
+        return view('home', compact('slider', 'contentType', 'logo', 'categorias','seccion','sectores'));
     }
 }

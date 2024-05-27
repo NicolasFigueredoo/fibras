@@ -8,7 +8,7 @@
         <form class="mt-3">
             <div class="row">
                 <div class="col-lg-6">
-                    <label class="form-label">Imagen (Tamaño recomendado 804x650) </label>
+                    <label class="form-label">Imagen (Tamaño recomendado 600x400) </label>
                     <input type="file" ref="fotoBanner" class="form-control" @change="guardarFoto()">
                 </div>
                 <div class="col-lg-6">
@@ -26,17 +26,17 @@
                 <textarea class="summernote" id="editor" :value="bannerTexto"></textarea>
             </div>
 
-            <!-- <div v-if="this.seccion === 'home'" class="row mt-2">
+             <div v-if="this.idComponente === 123" class="row mt-3">
                 <div class="col-lg-6">
-                <label class="form-label">Texto boton</label>
-                <input type="text" class="form-control" id="txtBoton" :value="this.txtBoton" >
+                <label class="form-label">Políticas de calidad</label>
+                <input type="file" ref="politicaCalidad" class="form-control" @change="guardarPolitica()">
                 </div>
                 <div class="col-lg-6">
-                <label class="form-label">Link boton</label>
-                <input type="text" class="form-control" id="linkBoton" :value="this.linkBoton" >
+                <label class="form-label">Certificado Anmat</label>
+                <input type="file" ref="CertificadoAnmat" class="form-control" @change="guardarCertificado()">
                 </div>
 
-            </div> -->
+            </div>
 
             <div class="w-100 d-flex justify-content-end mt-3">
                 <button @click="updateBanner()" type="button" class="btn"
@@ -68,7 +68,9 @@ export default {
             imagen: null,
             seccion: null,
             txtBoton: null,
-            linkBoton: null
+            linkBoton: null,
+            calidad: null,
+            certificado: null
         }
 
     },
@@ -89,14 +91,22 @@ export default {
             const file = this.$refs.fotoBanner;
             this.foto = file.files[0]
         },
+        guardarPolitica() {
+            const file = this.$refs.politicaCalidad;
+            this.calidad = file.files[0]
+        },
+        guardarCertificado() {
+            const file = this.$refs.CertificadoAnmat;
+            this.certificado = file.files[0]
+        },
         updateBanner() {
             let formData = new FormData();
             formData.append('idBanner', this.idBanner);
             formData.append('foto', this.foto);
             formData.append('bannerTitulo', $('#titulo').val());
             formData.append('bannerTexto', $('#editor').summernote('code').toString());
-            formData.append('txtBoton', $('#txtBoton').val());
-            formData.append('linkBoton', $('#linkBoton').val());
+            formData.append('txtBoton', this.calidad);
+            formData.append('linkBoton', this.certificado);
 
 
             axios.post('/api/updateBanner', formData, {
@@ -119,7 +129,7 @@ export default {
 
         },
         summerNote() {
-            if (this.getSummer === null && this.getSummer !== true && this.getSummer === undefined) {
+
                 $('#editor').summernote({
                     height: 300,
                 });
@@ -129,7 +139,7 @@ export default {
                 });
 
                 this.$store.commit('setSummer', true);
-            }
+            
         },
         obtenerBannerInformacion() {
             axios.get(`/api/obtenerBanner`)
@@ -170,6 +180,16 @@ export default {
                         this.seccion = response.data[3].seccion
                         this.txtBoton = response.data[3].textoboton
                         this.linkBoton = response.data[3].link
+                    }
+
+                    else if(this.idComponente === 123) {
+                        this.bannerTexto = response.data[4].texto
+                        this.bannerTitulo = response.data[4].titulo
+                        this.idBanner = response.data[4].id
+                        this.imagen = response.data[4].imagen
+                        this.seccion = response.data[4].seccion
+                        this.txtBoton = response.data[4].textoboton
+                        this.linkBoton = response.data[4].link
                     }
 
                     $('#editor').summernote('code', this.bannerTexto);

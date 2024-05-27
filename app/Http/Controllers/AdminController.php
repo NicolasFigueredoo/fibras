@@ -6,6 +6,7 @@ use App\Models\Banner;
 use App\Models\Catalogo;
 use App\Models\Categoria;
 use App\Models\CategoriaHome;
+use App\Models\ClienteEmpresa;
 use App\Models\Contacto;
 use App\Models\Descarga;
 use App\Models\Feria;
@@ -151,6 +152,16 @@ class AdminController extends Controller
             $logo->footer = $photoPath;
         }
 
+        if ($request->hasFile('header')) {
+
+            if (!Storage::exists('public/fotos')) {
+                Storage::makeDirectory('public/fotos');
+            }
+
+            $photoPath = $request->file('header')->store('fotos');
+            $logo->header = $photoPath;
+        }
+
         $logo->save();
 
         return response()->json(['message' => 'Datos subidos correctamente'], 200);
@@ -168,8 +179,7 @@ class AdminController extends Controller
         $banner = Banner::find($request->idBanner);
         $banner->titulo = $request->bannerTitulo;
         $banner->texto = $request->bannerTexto;
-        $banner->textoboton = $request->txtBoton;
-        $banner->link = $request->linkBoton;
+      
 
         if ($request->hasFile('foto')) {
 
@@ -179,6 +189,26 @@ class AdminController extends Controller
 
             $photoPath = $request->file('foto')->store('fotos');
             $banner->imagen = $photoPath;
+        }
+
+        if ($request->hasFile('txtBoton')) {
+
+            if (!Storage::exists('public/fotos')) {
+                Storage::makeDirectory('public/fotos');
+            }
+
+            $photoPath = $request->file('txtBoton')->store('fotos');
+            $banner->textoboton = $photoPath;
+        }
+
+        if ($request->hasFile('linkBoton')) {
+
+            if (!Storage::exists('public/fotos')) {
+                Storage::makeDirectory('public/fotos');
+            }
+
+            $photoPath = $request->file('linkBoton')->store('fotos');
+            $banner->link = $photoPath;
         }
 
         $banner->save();
@@ -931,4 +961,68 @@ class AdminController extends Controller
         $litro->delete();
         return response()->json($litro);
     }
+
+     //CLIENTES EMPRESAS
+     public function obtenerClientesEmpresa()
+     {
+         $clientes = ClienteEmpresa::orderBy('orden', 'asc')->get();
+         return response()->json($clientes);
+     }
+ 
+     public function obtenerClienteEmpresa($idCliente)
+     {
+         $cliente = ClienteEmpresa::find($idCliente);
+         return response()->json($cliente);
+     }
+ 
+     public function crearClienteEmpresa(Request $request)
+     {
+         $clienteEmpresa = new ClienteEmpresa();
+         $clienteEmpresa->orden = $request->orden;
+         $clienteEmpresa->nombre = $request->titulo;
+         $clienteEmpresa->link = $request->link;
+
+         if ($request->hasFile('foto')) {
+ 
+             if (!Storage::exists('public/fotos')) {
+                 Storage::makeDirectory('public/fotos');
+             }
+ 
+             $photoPath = $request->file('foto')->store('fotos');
+             $clienteEmpresa->imagen = $photoPath;
+         }
+ 
+         $clienteEmpresa->save();
+ 
+         return response()->json($clienteEmpresa);
+     }
+ 
+     public function updateClienteEmpresa(Request $request)
+     {
+         $clienteEmpresa = ClienteEmpresa::find($request->idClienteEmpresa);
+         $clienteEmpresa->orden = $request->orden;
+         $clienteEmpresa->nombre = $request->titulo;
+         $clienteEmpresa->link = $request->link;
+
+         if ($request->hasFile('foto')) {
+ 
+             if (!Storage::exists('public/fotos')) {
+                 Storage::makeDirectory('public/fotos');
+             }
+ 
+             $photoPath = $request->file('foto')->store('fotos');
+             $clienteEmpresa->imagen = $photoPath;
+         }
+ 
+         $clienteEmpresa->save();
+ 
+         return response()->json($clienteEmpresa);
+     }
+ 
+     public function deleteClienteEmpresa(Request $request)
+     {
+         $clienteEmpresa = ClienteEmpresa::find($request->idClienteEmpresa);
+         $clienteEmpresa->delete();
+         return response()->json($clienteEmpresa);
+     }
 }

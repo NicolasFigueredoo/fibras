@@ -7,23 +7,31 @@
 
         <form class="mt-3" >
             <div class="row">
-                <div class="col-md-6">
-                    <label class="form-label">LOGO NAVBAR (Tamaño recomendado 569x105)</label>
+                <div class="col-md-4">
+                    <label class="form-label">LOGO HEADER (Tamaño recomendado 103x134)</label>
+                    <input type="file" class="form-control" ref="img3" @change="guardarFotoBlank()">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">LOGO SECCIONES (Tamaño recomendado 79x103)</label>
                     <input type="file" class="form-control" ref="img1"  @change="guardarFotoNavbar()">
                 </div>
-                <div class="col-md-6">
-                    <label class="form-label">LOGO FOOTER (Tamaño recomendado 206x34)</label>
+                <div class="col-md-4">
+                    <label class="form-label">LOGO FOOTER (Tamaño recomendado 79x103)</label>
                     <input type="file" class="form-control" ref="img2" @change="guardarFotoFooter()">
                 </div>
             </div>
             <div class="row mt-3">
-                <div class="col-md-6">
+                <div class="col-md-4">
+                    <img v-if="this.img3" class="imagen" :src="getImagen(this.img3)" alt="">
+                </div>
+                <div class="col-md-4">
                     <img v-if="this.img1" class="imagen" :src="getImagen(this.img1)" alt="">
                 </div>
 
-                <div class="col-md-6">
-                    <img v-if="this.img2" class="imagen2" :src="getImagen(this.img2)" alt="">
+                <div class="col-md-4">
+                    <img v-if="this.img2" class="imagen" :src="getImagen(this.img2)" alt="">
                 </div>
+
 
 
             </div>
@@ -51,8 +59,11 @@ export default {
             logos:[],
             img1: null,
             img2: null,
+            img3: null,
             foto1: null,
-            foto2: null
+            foto2: null,
+            foto3: null
+
         }
     },
     
@@ -67,10 +78,16 @@ export default {
             }
         },
 
+
+        
+        guardarFotoBlank() {
+            const file = this.$refs.img3;
+            this.foto3 = file.files[0]
+        },
+
         guardarFotoNavbar() {
             const file = this.$refs.img1;
             this.foto1 = file.files[0]
-            console.log(this.foto1)
         },
 
         guardarFotoFooter() {
@@ -82,7 +99,9 @@ export default {
             axios.post('/api/updateLogo', 
             {
                 logoNav: this.foto1,
-                logoFooter: this.foto2
+                logoFooter: this.foto2,
+                header: this.foto3
+
             },{
                 headers: {
                     'Content-Type': 'multipart/form-data'
@@ -111,6 +130,7 @@ export default {
                     this.logos = response.data
                     this.img1 = response.data.navbar
                     this.img2 = response.data.footer
+                    this.img3 = response.data.header
                 })
                 .catch(error => {
                     console.error(error);
@@ -152,13 +172,9 @@ h1 {
 }
 
 .imagen{
-    width: 569px;
-    height: 105px;
-}
-
-.imagen2{
-    width: 206px;
-    height: 34px;
+    width: 103px;
+height: 134px;
+flex-shrink: 0;
 }
 
 </style>

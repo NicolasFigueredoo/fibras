@@ -10,9 +10,9 @@
     <div id="app">
         @if (!request()->is('/'))
         <x-navbar></x-navbar>
-        @endif        <!-- -->
+        @endif
          @yield('content')
-        {{-- <x-footer></x-footer> --}}
+        <x-footer></x-footer>
     </div>
 
     

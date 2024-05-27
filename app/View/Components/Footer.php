@@ -8,7 +8,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Navbar extends Component
+class Footer extends Component
 {
     /**
      * Create a new component instance.
@@ -26,6 +26,9 @@ class Navbar extends Component
     public function render(): View|Closure|string
     {
         $logo = Logo::all();
-        return view('components.navbar', ['logo' => $logo]);
+        $contacto = Contacto::all();
+        $numeroWsp = preg_replace('/[^\d]/', '', $contacto[0]['telefono']);
+
+        return view('components.footer', ['logo' => $logo, 'contacto' => $contacto, 'numeroWsp' => $numeroWsp]);
     }
 }
