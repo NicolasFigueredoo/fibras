@@ -4,6 +4,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Logo;
 use App\Models\Slider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -13,6 +14,7 @@ class HomeController extends Controller
     public function index()
     {
         $slider = Slider::all();
+        $logo = Logo::all();
 
         $contentType = 'imagen';
         if ($slider->isNotEmpty()) {
@@ -26,6 +28,6 @@ class HomeController extends Controller
             }
         }
 
-        return view('home', compact('slider', 'contentType'));
+        return view('home', compact('slider', 'contentType', 'logo'));
     }
 }
