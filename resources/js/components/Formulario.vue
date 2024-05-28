@@ -119,7 +119,7 @@ export default {
     methods: {
         abrirEmail() {
             const destinatario = this.emailC;
-            const asunto = "Contacto desde la web de el roble";
+            const asunto = "Contacto desde la web quimica Real";
             const cuerpo = "Hola queria consultar";
 
             const mailtoLink = `mailto:${destinatario}?subject=${encodeURIComponent(

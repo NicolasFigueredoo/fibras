@@ -35,7 +35,7 @@
 
                 @if ($producto)
                     <div class="row">
-                        <div class="col-lg-5">
+                        <div class="col-lg-4">
 
                             <div id="carouselExample" class="carousel slide">
                                 <div class="carousel-inner">
@@ -70,7 +70,7 @@
 
                         </div>
 
-                        <div class="col-lg-7">
+                        <div class="col-lg-8">
                             <div class="d-flex flex-column">
                                 <div>
                                     <p class="categoriaTextProducto">
@@ -169,6 +169,41 @@
 
                         </div>
 
+                    </div>
+
+
+                    <div class="mt-5">
+                        <p class="titulo">Productos relacionados</p>
+
+                        <div class="row flex-wrap">
+
+                            @foreach ($productos as $producto)
+                                <div class="col-lg-4">
+                                    <a href="/categoria/{{ $categoria->id }}/{{ $producto->id }}"
+                                        class="text-decoration-none">
+                                        <div class="d-flex flex-column justify-content-end align-items-start producto p-3">
+                                            <div style="height: 19px">
+                                                <p class="categoriaText">
+                                                    {{ strtoupper($categoria['nombre']) }}
+                                                </p>
+                                            </div>
+                                            <div class="w-100 d-flex justify-content-between">
+                                                <p class="productoText">{{ $producto->nombre }}</p>
+                                                <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="24"
+                                                    height="24" viewBox="0 0 24 24" fill="none">
+                                                    <path class="arrow-path" d="M5 12H19" stroke="black" stroke-width="2"
+                                                        stroke-linecap="round" stroke-linejoin="round" />
+                                                    <path class="arrow-path" d="M12 5L19 12L12 19" stroke="black"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                </svg>
+
+
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
                 @else
                     <div class="row flex-wrap">
@@ -307,7 +342,7 @@
         font-size: 17px;
         font-style: normal;
         font-weight: 400 !important;
-        line-height: 0.6 !important;
+        line-height: 1 !important;
     }
 
     .arrow-icon .arrow-path {
@@ -374,6 +409,15 @@
         font-size: 16px !important;
         font-style: normal !important;
         font-weight: 400 !important;
+        line-height: normal;
+    }
+
+    .titulo {
+        color: #000;
+        font-family: Inter;
+        font-size: 26px;
+        font-style: normal;
+        font-weight: 500;
         line-height: normal;
     }
 

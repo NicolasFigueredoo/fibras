@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Banner;
 use App\Models\Categoria;
 use App\Models\ClienteEmpresa;
+use App\Models\Contacto;
 use App\Models\Logo;
 use App\Models\Producto;
 use App\Models\Sector;
@@ -99,25 +100,34 @@ class WebsiteController extends Controller
 
     public function mostrarProductosCategoria($id, $idProducto){
     
+        $producto = Producto::find($idProducto);
 
-        if($idProducto){
-            $categorias = Categoria::all();
-            $categoria = Categoria::find($id);
+        if($producto){
             $producto = Producto::find($idProducto);
+            $categorias = Categoria::orderBy('orden')->get();
+            $categoria = Categoria::find($id);
             $productos = $categoria->productos;
-            $imagenes = $producto->imagenes;
+            $imagenes = $producto->imagenes->sortBy('orden');
             $litros = $producto->litros->sortBy('cantidad');
 
             return view('categoriasProducto', compact('categoria', 'producto', 'categorias', 'productos', 'imagenes', 'litros'));
         }else{
             $categoria = Categoria::find($id);
-            $categorias = Categoria::all();
+            $categorias = Categoria::orderBy('orden')->get();
             $productos = $categoria->productos;
             if (!$categoria) {
                 abort(404);
             }
-            return view('categoriasProducto', compact('categoria', 'productos', 'categorias'));
+            return view('categoriasProducto', compact('categoria', 'productos', 'categorias', 'producto',));
         }
+    }
+
+    public function obtenerNumeroWhatsApp()
+    {
+        $contacto = Contacto::all();
+        $numeroWhatsApp = preg_replace('/[^\d]/', '', $contacto[0]['telefono']);
+
+        return $numeroWhatsApp;
     }
 
     

@@ -62,7 +62,6 @@
         height: 376px;
         flex-shrink: 0;
         margin-top: 33px;
-        cursor: pointer;
     }
 
     .textSectores {

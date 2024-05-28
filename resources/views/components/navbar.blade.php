@@ -19,13 +19,13 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-end align-items-end" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                        <a class="nav-link text-black" href="/nosotros">Nosotros</a>
-                        <a class="nav-link text-black" href="/servicios">Servicios</a>
-                        <a class="nav-link text-black" href="/productos">Productos</a>
-                        <a class="nav-link text-black" href="/sectores">Sectores</a>
-                        <a class="nav-link text-black" href="/clientes">Clientes</a>
-                        <a class="nav-link text-black" href="/calidad">Calidad</a>
-                        <a class="nav-link text-black" href="/contacto">Contacto</a>
+                        <a class="nav-link text-black "  href="/nosotros" style="{{ Request::path() === 'nosotros' ? 'font-weight: bold;' : '' }}">Nosotros</a>
+                        <a class="nav-link text-black "  href="/servicios" style="{{ Request::path() === 'servicios' ? 'font-weight: bold;' : '' }}">Servicios</a>
+                        <a class="nav-link text-black "  href="/productos" style="{{ Request::path() === 'productos' ? 'font-weight: bold;' : '' }}">Productos</a>
+                        <a class="nav-link text-black "  href="/sectores" style="{{ Request::path() === 'sectores' ? 'font-weight: bold;' : '' }}">Sectores</a>
+                        <a class="nav-link text-black "  href="/clientes" style="{{ Request::path() === 'clientes' ? 'font-weight: bold;' : '' }}">Clientes</a>
+                        <a class="nav-link text-black "  href="/calidad" style="{{ Request::path() === 'calidad' ? 'font-weight: bold;' : '' }}">Calidad</a>
+                        <a class="nav-link text-black "  href="/contacto" style="{{ Request::path() === 'contacto' ? 'font-weight: bold;' : '' }}">Contacto</a>
                     </div>
                 </div>
             </div>

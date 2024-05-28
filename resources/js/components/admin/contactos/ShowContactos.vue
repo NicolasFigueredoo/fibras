@@ -23,7 +23,7 @@
                 </div>
             </div>
 
-            <div class="row mt-3">
+          <!--   <div class="row mt-3">
                 <div class="col-md-6">
                     <label class="form-label">Instagram (Link)</label>
                     <input type="text" class="form-control" id="instagram" :value="this.contacto.instagram">
@@ -32,7 +32,7 @@
                     <label class="form-label">Teléfono 2</label>
                     <input type="text" class="form-control" id="telefono2" :value="this.contacto.telefono_secundario">
                 </div>
-            </div>
+            </div>--> 
 
             <div class="w-100 d-flex justify-content-end">
 

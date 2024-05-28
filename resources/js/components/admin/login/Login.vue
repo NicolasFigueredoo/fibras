@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="row justify-content-center align-items-center vh-100">
+    <div class="row justify-content-center align-items-center vh-100 mt-5">
       <div class="col-md-3 formulario">
         <form>
           <div class="mb-3 d-flex justify-content-center align-items-center">

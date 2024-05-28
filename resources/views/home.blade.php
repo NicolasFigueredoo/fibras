@@ -65,14 +65,16 @@
                 <div class="row flex-wrap categorias">
                     @foreach ($categorias as $categoria)
                         <div class="col-lg-4">
-                            <div class="d-flex justify-content-around align-items-center categoria">
-                                <div class="contenedor-img">
-                                    <div class="categoria-img"></div>
+                            <a href="/categoria/{{ $categoria->id }}/null" style="text-decoration: none">
+                                <div class="d-flex justify-content-around align-items-center categoria">
+                                    <div class="contenedor-img">
+                                        <div class="categoria-img"></div>
+                                    </div>
+                                    <div class="contenedor-textCategoria">
+                                        <p class="textCategoria">{{ $categoria->nombre }}</p>
+                                    </div>
                                 </div>
-                                <div class="contenedor-textCategoria">
-                                    <p class="textCategoria">{{ $categoria->nombre }}</p>
-                                </div>
-                            </div>
+                            </a>
                         </div>
                     @endforeach
                 </div>
@@ -97,7 +99,9 @@
 
                     <div class="descripcionSeccion">{!! $seccion[0]['texto'] !!}</div>
 
-                    <button type="button" id="btnSeccion" class="btn">Ver más</button>
+                    <a href="/nosotros">
+                        <button type="button" id="btnSeccion" class="btn">Ver más</button>
+                    </a>
 
                 </div>
 
@@ -112,7 +116,9 @@
                     <p>Sectores</p>
                 </div>
                 <div>
-                    <button type="button" id="btnSectores" class="btn">Ver todos</button>
+                    <a href="/sectores">
+                        <button type="button" id="btnSectores" class="btn">Ver todos</button>
+                    </a>
 
                 </div>
             </div>
@@ -394,7 +400,6 @@
         height: 376px;
         flex-shrink: 0;
         margin-top: 63px;
-        cursor: pointer;
     }
 
     .textSectores {
