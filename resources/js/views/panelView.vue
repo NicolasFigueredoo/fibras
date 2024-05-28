@@ -516,7 +516,7 @@
                     </nav>
 
                 </div>
-                <div class="componentesV" style="max-height: 500px; overflow-y: scroll; overflow-x: hidden;">
+                <div class="componentesV" style="max-height: 500px;">
 
                     <Alerta style="position: fixed; z-index: 5;" v-if="mostrarAlerta === true" />
                     <!--COMPONENTES SLIDER -->

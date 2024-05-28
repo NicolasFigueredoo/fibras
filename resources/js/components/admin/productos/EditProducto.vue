@@ -241,8 +241,20 @@ export default {
             let categoria = { id: cat.id, nombre: cat.nombre }
             this.catSelect.push(categoria);}
         },
+        summerNote() {
+                $('#editor').summernote({
+                    height: 300,
+                });
+                var noteBar = $('.note-toolbar');
+                noteBar.find('[data-toggle]').each(function () {
+                    $(this).attr('data-bs-toggle', $(this).attr('data-toggle')).removeAttr('data-toggle');
+                });
+
+                this.$store.commit('setSummer', true);
+        },
     },
     mounted() {
+        this.summerNote()
         this.obtenerProducto()
         this.obtenerCategorias()
         this.obtenerLitros()

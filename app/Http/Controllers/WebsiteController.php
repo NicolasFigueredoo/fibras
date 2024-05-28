@@ -6,6 +6,7 @@ use App\Models\Banner;
 use App\Models\Categoria;
 use App\Models\ClienteEmpresa;
 use App\Models\Logo;
+use App\Models\Producto;
 use App\Models\Sector;
 use App\Models\Servicio;
 use App\Models\Slider;
@@ -83,4 +84,41 @@ class WebsiteController extends Controller
         
         return view('calidad', compact('seccion'));
     }
+
+    public function contacto()
+    {
+            
+        return view('contacto');
+    }
+
+    public function productos()
+    {
+        $categorias = Categoria::orderBy('orden')->get();
+        return view('productos', compact('categorias'));
+    }
+
+    public function mostrarProductosCategoria($id, $idProducto){
+    
+
+        if($idProducto){
+            $categorias = Categoria::all();
+            $categoria = Categoria::find($id);
+            $producto = Producto::find($idProducto);
+            $productos = $categoria->productos;
+            $imagenes = $producto->imagenes;
+            $litros = $producto->litros->sortBy('cantidad');
+
+            return view('categoriasProducto', compact('categoria', 'producto', 'categorias', 'productos', 'imagenes', 'litros'));
+        }else{
+            $categoria = Categoria::find($id);
+            $categorias = Categoria::all();
+            $productos = $categoria->productos;
+            if (!$categoria) {
+                abort(404);
+            }
+            return view('categoriasProducto', compact('categoria', 'productos', 'categorias'));
+        }
+    }
+
+    
 }

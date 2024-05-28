@@ -4,6 +4,7 @@ use App\Http\Controllers\WebsiteController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EmailsController;
 use App\Http\Controllers\ExcelController;
+use App\Http\Controllers\FileDownloadController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImagenController;
 use App\Http\Controllers\NosotrosController;
@@ -41,9 +42,22 @@ Route::get('/sectores', [WebsiteController::class, 'sectores']);
 Route::get('/clientes', [WebsiteController::class, 'clientes']);
 //calidad
 Route::get('/calidad', [WebsiteController::class, 'calidad']);
+//contacto
+Route::get('/contacto', [WebsiteController::class, 'contacto']);
+
+//productos
+Route::get('/productos', [WebsiteController::class, 'productos']);
+
+
 //mostrar imagenes
 Route::get('/getImage/{fileName}', [ImagenController::class, 'getImage']);
 
+//mostrarProductosCategorias
+Route::get('/categoria/{id}/{idProducto}', [WebsiteController::class, 'mostrarProductosCategoria']);
+
+
+
+Route::get('/download/{filename}', [FileDownloadController::class, 'download'])->name('download');
 
 
 

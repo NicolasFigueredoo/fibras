@@ -3,7 +3,7 @@
 @section('content')
     <div style="background:#F4F4F4">
         <div class="container">
-            <p class="indicador"><b>Inicio</b> / Servicios</p>
+            <p class="indicador"><b>Inicio</b> / Clientes</p>
 
 
             <div class="row d-flex" style="margin-top: 30px">

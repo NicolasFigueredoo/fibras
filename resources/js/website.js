@@ -2,10 +2,17 @@ import './bootstrap';
 import '../../node_modules/bootstrap/dist/js/bootstrap';
 
 import { createApp } from 'vue';
-import Home from './components/Home.vue'
+import dowload from './components/Dowload.vue'
+import formulario from './components/Formulario.vue'
 
 createApp({
 	components: {
-		Home
+		dowload
 	}
-}).mount('#app');
+}).mount('#appCalidad');
+
+createApp({
+	components: {
+		formulario
+	}
+}).mount('#appContacto');

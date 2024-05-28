@@ -140,7 +140,11 @@ class ProductosController extends Controller
         
         $producto = Producto::with(['categorias' => function ($query) {
             $query->orderBy('orden', 'asc');
-        }])->with(['litros' => function ($query) {
+        }])
+        ->with(['imagenes' => function ($query) {
+            $query->orderBy('orden', 'asc');
+        }])
+        ->with(['litros' => function ($query) {
             $query->orderBy('cantidad', 'asc');
         }])->find($idProducto);;
 

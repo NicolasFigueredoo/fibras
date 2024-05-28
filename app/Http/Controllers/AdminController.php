@@ -450,13 +450,19 @@ class AdminController extends Controller
 
     public function descargarArchive($idArchivo)
     {
-        $archivo = Descarga::find($idArchivo);
+        $archivo = Banner::find(5);
 
         if (!$archivo) {
             return response()->json(['error' => 'Archivo no encontrado'], 404);
         }
 
-        $rutaArchivo = $archivo->file;
+        if($idArchivo == 5){
+            $rutaArchivo = $archivo->textoboton;
+        }else{
+            $rutaArchivo = $archivo->link;
+
+        }
+
         $tipoMime = Storage::mimeType($rutaArchivo);
 
         if (Storage::exists($rutaArchivo)) {

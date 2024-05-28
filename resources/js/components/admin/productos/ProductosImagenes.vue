@@ -155,6 +155,7 @@ export default {
         obtenerProducto() {
             axios.get(`/api/obtenerProducto/${this.idProducto}`)
                 .then(response => {
+                    console.log(response.data)
                     this.producto = response.data
                     this.nombre = response.data.nombre
                     this.imagenes = response.data.imagenes
