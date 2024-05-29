@@ -11,13 +11,12 @@ class Cliente extends Authenticatable
     use HasFactory, Notifiable;
 
     protected $table = 'clientes';
+
     protected $fillable = [
-        'usuario', 'email', 'contraseña'
+        'nombre', 'email', 'contraseña',
     ];
 
     protected $hidden = [
-        'password', 'remember_token',
+        'contraseña', 'remember_token', 
     ];
-
-
 }

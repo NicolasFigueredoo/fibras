@@ -3,8 +3,11 @@
         <div class="container contacto" style="margin-bottom: 80px">
             <div class="row">
                 <div class="col-lg-4 informacion">
-                    <p class="textoC">Para mayor información, no dude en contactarse mediante el siguiente formulario, o a través de nuestras vías de comunicación.</p>
-                    <div class="ubicacion" style="cursor: pointer">
+                    <p class="textoC ">Para mayor información, no dude en contactarse mediante el siguiente formulario, o
+                        a través de nuestras vías de comunicación.</p>
+
+                        
+                    <div class="ubicacion" style="cursor: pointer; margin-top: 30px;">
                         <div style="width: 20px">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none">
@@ -93,7 +96,10 @@
                     </div>
                 </form>
             </div>
-            <iframe class="mapa mt-5" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3291.5926291472765!2d-58.95970538843187!3d-34.41169887291124!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bb7d6a8f2c1c45%3A0x6c65f2d8ec589e53!2sReal%20Quimica%20SRL!5e0!3m2!1ses!2sar!4v1716913688940!5m2!1ses!2sar" width="800" height="516" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <iframe class="mapa"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3291.5926291472765!2d-58.95970538843187!3d-34.41169887291124!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bb7d6a8f2c1c45%3A0x6c65f2d8ec589e53!2sReal%20Quimica%20SRL!5e0!3m2!1ses!2sar!4v1716913688940!5m2!1ses!2sar"
+                width="800" height="516" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
     </div>
 </template>
@@ -152,7 +158,7 @@ export default {
 
             grecaptcha.ready(function () {
                 grecaptcha
-                    .execute("6LfXCt8pAAAAAJ988vWMQzCeZ6rm8hZOZk1u95KU", {
+                    .execute("6LdIAewpAAAAAGO1WyC2JZ5TLW2Xhpa0bfVVpUJR ", {
                         action: "submit",
                     })
                     .then(function (token) {
@@ -169,7 +175,7 @@ export default {
                                 mensaje: self.mensaje,
                                 recaptchaToken: token,
                                 recaptchaSecret:
-                                    "6LfXCt8pAAAAAOHrkdG2Htnz9omqRMAYSF_FpOlx",
+                                    "6LdIAewpAAAAAFZ3ET1KK0avyL6d2oGkYiWJsq_5",
                             })
                             .then((response) => {
                                 $("#mensajePresupuesto").html(
@@ -197,27 +203,28 @@ export default {
 
 textarea::placeholder {
     color: rgba(0, 0, 0, 0.50);
-    font-family: Inter;
+    font-family: 'Inter';
     font-size: 16px;
     font-style: normal;
     font-weight: 300;
     line-height: 50px;
 }
 
-input{
-height: 48px;
-flex-shrink: 0;
-border-radius: 4px !important;
-border: 1px solid #D9D9D9 !important;
+input {
+    height: 48px;
+    flex-shrink: 0;
+    border-radius: 4px !important;
+    border: 1px solid #D9D9D9 !important;
 }
 
 .mapa {
     width: 100%;
+    margin-top: 80px;
 }
 
 .titleForm {
     color: #000;
-    font-family: Inter;
+    font-family: 'Inter';
     font-size: 18px;
     font-style: normal;
     font-weight: 300;
@@ -227,7 +234,7 @@ border: 1px solid #D9D9D9 !important;
 
 .campoO {
     color: #131313;
-    font-family: Inter;
+    font-family: 'Inter';
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -241,7 +248,7 @@ border: 1px solid #D9D9D9 !important;
 
 .titulo {
     color: #000;
-    font-family: Inter;
+    font-family: 'Inter';
     font-size: 35px;
     font-style: normal;
     font-weight: 500;
@@ -263,7 +270,7 @@ border: 1px solid #D9D9D9 !important;
     width: 350px;
 
     color: #000;
-    font-family: Inter;
+    font-family: 'Inter';
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -273,7 +280,7 @@ border: 1px solid #D9D9D9 !important;
 .telefono {
     display: flex;
     color: #000;
-    font-family: Inter;
+    font-family: 'Inter';
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -284,7 +291,7 @@ border: 1px solid #D9D9D9 !important;
     display: flex;
     font-size: 16px;
     color: #000;
-    font-family: Inter;
+    font-family: 'Inter';
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -320,7 +327,7 @@ border: 1px solid #D9D9D9 !important;
     border-radius: 40px !important;
     background: var(--Naranja, #F2AE59);
     color: #FFF;
-    font-family: Inter;
+    font-family: 'Inter';
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -336,14 +343,29 @@ border: 1px solid #D9D9D9 !important;
 .form-control {
     border-radius: 0%;
 }
-.textoC{
+
+.textoC {
     color: #131313;
-font-family: Inter;
-font-size: 16px;
-font-style: normal;
-font-weight: 400;
-line-height: 160%; /* 25.6px */
+    font-family: 'Inter';
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 160%;
+    /* 25.6px */
 }
+
+#ubi:hover {
+    font-weight: 500;
+}
+
+.telefono p:hover {
+    font-weight: 500;
+}
+
+.email p:hover {
+    font-weight: 500;
+}
+
 @media only screen and (max-width: 600px) {
     #content {
         flex-direction: column;

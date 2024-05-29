@@ -23,6 +23,7 @@ Route::get('/admin', function () {
 });
 
 
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/panel', function () {
         return view('admin.admin');
@@ -31,39 +32,37 @@ Route::middleware(['auth'])->group(function () {
 
 
 //Home
-Route::get('/', [WebsiteController::class, 'home']);
+Route::get('/', [WebsiteController::class, 'home'])->name('home');
 //nosotros
-Route::get('/nosotros', [WebsiteController::class, 'nosotros']);
+Route::get('/nosotros', [WebsiteController::class, 'nosotros'])->name('nosotros');
 //servicios
-Route::get('/servicios', [WebsiteController::class, 'servicios']);
+Route::get('/servicios', [WebsiteController::class, 'servicios'])->name('servicios');
 //sectores
-Route::get('/sectores', [WebsiteController::class, 'sectores']);
+Route::get('/sectores', [WebsiteController::class, 'sectores'])->name('sectores');
 //clientes
-Route::get('/clientes', [WebsiteController::class, 'clientes']);
+Route::get('/clientes', [WebsiteController::class, 'clientes'])->name('clientes');
 //calidad
-Route::get('/calidad', [WebsiteController::class, 'calidad']);
+Route::get('/calidad', [WebsiteController::class, 'calidad'])->name('calidad');
 //contacto
-Route::get('/contacto', [WebsiteController::class, 'contacto']);
+Route::get('/contacto', [WebsiteController::class, 'contacto'])->name('contacto');
 
 //productos
-Route::get('/productos', [WebsiteController::class, 'productos']);
+Route::get('/productos', [WebsiteController::class, 'productos'])->name('productos');
 
 
 //mostrar imagenes
 Route::get('/getImage/{fileName}', [ImagenController::class, 'getImage']);
 
 //mostrarProductosCategorias
-Route::get('/categoria/{id}/{idProducto}', [WebsiteController::class, 'mostrarProductosCategoria']);
+Route::get('/categoria/{id}/{idProducto}', [WebsiteController::class, 'mostrarProductosCategoria'])->name('categoria');
 
 
-Route::get('/downloadFile/{file}', [FileDownloadController::class, 'downloadTwo'])->name('downloadFile');
-
-
-Route::get('/download/{filename}', [FileDownloadController::class, 'download'])->name('download');
+Route::get('/downloadFile/{file}/{downloadName}/{extension}', [FileDownloadController::class, 'downloadTwo'])->name('downloadFile');
 
 
 
-
+Route::post('/logout', [UserController::class, 'destroyLogin'])
+    ->name('logout');
 
 
 
@@ -105,7 +104,7 @@ Route::get('/api/getImage/{fileName}', [ImagenController::class, 'getImage']);
 
 //LOGIN
 Route::post('/api/verificarLogin', [UserController::class, 'verify']);
-Route::post('/api/verificarLoginZona', [UserController::class, 'verificarLoginZona']);
+Route::post('/verificarLoginZona', [UserController::class, 'verificarLoginZona'])->name('login');
  
 Route::get('/api/obtenerIdUsuario/{idUsuario}', [UserController::class, 'obtenerUsuario']);
 Route::get('/api/obtenerIdUsuarioZona/{idUsuario}', [UserController::class, 'obtenerIdUsuarioZona']);
@@ -174,7 +173,7 @@ Route::get('/api/obtenerDescarga/{idDescarga}', [AdminController::class, 'obtene
 
 //EMAILS
 Route::post('/api/enviarMensajeSub', [EmailsController::class, 'enviarMensajeSub']);
-Route::post('/api/agregarSuscripcion', [SuscripcionController::class, 'agregarSuscripcion']);
+Route::post('/api/agregarSuscripcion', [SuscripcionController::class, 'agregarSuscripcion'])->name('suscribe');
 Route::get('/api/obtenerSuscripciones', [SuscripcionController::class, 'obtenerSuscripciones']);
 Route::get('/api/deleteSuscripcion/{idSuscripcion}', [SuscripcionController::class, 'deleteSuscripcion']);
 
@@ -226,7 +225,8 @@ Route::get('/api/obtenerFileZona/{idFileZona}', [AdminController::class, 'obtene
 Route::get('/api/deleteUsuarioZona/{idUsuario}', [UserController::class, 'deleteUsuarioZona']);
 
 //ZONA PRIVADA
-Route::post('/api/crearUsuarioZona', [UserController::class, 'crearUsuarioZona']);
+Route::post('/api/crearUsuarioZona', [UserController::class, 'crearUsuarioZona'])->name('register');
+Route::post('/api/updateClienteActivo', [UserController::class, 'updateClienteActivo']);
 
 //CARGA MASIVA
 Route::post('/api/cargarCargaMasiva', [ExcelController::class, 'importExcel']);

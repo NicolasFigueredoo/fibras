@@ -11,7 +11,7 @@
                 <input type="text" class="form-control" id="orden" :value="this.slider.orden">
             </div>
             <div class="mb-3">
-                <label class="form-label">Imagen (Tamaño recomendado 586x1400)</label>
+                <label class="form-label">Imagen (Tamaño recomendado 768x1400)</label>
                 <input type="file" ref="fotoSlider" class="form-control" @change="guardarFoto()">
             </div>
             <div class="mb-3">

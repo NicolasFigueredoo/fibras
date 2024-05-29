@@ -8,7 +8,7 @@
         <form class="mt-3">
             <div class="row">
                 <div class="col-lg-6">
-                    <label class="form-label">Imagen (Tamaño recomendado 600x400) </label>
+                    <label class="form-label">Imagen (Tamaño recomendado 804x650) </label>
                     <input type="file" ref="fotoBanner" class="form-control" @change="guardarFoto()">
                 </div>
                 <div class="col-lg-6">

@@ -18,7 +18,7 @@
             </div>
   
             <div class="mt-3">
-                <label class="form-label">Portada (Tamaño recomendado 704x306)</label>
+                <label class="form-label">Portada (Tamaño recomendado 60x60)</label>
                 <input type="file" ref="fotoSlider" class="form-control" id="imgs" @change="guardarFoto()">
             </div>
             <!-- <div class="mb-3 mt-3">

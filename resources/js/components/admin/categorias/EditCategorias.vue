@@ -21,6 +21,11 @@
                 </div>
             </div>
 
+            <div class="col-md-4 mt-4">
+                    <label class="form-label">Imagen tamaño recomendado (120x120)</label>
+                    <input type="file" class="form-control" ref="img2" @change="guardarFotoFooter()">
+                </div>
+
             <div class="w-100 d-flex justify-content-end mt-3">
                 <button @click="updateCategoria()" type="button" class="btn"
                     style="background-color: #7F7F7F; color: white;">Actualizar</button>
@@ -47,7 +52,8 @@ export default {
             orden: null,
             nombre: null,
             categoria: null,
-            productoDestacado: 0
+            productoDestacado: 0,
+            imagen: null
         }
 
     },
@@ -58,6 +64,11 @@ export default {
         },
     },
     methods: {
+
+        guardarFotoFooter() {
+            const file = this.$refs.img2;
+            this.imagen = file.files[0]
+        },
         resetCampos() {
             $('#orden').val('');
             $('#titulo').val('');
@@ -79,6 +90,7 @@ export default {
             formData.append('orden', this.orden);
             formData.append('titulo', this.nombre);
             formData.append('destacado', this.productoDestacado);
+            formData.append('imagen', this.imagen);
 
             axios.post('/api/updateCategoria', formData, {
                 headers: {

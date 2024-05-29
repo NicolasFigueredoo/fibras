@@ -8,9 +8,9 @@ class FileDownloadController extends Controller
 {
     public function download($filename)
     {
-        dd($filename); 
+        dd($filename);
         $filePath = 'app/fotos/ffzgC9SUl2DGGPA7Nc8DUt36ZCAzdB5kboL2lV8Q.xlsx';
-    
+
         if (Storage::exists($filePath)) {
             return Storage::download($filePath);
         } else {
@@ -18,10 +18,11 @@ class FileDownloadController extends Controller
         }
     }
 
-    public function downloadTwo($file)
-{
-    return response()->download(storage_path("app/fotos/{$file}"));
-}
-    
-}
+    public function downloadTwo($file, $downloadName, $extension)
+    {
 
+        $downloadFileName = $downloadName . '.' . $extension;
+
+        return response()->download(storage_path("app/fotos/{$file}"), $downloadFileName);
+    }
+}

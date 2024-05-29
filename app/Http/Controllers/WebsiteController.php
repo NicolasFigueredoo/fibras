@@ -102,7 +102,7 @@ class WebsiteController extends Controller
     
         $producto = Producto::find($idProducto);
 
-        if($producto){
+        if($producto !== null){
             $producto = Producto::find($idProducto);
             $categorias = Categoria::orderBy('orden')->get();
             $categoria = Categoria::find($id);
@@ -118,7 +118,7 @@ class WebsiteController extends Controller
             if (!$categoria) {
                 abort(404);
             }
-            return view('categoriasProducto', compact('categoria', 'productos', 'categorias', 'producto',));
+            return view('categoriasProducto', compact('categoria', 'productos', 'categorias', 'producto'));
         }
     }
 

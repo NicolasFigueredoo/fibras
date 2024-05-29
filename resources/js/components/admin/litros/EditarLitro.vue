@@ -27,7 +27,7 @@
             </div>
 
             <div class="mt-3">
-                <label class="form-label">Imagen</label>
+                <label class="form-label">Imagen tamaño recomendado (50x45)</label>
                 <input type="file" ref="fotoSlider" class="form-control" id="imgs" @change="guardarFoto()">
 
             </div>

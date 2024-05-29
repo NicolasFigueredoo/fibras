@@ -6,7 +6,9 @@ use App\Models\Cliente;
 use App\Models\User;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -33,18 +35,32 @@ class UserController extends Controller
     {
         $usuario = $request->nombre;
         $contraseña = $request->contraseña;
-
+    
         $user = Cliente::where('nombre', $usuario)->first();
-
+    
         if ($user) {
             if (Hash::check($contraseña, $user->contraseña)) {
-                return response()->json($user->id);
+                if ($user->activo == 1) {
+                    Auth::login($user);
+                    return response()->json(true);
+                } else {
+                    return response()->json(['error' => 'Usuario no activado'], 401);
+                }
             } else {
-                return response('Contraseña incorrecta');
+                return response()->json(['error' => 'Contraseña incorrecta'], 401);
             }
         } else {
-            return response('No se encontró el usuario');
+            return response()->json(['error' => 'Usuario no encontrado'], 401);
         }
+    }
+
+    public function updateClienteActivo(Request $request){
+
+        $cliente = Cliente::findOrFail($request->idCliente);
+        $cliente->activo = $request->activo;
+        $cliente->save();
+        
+        return response()->json($cliente);
     }
 
     public function store(Request $request)
@@ -84,7 +100,16 @@ class UserController extends Controller
         return response()->json($usuarios);
     }
 
-    
+    public function destroyLogin(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/');
+    }
 
     public function obtenerUsuarios()
     {
@@ -116,14 +141,25 @@ class UserController extends Controller
         return response()->json($usuarios);
     }
 
-    public function crearUsuarioZona(Request $request){
-        $user = new Cliente();
-        $user->nombre = $request->usuario;
-        $user->email = $request->email;
-        $user->contraseña = Hash::make($request->contraseña);
-        $user->save();
+    public function crearUsuarioZona(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:clientes', 
+            'password' => 'required|string|min:8|confirmed',
+        ]);
 
-        return response()->json($user);
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $user = Cliente::create([
+            'nombre' => $request->name, 
+            'email' => $request->email,
+            'contraseña' => Hash::make($request->password), 
+        ]);
+
+        return response()->json(['message' => 'User registered successfully'], 201);
     }
 
     public function deleteUsuarioZona($idUsuario)

@@ -823,6 +823,16 @@ class AdminController extends Controller
         $categoria->nombre = $request->titulo;
         $categoria->destacado = $request->destacado;
 
+        if ($request->hasFile('imagen')) {
+
+            if (!Storage::exists('public/fotos')) {
+                Storage::makeDirectory('public/fotos');
+            }
+
+            $photoPath = $request->file('imagen')->store('fotos');
+            $categoria->imagen = $photoPath;
+        }
+
         $categoria->save();
 
         return response()->json($categoria);
@@ -834,6 +844,18 @@ class AdminController extends Controller
         $categoria->orden = $request->orden;
         $categoria->nombre = $request->titulo;
         $categoria->destacado = $request->destacado;
+
+        if ($request->hasFile('imagen')) {
+
+            if (!Storage::exists('public/fotos')) {
+                Storage::makeDirectory('public/fotos');
+            }
+
+            $photoPath = $request->file('imagen')->store('fotos');
+            $categoria->imagen = $photoPath;
+        }
+
+        
         $categoria->save();
 
         return response()->json($categoria);

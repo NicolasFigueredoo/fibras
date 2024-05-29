@@ -2,7 +2,7 @@
     <div class="container">
 
         <div class="w-100 border-bottom">
-            <h1>CLIENTES</h1>
+            <h1>USUARIOS WEB</h1>
         </div>
 
         <table class="table table-bordered mt-3">
@@ -10,6 +10,7 @@
                 <tr>
                     <th scope="col" class="col-sm-1 encabezado">Usuario</th>
                     <th scope="col" class="encabezado">Email</th>
+                    <th scope="col" class="col-sm-1 encabezado">Activado</th>
                     <th scope="col" class="col-sm-1 encabezado">Acciones</th>
 
                 </tr>
@@ -18,6 +19,9 @@
                 <tr v-for="usuario in usuarios" :key="usuario.id">
                     <td>{{ usuario.nombre }}</td>
                     <td>{{ usuario.email }}</td>
+                    <td class="d-flex justify-content-center">
+                    <input @click="ActivarUsuario(usuario.id, usuario.activo)"  type="checkbox" class="form-check-input" id="activo" :checked="usuario.activo == 1" >
+                </td>
                     <td>
                         <button type="button" class="btn btn-sm btn-danger" style="margin-left: 15px;" @click="deleteUsuario(usuario.id)">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="15" height="15"
@@ -50,6 +54,26 @@ export default {
     },
     
     methods:{
+
+    ActivarUsuario(idCliente, activoUser){
+        let activo = $('#activo').prop("checked");
+        let clienteActivo = 0;
+        if(activo == true){
+            clienteActivo = 1
+        }
+        axios.post('/api/updateClienteActivo', {
+                        idCliente: idCliente,
+                        activo: clienteActivo
+                    })
+                        .then(response => {
+
+
+                        })
+                        .catch(error => {
+                            console.error('Error ingresar Admin:', error);
+                        });
+
+    },
     editarUsuario(idComponente, idUsuario){
         this.$store.commit('setUsuarioId', idUsuario);
         this.$store.commit('mostrarComponente', idComponente);
@@ -57,7 +81,7 @@ export default {
     deleteUsuario(id){
         axios.get(`/api/deleteUsuarioZona/${id}`)
                 .then(response => {
-                    this.usuarios = response.data
+                    this.obtenerUsuarios();
                 })
                 .catch(error => {
                     console.error(error);
@@ -66,7 +90,8 @@ export default {
     obtenerUsuarios(){
         axios.get('/api/obtenerClientes')
                 .then(response => {
-                    this.usuarios = response.data
+                console.log(response.data, '?')
+                    this.usuarios = response.data;
                 })
                 .catch(error => {
                     console.error(error);
@@ -98,5 +123,10 @@ h1 {
     color: black;
     font-family: "Montserrat", sans-serif;
     font-weight: 700;
+}
+
+.form-check-input:checked {
+    background-color: #7F7F7F;
+    border-color: #7F7F7F;
 }
 </style>

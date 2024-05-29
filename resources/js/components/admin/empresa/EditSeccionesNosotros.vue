@@ -18,7 +18,7 @@
             </div>
             <div class="row mt-3">
                 <div class="col-md-6">
-                <label class="form-label">Imagen (Tamaño recomendado 80x80)</label>
+                <label class="form-label">Imagen (Tamaño recomendado 66x66)</label>
                 <input type="file" ref="fotoSlider" class="form-control" id="imgs" @change="guardarFoto()">
                 </div>
                 <div class="col-md-4" style="">

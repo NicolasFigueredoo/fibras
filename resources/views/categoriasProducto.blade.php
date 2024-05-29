@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        @if ($producto)
+        @if ($producto !== null)
             <p class="indicador"><b>Inicio / Servicios / {{ $categoria['nombre'] }} </b> / {{ $producto['nombre'] }} </p>
         @else
             <p class="indicador"><b>Inicio / Servicios</b> / {{ $categoria['nombre'] }}</p>
@@ -12,7 +12,7 @@
 
         <div class="row d-flex">
             <div class="col-lg-3">
-                <div class="w-100 divContenedor" style="border-bottom: 1px solid #E5E5E5">
+                <div class="w-100" style="border-bottom: 1px solid #E5E5E5" style="height: 20px">
                 </div>
                 <div class="w-100 divContenedor" style="border-bottom: 1px solid #E5E5E5">
                     <p class="categoriaSelect">{{ $categoria['nombre'] }}</p>
@@ -20,7 +20,7 @@
 
                 @foreach ($categorias as $cat)
                     @if ($categoria['nombre'] != $cat['nombre'])
-                        <a href="/categoria/{{ $cat->id }}/null" style="text-decoration: none;">
+                        <a href="{{ route('categoria', ['id' => $cat->id, 'idProducto' => 0]) }}" style="text-decoration: none;">
                             <div class="w-100 divContenedor" style="border-bottom: 1px solid #E5E5E5">
                                 <p class="categoriaName">{{ $cat['nombre'] }}</p>
                             </div>
@@ -33,12 +33,13 @@
 
             <div class="col-lg-9">
 
-                @if ($producto)
+                @if ($producto !== null)
                     <div class="row">
-                        <div class="col-lg-4">
+                        <div class="col-lg-5">
 
                             <div id="carouselExample" class="carousel slide">
                                 <div class="carousel-inner">
+                                    @if($imagenes)
                                     @foreach ($imagenes as $index => $imagen)
                                         <div class="carousel-item{{ $index === 0 ? ' active' : '' }}">
                                             <div class="contenedor-imagen">
@@ -54,6 +55,7 @@
                                             </div>
                                         </div>
                                     @endforeach
+                                    @endif
                                 </div>
                                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"
                                     data-bs-slide="prev">
@@ -70,7 +72,7 @@
 
                         </div>
 
-                        <div class="col-lg-8">
+                        <div class="col-lg-7">
                             <div class="d-flex flex-column">
                                 <div>
                                     <p class="categoriaTextProducto">
@@ -89,7 +91,7 @@
 
                                 </div>
 
-                                <div class="d-flex text-center" style="margin-top: 20px">
+                                <div class="d-flex text-center" >
                                     @foreach ($litros as $litro)
                                         @if ($litro->cantidad <= 100)
                                             <div class="d-flex flex-column">
@@ -138,11 +140,23 @@
 
 
                                 <div>
-                                    <button class="btn consultarBtn">Consultar</button>
-                                    <div class="d-flex justify-content-around mt-3">
-                                        <div>
+                                    <a href="{{route('contacto')}}">
+                                        <button class="btn consultarBtn">Consultar</button>
+                                    </a>
+                                    <div class="row d-flex justify-content-around mt-3">
+                                        <div class="col-lg-6">
+                                            @auth
 
-                                            <a href="{{ route('downloadFile', ['file' => basename($producto['fichatecnica'])]) }}">      
+                                            @if($producto['fichatecnica'] !== null)
+
+                                            <a href="{{ route('downloadFile', ['file' => basename($producto['fichatecnica']), 'downloadName' => 'Ficha técnica', 'extension' => pathinfo($producto['fichatecnica'], PATHINFO_EXTENSION)]) }}">      
+                                                <button class="btn fichaTecnica">Ficha técnica
+                                                </button>
+                                            </a>
+
+                                            @endif
+                                            @else
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal">      
                                                 <button class="btn fichaTecnica">Ficha técnica
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="17" height="18"
                                                         viewBox="0 0 17 18" fill="none">
@@ -152,9 +166,19 @@
                                                     </svg>
                                                 </button>
                                             </a>
+                                            @endauth
                                         </div>
-                                        <div>
-                                            <a href="{{ route('downloadFile', ['file' => basename($producto['hojaseguridad'])]) }}">
+                                        <div class="col-lg-6">
+                                            @auth
+                                            @if($producto['hojaseguridad'] !== null)
+
+                                            <a href="{{ route('downloadFile', ['file' => basename($producto['hojaseguridad']), 'downloadName' => 'Hoja de seguridad', 'extension' => pathinfo($producto['hojaseguridad'], PATHINFO_EXTENSION)]) }}">      
+                                                <button class="btn fichaTecnica">Hoja de seguridad
+                                            </button>
+                                        </a>
+                                        @endif
+                                        @else
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
                                             <button class="btn fichaTecnica">Hoja de seguridad
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="17" height="18"
                                                     viewBox="0 0 17 18" fill="none">
@@ -164,6 +188,8 @@
                                                 </svg>
                                             </button>
                                         </a>
+                                        @endauth
+
                                         </div>
 
                                     </div>
@@ -184,7 +210,7 @@
 
                             @foreach ($productos as $producto)
                                 <div class="col-lg-4">
-                                    <a href="/categoria/{{ $categoria->id }}/{{ $producto->id }}"
+                                    <a href="{{ route('categoria', ['id' => $categoria->id, 'idProducto' => $producto->id]) }}"
                                         class="text-decoration-none">
                                         <div class="d-flex flex-column justify-content-end align-items-start producto p-3">
                                             <div style="height: 19px">
@@ -215,7 +241,7 @@
 
                         @foreach ($productos as $producto)
                             <div class="col-lg-4">
-                                <a href="/categoria/{{ $categoria->id }}/{{ $producto->id }}"
+                                <a href="{{ route('categoria', ['id' => $categoria->id, 'idProducto' => $producto->id]) }}"
                                     class="text-decoration-none">
                                     <div class="d-flex flex-column justify-content-end align-items-start producto p-3">
                                         <div style="height: 19px">
@@ -343,11 +369,11 @@
 
     .productoDescripcion {
         color: #000;
-        font-family: Inter;
-        font-size: 17px;
-        font-style: normal;
-        font-weight: 400 !important;
-        line-height: 1 !important;
+font-family: Inter;
+font-size: 15px;
+font-style: normal;
+font-weight: 400;
+line-height: 26px !important; /* 173.333% */
     }
 
     .arrow-icon .arrow-path {
@@ -359,7 +385,7 @@
     }
 
     .contenedor-imagen {
-        height: 352px;
+        height: 362px;
         flex-shrink: 0;
     }
 
@@ -400,7 +426,7 @@
 
     .fichaTecnica {
         display: flex;
-        width: 248px;
+        width: 100%;
         height: 40px;
         padding: 10px 32px;
         justify-content: center;

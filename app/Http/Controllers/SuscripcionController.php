@@ -14,7 +14,7 @@ class SuscripcionController extends Controller
         $suscripcion->email = $email;
         $suscripcion->save();
 
-        return response()->json($email);
+        return redirect('/');
 
       
     }

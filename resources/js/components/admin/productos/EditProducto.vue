@@ -40,8 +40,8 @@
 
                         <label class="form-label mt-3">Categorias</label>
                         <div id="contenedorCategorias w-100">
-                            <button v-for="cat in catSelect" :key="cat.id" type="button" class="btn"
-                                style="background-color: #7F7F7F; color: white; margin-bottom:10px">
+                            <button v-for="cat in catSelect" :key="cat.id" type="button" class="btn m-1"
+                                style="background-color: #7F7F7F; color: white;">
                                 {{ cat.nombre }}
                                 <svg xmlns="http://www.w3.org/2000/svg" height="14" width="15.75" viewBox="0 0 576 512"
                                     @click="deleteCat(cat.id)">
@@ -68,9 +68,9 @@
                         </select>
 
                         <label class="form-label mt-3">Litros</label>
-                        <div id="contenedorAplicaciones" style="width: 50%;">
-                            <button v-for="lit in litSelect" :key="lit.id" type="button" class="btn"
-                                style="background-color: #7F7F7F; color: white; margin-bottom: 10px">
+                        <div id="contenedorAplicaciones" style="width: 100%;">
+                            <button v-for="lit in litSelect" :key="lit.id" type="button" class="btn m-1"
+                                style="background-color: #7F7F7F; color: white">
                                 {{ lit.cantidad }}L
                                 <svg xmlns="http://www.w3.org/2000/svg" height="14" width="15.75" viewBox="0 0 576 512"
                                     @click="deleteLit(lit.id)">
@@ -104,8 +104,6 @@
                     style="background-color: #7F7F7F; color: white; margin-bottom: 4%;">Actualizar</button>
             </div>
         </form>
-
-
 
     </div>
 

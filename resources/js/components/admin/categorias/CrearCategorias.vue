@@ -19,7 +19,13 @@
                     <label class="form-check-label" for="checkbox3">Destacada</label>
                     <input type="checkbox" class="form-check-input" id="destacado">
                 </div>
+                
             </div>
+
+            <div class="col-md-4 mt-4">
+                    <label class="form-label">Imagen tamaño recomendado (120x120)</label>
+                    <input type="file" class="form-control" ref="img2" @change="guardarFotoFooter()">
+                </div>
 
             <div class="w-100 d-flex justify-content-end mt-3">
                 <button @click="crearCategoria()" type="button" class="btn"
@@ -48,7 +54,8 @@ export default {
             foto: null,
             orden: null,
             slider: '',
-            productoDestacado: 0
+            productoDestacado: 0,
+            imagen: null
         }
 
     },
@@ -59,6 +66,11 @@ export default {
         }
     },
     methods: {
+
+        guardarFotoFooter() {
+            const file = this.$refs.img2;
+            this.imagen = file.files[0]
+        },
         resetCampos() {
             $('#orden').val('');
             $('#titulo').val('');
@@ -82,6 +94,7 @@ export default {
             formData.append('orden', $('#orden').val());
             formData.append('titulo', $('#titulo').val());
             formData.append('destacado', this.productoDestacado);
+            formData.append('imagen', this.imagen);
 
             axios.post('/api/crearCategoria', formData, {
                 headers: {

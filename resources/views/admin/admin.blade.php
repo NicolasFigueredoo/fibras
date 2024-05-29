@@ -10,7 +10,6 @@
 </head>
 <body>
     <div id="app">
-        <app></app>
     </div>
     
     @vite('resources/js/admin.js')

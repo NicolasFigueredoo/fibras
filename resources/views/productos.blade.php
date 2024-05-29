@@ -7,10 +7,15 @@
             <div class="row flex-wrap categorias">
                 @foreach ($categorias as $categoria)
                     <div class="col-lg-4">
-                        <a href="/categoria/{{ $categoria->id }}/null" class="text-decoration-none">
+                        <a href="{{ route('categoria', ['id' => $categoria->id, 'idProducto' => 0]) }}"  class="text-decoration-none">
                             <div class="d-flex justify-content-around align-items-center categoria">
                                 <div class="contenedor-img">
-                                    <div class="categoria-img"></div>
+                                    <div class="categoria-img" style="
+                                           background-image: url('{{ url('/getImage/' . basename($categoria->imagen)) }}');
+                                              width: 100%;
+                                               height: 100%;
+                                        
+                                        "></div>
                                 </div>
                                 <div class="contenedor-textCategoria">
                                     <p class="textCategoria">{{ $categoria->nombre }}</p>
@@ -161,10 +166,8 @@
     }
 
     .categoria-img {
-        background-image: url('/img/logoCategoria.png');
         filter: grayscale(1);
-        width: 100%;
-        height: 100%;
+
     }
 
     .categoria:hover .categoria-img {

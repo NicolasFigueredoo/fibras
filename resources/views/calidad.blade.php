@@ -21,11 +21,46 @@
 
     </div>
 
-    <div id="appCalidad">
-        <dowload></dowload>
-
-    </div>
-
+    <div class="container">
+        <div style="margin-top: 80px" class="row d-flex justify-content-between align-items-center">
+                 <div class="col-lg-6">
+                     <div  class="input-group mb-3 d-flex justify-content-start align-items-center">
+                         <span class="input-group-text" id="basic-addon1">
+                             <div class="imagenCertificado"></div>
+                         </span>
+                         <a href="{{ route('downloadFile', ['file' => basename($seccion[0]['textoboton']), 'downloadName' => 'Certificado_Anmat', 'extension' => pathinfo($seccion[0]['textoboton'], PATHINFO_EXTENSION)]) }}" class="btn inputB">
+                            <div class="d-flex justify-content-between align-items-center">
+                                 <p class="m-3 txtBoton">Políticas de calidad</p>
+                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                     <path d="M12 17V3" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                     <path d="M6 11L12 17L18 11" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                     <path d="M19 21H5" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                 </svg>
+                             </div>
+                         </a>
+                     </div>
+                 </div>
+     
+                 <div class="col-lg-6">
+                     <div class="input-group mb-3 d-flex justify-content-start align-items-center">
+                         <span class="input-group-text" id="basic-addon1">
+                             <div class="imagenCertificadoAnmat"></div>
+                         </span>
+                         <a href="{{ route('downloadFile', ['file' => basename($seccion[0]['link']), 'downloadName' => 'Certificado_Anmat', 'extension' => pathinfo($seccion[0]['link'], PATHINFO_EXTENSION)]) }}" class="btn inputB">
+                            <div class="d-flex justify-content-between align-items-center">
+                                 <p class="m-3 txtBoton">Certificado Anmat</p>
+                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                     <path d="M12 17V3" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                     <path d="M6 11L12 17L18 11" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                     <path d="M19 21H5" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                 </svg>
+                             </div>
+                         </a>
+                     </div>
+                 </div>
+             </div>
+    
+      </div>
 
 @endsection
 
@@ -71,12 +106,13 @@
     }
 
     .descripcionSeccion {
-        color: #131313;
-        font-family: Inter;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 0.8 !important;
+        color: #000;
+font-family: Inter;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: 160% !important; /* 25.6px */
+padding-right: 80px;
     }
 
     .imagenCertificado {
@@ -105,7 +141,7 @@
     }
 
     .inputB {
-        width: 89.5%;
+        width: 88%;
         display: flex;
         height: 64px;
         padding: 10px 16px 10px 31px;
@@ -113,7 +149,11 @@
         gap: 286px;
         flex-shrink: 0;
         background: #F4F4F4 !important;
-        border-radius: 0px 8px 8px 0px;
+        border-top:  1px solid #EAEAEA !important;
+        border-bottom:  1px solid #EAEAEA !important;
+        border-right:  1px solid #EAEAEA !important;
+
+        border-radius: 0px 8px 8px 0px !important;
     }
 
     .txtBoton {

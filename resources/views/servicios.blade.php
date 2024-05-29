@@ -3,7 +3,7 @@
 @section('content')
     <div style="background:#F4F4F4">
         <div class="container">
-            <p class="indicador"><b>Inicio</b> / Clientes</p>
+            <p class="indicador"><b>Inicio</b> / Servicios</p>
 
 
             <div class="row d-flex" style="margin-top: 30px">
@@ -64,9 +64,9 @@
     <div class="container" style="padding-bottom: 100px">
         <div class="row d-flex" style="margin-top: 89px;">
             <div class="col-lg-6 contenedor-textoSeccion2">
-                <p class="tituloSeccion" style="padding-right: 250px">{!! $seccion2[0]['titulo'] !!}</p>
+                <p class="tituloSeccion2" style="padding-right: 130px">{!! $seccion2[0]['titulo'] !!}</p>
 
-                <div class="descripcionSeccion2 pt-5">{!! $seccion2[0]['texto'] !!}</div>
+                <div class="descripcionSeccion2 pt-5" style="padding-right: 20px">{!! $seccion2[0]['texto'] !!}</div>
 
 
             </div>
@@ -125,23 +125,21 @@
     }
 
     .descripcionSeccion {
-        padding-top: 20px;
         color: #131313;
         font-family: Inter;
         font-size: 16px;
         font-style: normal;
         font-weight: 400;
-        line-height: 0.5 !important;
+        line-height: 160% !important;
     }
 
     .descripcionSeccion2 {
-        padding-top: 20px;
         color: #131313;
         font-family: Inter;
         font-size: 16px;
         font-style: normal;
         font-weight: 400;
-        line-height: 0.5 !important;
+        line-height: 160% !important;
     }
 
     .contenedor-textoSeccion {
@@ -176,6 +174,15 @@
         font-style: normal;
         font-weight: 600;
         line-height: normal;
+    }
+
+    .tituloSeccion2{
+        color: #131313;
+font-family: Inter;
+font-size: 32px;
+font-style: normal;
+font-weight: 600;
+line-height: 130%; /* 41.6px */
     }
 
     @media screen and (max-width: 1000px) {

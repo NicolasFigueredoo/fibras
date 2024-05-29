@@ -5,7 +5,7 @@
     <p class="indicador"><b>Inicio</b> / Empresa</p>
 
 
-    <div class="row d-flex" style="margin-top: 30px">
+    <div class="row d-flex" style="margin-top: 30px;">
             <div class="col-lg-6 contenedorImagen">
                 <div style="background-image: url('{{ url('/getImage/' . basename($seccion[0]['imagen'])) }}'); 
                 background-size: cover; 
@@ -19,7 +19,11 @@
             <div class="col-lg-6 contenedor-textoSeccion">
                 <p class="tituloSeccion">{!! $seccion[0]['titulo'] !!}</p>
 
-                <div class="descripcionSeccion">{!! $seccion[0]['texto'] !!}</div>
+                <div>
+
+                    <div class="descripcionSeccion">{!! $seccion[0]['texto'] !!}</div>
+                </div>
+
                 
 
             </div>
@@ -112,12 +116,12 @@ font-family: Inter;
 font-size: 16px;
 font-style: normal;
 font-weight: 400;
-line-height: 1 !important; 
+line-height: 160% !important; /* 25.6px */
 }
 
 .contenedor-textoSeccion{
     padding: 50px;
-    padding-left: 80px !important;
+    padding-left: 60px !important;
 
 }
 

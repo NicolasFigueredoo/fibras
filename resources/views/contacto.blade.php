@@ -9,11 +9,12 @@
 
     <div id="appContacto">
         <formulario></formulario>
-
     </div>
 
 
 @endsection
+
+<script src="https://www.google.com/recaptcha/api.js?render=6LdIAewpAAAAAFZ3ET1KK0avyL6d2oGkYiWJsq_5"></script>
 
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');

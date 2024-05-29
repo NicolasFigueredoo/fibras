@@ -57,7 +57,7 @@
                         <input type="text" class="form-control" id="orden">
                     </div>
                     <div class="mt-3">
-                        <label class="form-label">Imagen 454x448</label>
+                        <label class="form-label">Imagen 390x350</label>
                         <input @change="guardarImagen()" type="file" ref="imagenProducto" class="form-control" id="imagen">
 
                     </div>
