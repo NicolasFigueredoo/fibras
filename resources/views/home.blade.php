@@ -281,7 +281,7 @@
         height: 100%;
     }
 
-    .categoria-img:hover {
+    .categoria:hover .categoria-img{
         filter: grayscale(0);
 
     }

@@ -17,6 +17,11 @@ class FileDownloadController extends Controller
             abort(404, 'File not found.');
         }
     }
+
+    public function downloadTwo($file)
+{
+    return response()->download(storage_path("app/fotos/{$file}"));
+}
     
 }
 

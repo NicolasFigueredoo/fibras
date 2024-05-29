@@ -56,6 +56,8 @@ Route::get('/getImage/{fileName}', [ImagenController::class, 'getImage']);
 Route::get('/categoria/{id}/{idProducto}', [WebsiteController::class, 'mostrarProductosCategoria']);
 
 
+Route::get('/downloadFile/{file}', [FileDownloadController::class, 'downloadTwo'])->name('downloadFile');
+
 
 Route::get('/download/{filename}', [FileDownloadController::class, 'download'])->name('download');
 
