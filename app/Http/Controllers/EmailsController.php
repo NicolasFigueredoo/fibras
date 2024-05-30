@@ -14,13 +14,8 @@ class EmailsController extends Controller
 {
     public function enviarCorreoContacto(Request $request){
 
-        $recaptchaSecret = $request->recaptchaSecret;
-        $recaptchaToken = $request->recaptchaToken;
+    
 
-        $recaptcha = new ReCaptcha($recaptchaSecret);
-        $response = $recaptcha->verify($recaptchaToken, $request->ip());
-
-        if ($response->isSuccess()) {
 
         $nombre = $request->nombre;
         $empresa = $request->empresa;
@@ -32,12 +27,6 @@ class EmailsController extends Controller
 
         Mail::to($contacto->email)->send(new ContactoMail($nombre, $empresa, $email,$celular,$mensaje));
         return response()->json(['message' => 'mensajes enviados'], 200);
-
-    }
-    else{
-        return response()->json(['error' => 'El reCAPTCHA no se validó correctamente.']);
-    }
-        
 
 
     }

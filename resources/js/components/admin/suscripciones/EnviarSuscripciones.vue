@@ -56,7 +56,7 @@ export default {
 
                 })
                 .catch(error => {
-                    $('.mensaje').html('<p class="text-success">a ocurrido un error</p>')
+                    $('.mensaje').html('<p class="text-danger">a ocurrido un error</p>')
                 });
 
                 

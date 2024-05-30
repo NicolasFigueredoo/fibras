@@ -3,10 +3,11 @@
         <div class="container contacto" style="margin-bottom: 80px">
             <div class="row">
                 <div class="col-lg-4 informacion">
-                    <p class="textoC ">Para mayor información, no dude en contactarse mediante el siguiente formulario, o
+                    <p class="textoC ">Para mayor información, no dude en contactarse mediante el siguiente formulario,
+                        o
                         a través de nuestras vías de comunicación.</p>
 
-                        
+
                     <div class="ubicacion" style="cursor: pointer; margin-top: 30px;">
                         <div style="width: 20px">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -81,7 +82,9 @@
                                       border-radius: 0%;
                                   " v-model="mensaje"></textarea>
                         </div>
+                        <div id="mensajePresupuesto"></div>
                         <div id="content" class="d-flex justify-content-end align-items-center col-lg-12 mt-3 gap-5">
+
                             <div style="margin-top: 20px;">
                                 <p class="campoO">*Campos obligatorios</p>
                             </div>
@@ -90,7 +93,6 @@
                                     class="btn btn-primary" @click="enviarCorreo()">
                                     Enviar formulario
                                 </button>
-                                <div id="mensajePresupuesto"></div>
                             </div>
                         </div>
                     </div>
@@ -106,6 +108,7 @@
 
 <script>
 import axios from "axios";
+import $ from 'jquery';
 
 export default {
     data() {
@@ -156,39 +159,30 @@ export default {
                 return;
             }
 
-            grecaptcha.ready(function () {
-                grecaptcha
-                    .execute("6LdIAewpAAAAAGO1WyC2JZ5TLW2Xhpa0bfVVpUJR ", {
-                        action: "submit",
-                    })
-                    .then(function (token) {
-                        $("#mensajePresupuesto").html(
-                            '<p class="text-success">Enviando..</p>'
-                        );
 
-                        axios
-                            .post("/enviarCorreo", {
-                                nombre: self.nombre,
-                                empresa: self.empresa,
-                                email: self.email,
-                                celular: self.celular,
-                                mensaje: self.mensaje,
-                                recaptchaToken: token,
-                                recaptchaSecret:
-                                    "6LdIAewpAAAAAFZ3ET1KK0avyL6d2oGkYiWJsq_5",
-                            })
-                            .then((response) => {
-                                $("#mensajePresupuesto").html(
-                                    '<p class="text-success">Mensaje enviado correctamente</p>'
-                                );
-                            })
-                            .catch((error) => {
-                                $("#mensajePresupuesto").html(
-                                    '<p class="text-danger">Mensaje fallido revisar campos</p>'
-                                );
-                            });
-                    });
-            });
+            $("#mensajePresupuesto").html(
+                '<p class="text-success">Enviando..</p>'
+            );
+
+            axios
+                .post("/enviarCorreo", {
+                    nombre: self.nombre,
+                    empresa: self.empresa,
+                    email: self.email,
+                    celular: self.celular,
+                    mensaje: self.mensaje
+                })
+                .then((response) => {
+                    $("#mensajePresupuesto").html(
+                        '<p class="text-success">Mensaje enviado correctamente</p>'
+                    );
+                })
+                .catch((error) => {
+                    $("#mensajePresupuesto").html(
+                        '<p class="text-danger">Mensaje fallido revisar campos</p>'
+                    );
+                });
+
         },
     },
     mounted() {
