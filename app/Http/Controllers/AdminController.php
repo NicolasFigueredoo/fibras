@@ -43,7 +43,14 @@ class AdminController extends Controller
         $slider->orden = $request->orden;
         $slider->texto = $request->jsonCodigoSlider;
         $slider->textoboton = $request->textoboton;
-        $slider->linkboton = $request->linkboton;
+        $slider->textoAlternativo = $request->textoAlternativo;
+        $slider->textobotonAlternativo = $request->textobotonAlternativo;
+
+        if($request->linkboton){
+            $slider->linkboton = $request->linkboton;
+        }else{
+            $slider->linkboton = 'none';
+        }
 
         if ($request->hasFile('foto')) {
 
@@ -74,7 +81,14 @@ class AdminController extends Controller
         $slider->orden = $request->orden;
         $slider->texto = $request->jsonCodigoSlider;
         $slider->textoboton = $request->textoboton;
-        $slider->linkboton = $request->linkboton;
+        $slider->textoAlternativo = $request->textoAlternativo;
+        $slider->textobotonAlternativo = $request->textobotonAlternativo;
+
+        if($request->linkboton){
+            $slider->linkboton = $request->linkboton;
+        }else{
+            $slider->linkboton = 'none';
+        }
 
         if ($request->hasFile('foto')) {
 
@@ -179,7 +193,8 @@ class AdminController extends Controller
         $banner = Banner::find($request->idBanner);
         $banner->titulo = $request->bannerTitulo;
         $banner->texto = $request->bannerTexto;
-      
+        $banner->tituloAlternativo = $request->bannerTituloAlternativo;
+        $banner->textoAlternativo = $request->bannerTextoAlternativo;
 
         if ($request->hasFile('foto')) {
 
@@ -550,6 +565,7 @@ class AdminController extends Controller
         $seccion->orden = $request->orden;
         $seccion->titulo = $request->titulo;
         $seccion->texto = $request->texto;
+        
         if ($request->hasFile('imagen')) {
 
             if (!Storage::exists('public/fotos')) {
@@ -821,6 +837,7 @@ class AdminController extends Controller
         $categoria = new Categoria();
         $categoria->orden = $request->orden;
         $categoria->nombre = $request->titulo;
+        $categoria->nombreAlternativo = $request->tituloAlternativo;
         $categoria->destacado = $request->destacado;
 
         if ($request->hasFile('imagen')) {
@@ -843,6 +860,7 @@ class AdminController extends Controller
         $categoria = Categoria::find($request->idCategoria);
         $categoria->orden = $request->orden;
         $categoria->nombre = $request->titulo;
+        $categoria->nombreAlternativo = $request->tituloAlternativo;
         $categoria->destacado = $request->destacado;
 
         if ($request->hasFile('imagen')) {

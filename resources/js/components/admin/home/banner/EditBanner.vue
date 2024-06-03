@@ -11,9 +11,18 @@
                     <label class="form-label">Imagen (Tamaño recomendado 804x650) </label>
                     <input type="file" ref="fotoBanner" class="form-control" @change="guardarFoto()">
                 </div>
-                <div class="col-lg-6">
-                    <label class="form-label">Título</label>
+                <div class="row col-lg-6">
+                    <div class=" col-lg-6">
+
+                    <label class="form-label">Título (Español)</label>
                     <input type="text" class="form-control" id="titulo" :value="this.bannerTitulo">
+                </div>
+                <div class="col-lg-6">
+                    <label class="form-label">Título (Portugués)</label>
+                    <input type="text" class="form-control" id="tituloAlternativo" :value="this.bannerTituloAlternativo">
+
+                </div>
+
                 </div>
           
             </div>
@@ -21,19 +30,19 @@
                 <img class="imagen" :src="getImagen(this.imagen)" alt="">
             </div>
 
-            <div class="mt-3">
-                <label for="exampleInputPassword1" class="form-label">Texto</label>
-                <textarea class="summernote" id="editor" :value="bannerTexto"></textarea>
-            </div>
-
-             <div v-if="this.idComponente === 123" class="row mt-3">
+            <div class="row mt-3">
                 <div class="col-lg-6">
-                <label class="form-label">Políticas de calidad</label>
-                <input type="file" ref="politicaCalidad" class="form-control" @change="guardarPolitica()">
-                </div>
-          
 
+                <label for="exampleInputPassword1" class="form-label">Texto (Español)</label>
+                <textarea class="summernote" id="editor" :value="bannerTexto"></textarea>
+                </div>
+                <div class="col-lg-6">
+                    <label for="exampleInputPassword1" class="form-label">Texto (Portugués)</label>
+                <textarea class="summernote" id="editorAlternativo" :value="bannerTexto"></textarea>
+                </div>
             </div>
+
+        
 
             <div class="w-100 d-flex justify-content-end mt-3">
                 <button @click="updateBanner()" type="button" class="btn"
@@ -101,11 +110,11 @@ export default {
             formData.append('idBanner', this.idBanner);
             formData.append('foto', this.foto);
             formData.append('bannerTitulo', $('#titulo').val());
+            formData.append('bannerTituloAlternativo', $('#tituloAlternativo').val());
             formData.append('bannerTexto', $('#editor').summernote('code').toString());
+            formData.append('bannerTextoAlternativo', $('#editorAlternativo').summernote('code').toString());
             formData.append('txtBoton', this.calidad);
             formData.append('linkBoton', this.certificado);
-
-
             axios.post('/api/updateBanner', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
@@ -135,7 +144,15 @@ export default {
                     $(this).attr('data-bs-toggle', $(this).attr('data-toggle')).removeAttr('data-toggle');
                 });
 
-                this.$store.commit('setSummer', true);
+
+                $('#editorAlternativo').summernote({
+                    height: 300,
+                });
+                var noteBar = $('.note-toolbar');
+                noteBar.find('[data-toggle]').each(function () {
+                    $(this).attr('data-bs-toggle', $(this).attr('data-toggle')).removeAttr('data-toggle');
+                });
+
             
         },
         obtenerBannerInformacion() {
@@ -143,7 +160,9 @@ export default {
                 .then(response => {
                     if (this.idComponente === 7) {
                         this.bannerTexto = response.data[0].texto
+                        this.bannerTextoAlternativo = response.data[0].textoAlternativo
                         this.bannerTitulo = response.data[0].titulo
+                        this.bannerTituloAlternativo = response.data[0].tituloAlternativo
                         this.idBanner = response.data[0].id
                         this.imagen = response.data[0].imagen
                         this.seccion = response.data[0].seccion
@@ -151,45 +170,34 @@ export default {
                         this.linkBoton = response.data[0].link
                     } else if(this.idComponente === 120) {
                         this.bannerTexto = response.data[1].texto
+                        this.bannerTextoAlternativo = response.data[1].textoAlternativo
                         this.bannerTitulo = response.data[1].titulo
                         this.idBanner = response.data[1].id
                         this.imagen = response.data[1].imagen
                         this.seccion = response.data[1].seccion
                         this.txtBoton = response.data[1].textoboton
                         this.linkBoton = response.data[1].link
+                        this.bannerTituloAlternativo = response.data[1].tituloAlternativo
+
                     }
 
                     else if(this.idComponente === 121) {
                         this.bannerTexto = response.data[2].texto
+                        this.bannerTextoAlternativo = response.data[2].textoAlternativo
                         this.bannerTitulo = response.data[2].titulo
                         this.idBanner = response.data[2].id
                         this.imagen = response.data[2].imagen
                         this.seccion = response.data[2].seccion
                         this.txtBoton = response.data[2].textoboton
                         this.linkBoton = response.data[2].link
+                        this.bannerTituloAlternativo = response.data[2].tituloAlternativo
+
                     }
 
-                    else if(this.idComponente === 122) {
-                        this.bannerTexto = response.data[3].texto
-                        this.bannerTitulo = response.data[3].titulo
-                        this.idBanner = response.data[3].id
-                        this.imagen = response.data[3].imagen
-                        this.seccion = response.data[3].seccion
-                        this.txtBoton = response.data[3].textoboton
-                        this.linkBoton = response.data[3].link
-                    }
-
-                    else if(this.idComponente === 123) {
-                        this.bannerTexto = response.data[4].texto
-                        this.bannerTitulo = response.data[4].titulo
-                        this.idBanner = response.data[4].id
-                        this.imagen = response.data[4].imagen
-                        this.seccion = response.data[4].seccion
-                        this.txtBoton = response.data[4].textoboton
-                        this.linkBoton = response.data[4].link
-                    }
-
+            
                     $('#editor').summernote('code', this.bannerTexto);
+                    $('#textoAlternativo').summernote('code', this.bannerTextoAlternativo);
+
                 })
                 .catch(error => {
                     console.error(error);

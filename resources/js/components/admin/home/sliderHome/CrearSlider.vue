@@ -7,26 +7,40 @@
 
         <form class="mt-3">
             <div class="mb-3">
-                <label class="form-label">orden</label>
+                <label class="form-label">Orden</label>
                 <input type="text" class="form-control" id="orden">
             </div>
             <div class="mb-3">
                 <label class="form-label">Imagen (Tamaño recomendado 586x1400)</label>
                 <input type="file" ref="fotoSlider" class="form-control" id="imgs" @change="guardarFoto()">
             </div>
-            <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Texto</label>
-                <textarea class="summernote" id="editor"></textarea>
-            </div>
             <div class="row mb-3">
                 <div class="col-lg-6">
-                    <label class="form-label">Texto boton</label>
-                    <input type="text" class="form-control" id="botonText">
+
+                <label for="exampleInputPassword1" class="form-label">Texto (Español)</label>
+                <textarea class="summernote" id="editor"></textarea>
                 </div>
                 <div class="col-lg-6">
+                    <label for="exampleInputPassword1" class="form-label">Texto (Portugués)</label>
+                <textarea class="summernote" id="editorAlternativo"></textarea>
+                </div>
+
+            </div>
+            <div class="row mb-3">
+                <div class="col-lg-4">
+                    <label class="form-label">Texto boton (Español)</label>
+                    <input type="text" class="form-control" id="botonText">
+                </div>
+                <div class="col-lg-4">
+                    <label class="form-label">Texto boton (Portugués)</label>
+                    <input type="text" class="form-control" id="botonTextAlternativo">
+                </div>
+                <div class="col-lg-4">
                     <label class="form-label">Link boton</label>
                     <input type="text" class="form-control" id="botonLink">
                 </div>
+
+                
             </div>
 
             <div class="w-100 d-flex justify-content-end">
@@ -80,8 +94,10 @@ export default {
             let formData = new FormData();
             formData.append('foto', this.foto);
             formData.append('jsonCodigoSlider', $('#editor').summernote('code').toString());
+            formData.append('textoAlternativo', $('#editorAlternativo').summernote('code').toString());
             formData.append('orden', $('#orden').val());
             formData.append('textoboton', $('#botonText').val());
+            formData.append('textobotonAlternativo', $('#botonTextAlternativo').val());
             formData.append('linkboton', $('#botonLink').val());
 
             axios.post('/api/crearSlider', formData, {
@@ -100,7 +116,6 @@ export default {
 
                 })
                 .catch(error => {
-                    console.error(error);
                     this.$store.commit('setMostrarAlerta', true);
                     this.$store.commit('setClaseAlerta', 2);
                     this.$store.commit('setMensajeAlerta', error);
@@ -109,27 +124,30 @@ export default {
 
         },
         summerNote() {
-            if (this.getSummer === null && this.getSummer !== true) {
-                $('#editor').summernote({
-                    height: 300,
-                });
-                var noteBar = $('.note-toolbar');
-                noteBar.find('[data-toggle]').each(function () {
-                    $(this).attr('data-bs-toggle', $(this).attr('data-toggle')).removeAttr('data-toggle');
-                });
+        $('#editor').summernote('destroy');
+        $('#textoAlternativo').summernote('destroy');
 
-                this.$store.commit('setSummer', true);
-            }
+        $('#editor').summernote({
+            height: 300,
+        });
+        var noteBar = $('.note-toolbar');
+        noteBar.find('[data-toggle]').each(function () {
+            $(this).attr('data-bs-toggle', $(this).attr('data-toggle')).removeAttr('data-toggle');
+        });
 
-
-        }
+        $('#editorAlternativo').summernote({
+            height: 300,
+        });
+        var noteBar = $('.note-toolbar');
+        noteBar.find('[data-toggle]').each(function () {
+            $(this).attr('data-bs-toggle', $(this).attr('data-toggle')).removeAttr('data-toggle');
+        });
+    }
 
     },
 
     mounted() {
-
         this.summerNote();
-
 
     } 
 

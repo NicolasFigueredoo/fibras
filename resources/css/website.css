@@ -1,1 +1,10 @@
+@font-face {
+    font-family: 'FuturaBook';
+    src: url('{{ asset('public/fonts/FuturaBook.ttf') }}') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 @import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+

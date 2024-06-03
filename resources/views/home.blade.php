@@ -3,100 +3,136 @@
 @section('content')
     <div>
         <div class="imagenPrincipal">
+      
+
             <div id="carouselExampleIndicators" class="carousel slide w-100" style="height: 600px;">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                        aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                        aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                        aria-label="Slide 3"></button>
+                </div>
                 <div class="carousel-inner">
                     @foreach ($sliders as $index => $slider)
-                        <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
+                        <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
                             @if ($slider->contentType == 'imagen')
-                                <div style="width: 100%; height: 768px;">
-                                    <div class="background-image"
-                                        style="background-image: url('{{ url('/getImage/' . basename($slider['imagen'])) }}');
+
+                            <div style=" height: 768px;">
+                                <div class="background-image"
+                                    style="background-image: url('{{ url('/getImage/' . basename($slider['imagen'])) }}');
                                         background-size: cover; 
                                         background-position: center;
                                         width: 100%;
                                         height: 100%;                                    ">
-                                    </div>
-                                    <div class="overlay"></div>
-
-                                    <div class="container">
-                                        <div class="d-flex flex-column">
-                                            <div class="container textoEncima">
-                                                <div>
-                                                    {!! $slider->texto !!}
-                                                </div>
-
-
-                                            </div>
-                                            <div style="margin-top: 124px;">
-                                                @if ($slider['linkboton'] !== null)
-                                                    <a href="{{ $slider['linkboton'] }}">
-                                                        <button type="button"
-                                                            class="btn botonSlider">{{ $slider['textoboton'] }}</button>
-                                                    </a>
-                                                @else
-                                                    <a href="/productos">
-                                                        <button type="button"
-                                                            class="btn botonSlider">{{ $slider['textoboton'] }}</button>
-                                                    </a>
-                                                @endif
-                                            </div>
-                                        </div>
-                                    </div>
-
                                 </div>
-                            @elseif ($slider->contentType == 'video')
-                                <div class="container" style="position: absolute; z-index: 10; margin-left: 15.5%;">
-                                    <div class="d-flex flex-column">
-                                        <div class="container textoEncima">
-                                            <div>
-                                                {!! $slider->texto !!}
-                                            </div>
-
-
-
-
-                                        </div>
-                                        <div style="margin-top: 124px;">
-                                            @if ($slider['linkboton'] !== null)
-                                                <a href="{{ $slider['linkboton'] }}">
-                                                    <button type="button"
-                                                        class="btn botonSlider">{{ $slider['textoboton'] }}</button>
-                                                </a>
-                                            @else
+                                <div class="container carousel-caption textoEncima">
+                                    @if($idioma['idioma'] == 'ES')
+                                    <div>{!! $slider->texto !!}</div>
+                                    <div >
+                                        @if ($slider['linkboton'] !== 'none')
+                                            <a href="{{ $slider['linkboton'] }}">
                                                 <button type="button"
                                                     class="btn botonSlider">{{ $slider['textoboton'] }}</button>
-                                            @endif
-                                        </div>
+                                            </a>
+                                        @else
+                                            <a href="{{ route('productos') }}">
+                                                <button type="button"
+                                                    class="btn botonSlider">{{ $slider['textoboton'] }}</button>
+                                            </a>
+                                        @endif
                                     </div>
+                                    @else
+                                    <div>{!! $slider->textoAlternativo !!}</div>
+                                    <div >
+                                        @if ($slider['linkboton'] !== 'none')
+                                            <a href="{{ $slider['linkboton'] }}">
+                                                <button type="button"
+                                                    class="btn botonSlider">{{ $slider['textobotonAlternativo'] }}</button>
+                                            </a>
+                                        @else
+                                            <a href="{{ route('productos') }}">
+                                                <button type="button"
+                                                    class="btn botonSlider">{{ $slider['textobotonAlternativo'] }}</button>
+                                            </a>
+                                        @endif
+                                    </div>
+                                    @endif
                                 </div>
-                                <video class="d-block w-100" style="width: 100%; height: 768px; object-fit: cover;" controls
-                                    autoplay muted>
-                                    <source src="{{ url('/getImage/' . basename($slider['imagen'])) }}" type="video/mp4">
-                                    Tu navegador no soporta la reproducción de videos.
-                                </video>
-                                <div class="carousel-indicators"
-                                    style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);">
-                                    @foreach ($sliders as $i => $slider)
-                                        <button type="button" data-bs-target="#carouselExampleIndicators"
-                                            data-bs-slide-to="{{ $i }}"
-                                            class="{{ $i === $index ? 'active' : '' }}"
-                                            aria-current="{{ $i === $index ? 'true' : null }}"
-                                            aria-label="Slide {{ $i + 1 }}"></button>
-                                    @endforeach
+                            </div>
+                            @else
+                            <div class="container carousel-caption textoEncima">
+
+                                @if($idioma['idioma'] == 'ES')
+                                <div>{!! $slider->texto !!}</div>
+                                <div >
+                                    @if ($slider['linkboton'] !== 'none')
+                                        <a href="{{ $slider['linkboton'] }}">
+                                            <button type="button"
+                                                class="btn botonSlider">{{ $slider['textoboton'] }}</button>
+                                        </a>
+                                    @else
+                                        <a href="{{ route('productos') }}">
+                                            <button type="button"
+                                                class="btn botonSlider">{{ $slider['textoboton'] }}</button>
+                                        </a>
+                                    @endif
                                 </div>
+                                @else
+                                <div>{!! $slider->textoAlternativo !!}</div>
+                                <div >
+                                    @if ($slider['linkboton'] !== 'none')
+                                        <a href="{{ $slider['linkboton'] }}">
+                                            <button type="button"
+                                                class="btn botonSlider">{{ $slider['textobotonAlternativo'] }}</button>
+                                        </a>
+                                    @else
+                                        <a href="{{ route('productos') }}">
+                                            <button type="button"
+                                                class="btn botonSlider">{{ $slider['textobotonAlternativo'] }}</button>
+                                        </a>
+                                    @endif
+                                </div>
+                                @endif
+                        </div>
+                            <video class="d-block w-100" style="height: 768px; object-fit: cover;" controls
+                            autoplay muted>
+                            <source src="{{ url('/getImage/' . basename($slider['imagen'])) }}" type="video/mp4">
+                            Tu navegador no soporta la reproducción de videos.
+                        </video>
+                    
                             @endif
+
+
                         </div>
                     @endforeach
                 </div>
-                <div class="carousel-indicators">
-                    @foreach ($sliders as $i => $slider)
-                        <button type="button" data-bs-target="#carouselExampleIndicators"
-                            data-bs-slide-to="{{ $i }}" class="{{ $i === 0 ? 'active' : '' }}"
-                            aria-current="{{ $i === 0 ? 'true' : 'false' }}"
-                            aria-label="Slide {{ $i + 1 }}"></button>
-                    @endforeach
-                </div>
             </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             <div class="container-fluid">
                 <nav class="navbar navbar-expand-lg">
@@ -145,12 +181,9 @@
 
                                 </div>
                                 <div class="d-flex justify-content-end align-items-center">
-                                    <a class="nav-link text-white" href="{{ route('nosotros') }}">Nosotros</a>
-                                    <a class="nav-link text-white" href="{{ route('productos') }}">Productos</a>
-                                    <a class="nav-link text-white" href="">Aplicaciones</a>
-                                    <a class="nav-link text-white" href="">Novedades</a>
-                                    <a class="nav-link text-white" href="">Presupuesto</a>
-                                    <a class="nav-link text-white" href="{{ route('contacto') }}">Contacto</a>
+                                    @foreach ($opcionesNavegador as $option)
+                                        <a class="nav-link text-white" href="{{ $option['url'] }}">{{ $option['name'] }}</a>
+                                @endforeach
                                     {{-- @auth
                                         <a class="nav-link text-white" href="{{ route('logout') }}"
                                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -189,11 +222,11 @@
             <div>
                 <div class="d-flex justify-content-between align-items-center" style="height: 100px">
                     <div>
-                        <p class="textoProductos">Productos</p>
+                        <p class="textoProductos">{{$tituloSeccionProductos}}</p>
                     </div>
                     <div>
                         <a href="{{ route('productos') }}">
-                            <button type="button" id="btnProductos" class="btn">Ver todos</button>
+                            <button type="button" id="btnProductos" class="btn">{{$textoBoton}}</button>
                         </a>
 
                     </div>
@@ -227,9 +260,16 @@
                                             height: 100%;
                                         ">
                                         </div>
+                                        <div class="svg-overlay"></div>
+
                                     </div>
                                     <div class="contenedor-textCategoria">
+                                        @if($idioma['idioma'] == 'ES')
                                         <p class="textCategoria">{{ $categoria->nombre }}</p>
+                                        @else
+                                        <p class="textCategoria">{{ $categoria->nombreAlternativo }}</p>
+
+                                        @endif
                                     </div>
                                 </div>
                             </a>
@@ -253,9 +293,16 @@
                     </div>
                 </div>
                 <div class="col-lg-6 contenedor-textoSeccion">
+                    @if($idioma['idioma'] == 'ES')
+
                     <p class="tituloSeccion">{!! $seccion[0]['titulo'] !!}</p>
 
                     <div class="descripcionSeccion">{!! $seccion[0]['texto'] !!}</div>
+                    @else
+                    <p class="tituloSeccion">{!! $seccion[0]['tituloAlternativo'] !!}</p>
+
+                    <div class="descripcionSeccion">{!! $seccion[0]['textoAlternativo'] !!}</div>
+                    @endif
                 </div>
 
             </div>
@@ -265,20 +312,20 @@
         <!---SECCION SECTORES--->
 
         <div class="fondoNovedades">
-            
+
             <div class="container">
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="tituloSectores">
-                        <p>Novedades</p>
+                        <p>{{$tituloSeccionProductos}}</p>
                     </div>
                     <div>
                         <a href="{{ route('sectores') }}">
-                            <button type="button" id="btnProductos" class="btn">Ver todas</button>
+                            <button type="button" id="btnProductos" class="btn">{{$textoBoton}}</button>
                         </a>
-    
+
                     </div>
                 </div>
-    
+
                 <div class="row flex-wrap sectores">
                     @foreach ($novedades as $novedad)
                         <div class="col-lg-4">
@@ -290,9 +337,7 @@
                    background-position: center;
                     background-repeat: no-repeat;
                     width: 100%;
-                    height: 100%;
-                
-                ">
+                    height: 100%;">
                                     </div>
                                     <div class="contenedor-textSector p-4">
                                         <p class="textEtiqueta">{{ $novedad->etiqueta }}</p>
@@ -304,10 +349,10 @@
                             </div>
                         </div>
                     @endforeach
-    
-    
+
+
                 </div>
-    
+
             </div>
         </div>
 
@@ -398,11 +443,15 @@
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
     crossorigin="anonymous"></script>
 
+<script>
+    $('.svg-overlay').on('click', function() {
+        $(this).toggleClass('active');
+    });
+</script>
 
+<style scoped>
 
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
-
+    
     .navbar {
         height: 130px;
         background: transparent;
@@ -429,14 +478,10 @@
     }
 
     .background-image {
-        position: absolute;
-        top: 0;
-        left: 0;
+
         width: 100%;
         height: 100%;
-        background-size: cover;
-        background-position: center;
-        z-index: 1;
+
     }
 
     .background-video {
@@ -456,7 +501,7 @@
         width: 100%;
         height: 100%;
         background: linear-gradient(180deg, rgba(0, 0, 0, 0.43) 0%, rgba(0, 0, 0, 0.00) 100%), rgba(0, 36, 93, 0.60);
-        z-index: 2;
+        z-index: 5;
     }
 
     .imagenNavbar {
@@ -465,8 +510,10 @@
     }
 
     .nav-link {
-        font-family: 'Inter', sans-serif;
-        font-size: 16px;
+        font-family: 'FuturaBook';
+        color: #FFF;
+        text-align: center;
+        font-size: 15px;
         font-style: normal;
         font-weight: 400;
         line-height: normal;
@@ -485,7 +532,7 @@
         position: relative;
         z-index: 3;
         color: #FFF;
-        font-family: Inter;
+        font-family: 'FuturaBook';
         font-style: normal;
         font-weight: 700;
         line-height: 130%;
@@ -493,7 +540,7 @@
 
     .textoProductos {
         color: var(--azul, #00245D);
-        font-family: "Futura Bk BT";
+        font-family: "FuturaBook";
         font-size: 35px;
         font-style: normal;
         font-weight: 400;
@@ -522,17 +569,32 @@
         width: 314px;
         height: 314px;
         flex-shrink: 0;
+        overflow: hidden;
+        position: relative;
+
+    }
+
+    .categoria-img {
+        background-size: cover;
+        background-position: center;
+        width: 100%;
+        height: 100%;
         filter: brightness(80%);
+        transition: transform 0.8s ease;
     }
 
     .categoria:hover .categoria-img {
-        filter: grayscale(0);
+        transform: scale(1.2);
+    }
+
+    .categoria:hover .textCategoria {
+        color: #0397D6;
 
     }
 
     .textCategoria {
         color: #000;
-        font-family: Inter;
+        font-family: 'FuturaBook';
         font-size: 22px;
         font-style: normal;
         font-weight: 400;
@@ -563,7 +625,7 @@
 
     .tituloSeccion {
         color: #FFF;
-        font-family: "Futura Bk BT";
+        font-family: "FuturaBook";
         font-size: 35px;
         font-style: normal;
         font-weight: 400;
@@ -574,7 +636,7 @@
     .descripcionSeccion {
         padding-top: 30px;
         color: #FFF;
-        font-family: "Futura Bk BT";
+        font-family: "FuturaBook";
         font-size: 20px;
         font-style: normal;
         font-weight: 400;
@@ -595,7 +657,7 @@
         justify-content: center;
         align-items: center;
 
-        font-family: Inter;
+        font-family: 'FuturaBook';
         font-size: 16px;
         font-style: normal;
         font-weight: 400;
@@ -604,7 +666,7 @@
 
     .tituloSectores {
         color: var(--azul, #00245D);
-        font-family: "Futura Bk BT";
+        font-family: "FuturaBook";
         font-size: 35px;
         font-style: normal;
         font-weight: 400;
@@ -623,7 +685,7 @@
         justify-content: center;
         align-items: center;
         color: #131313;
-        font-family: Inter;
+        font-family: 'FuturaBook';
         font-size: 16px;
         font-style: normal;
         font-weight: 400;
@@ -642,14 +704,15 @@
         border-radius: 37px;
         border: 1px solid var(--azul, #00245D);
         background: #FFF;
-        color: black !important;
+
         color: var(--azul, #00245D);
         text-align: center;
-        font-family: "Futura Bk BT";
+        font-family: "FuturaBook";
         font-size: 16px;
         font-style: normal;
         font-weight: 400;
         line-height: normal;
+        text-transform: uppercase
     }
 
     .sectores {
@@ -666,45 +729,54 @@
 
     .textSectores {
         color: #000;
-        font-family: "Futura Bk BT";
+        font-family: "FuturaBook";
         font-size: 30px;
         font-style: normal;
-        font-weight: 400;
+        font-weight: bold !important;
         line-height: 30px;
-        /* 100% */
+        padding-right: 50px;
     }
 
     .textLeer {
         color: rgba(0, 0, 0, 0.57);
-font-family: "Futura Bk BT";
-font-size: 16px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
-    }
-
-    .textEtiqueta {
-        color: var(--azul, #00245D);
-        font-family: "Futura Md BT";
+        font-family: "FuturaBook";
         font-size: 16px;
         font-style: normal;
         font-weight: 400;
         line-height: normal;
+        cursor: pointer;
+    }
+
+    .textEtiqueta {
+        color: var(--azul, #00245D);
+        font-family: "FuturaBookMd";
+        font-size: 16px;
+        font-style: normal;
+        line-height: normal;
         text-transform: uppercase;
+        font-weight: bold !important;
+        margin-bottom: 4px;
 
     }
 
     .textEpigrafe {
         color: #000;
-        font-family: "Futura Bk BT";
+        font-family: "FuturaBook";
         font-size: 18px;
         font-style: normal;
         font-weight: 400;
         line-height: 24px;
-        /* 133.333% */
+        max-height: 48px;
+        /* Dos líneas de texto */
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
     }
 
-    .fondoNovedades{
+
+    .fondoNovedades {
         background: #F5F5F5;
         margin-top: 100px;
         padding-top: 63px;
@@ -717,16 +789,22 @@ line-height: normal;
         background-size: cover;
         background-position: center;
         border-radius: 4px 4px 0px 0px !important;
-        
+
     }
 
-    .sector-imagen div{
+    .sector-imagen div {
         border-radius: 4px 4px 0px 0px !important;
 
     }
 
 
-    .contenedor-textSector {}
+    .contenedor-textSector {
+
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        padding: 16px;
+    }
 
     #botonLogin {
         width: 100%;
@@ -758,7 +836,7 @@ line-height: normal;
 
     .modal-title {
         color: var(--Celeste, #29A2C4);
-        font-family: Inter;
+        font-family: 'FuturaBook';
         font-size: 30px;
         font-style: normal;
         font-weight: 400;
@@ -803,13 +881,75 @@ line-height: normal;
         background: var(--azul, #00245D) !important;
         color: #FFF !important;
         text-align: center;
-        font-family: "Futura Bk BT";
+        font-family: "FuturaBook";
         font-size: 16px;
         font-style: normal;
         font-weight: 400;
         line-height: normal;
         margin-top: 78px;
     }
+
+
+  
+    .carousel-caption {
+  
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+    align-items: start;
+    text-align: justify !important;
+    margin-bottom: 250px;
+    
+}
+
+    .svg-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 50px;
+        height: 50px;
+        background-image: url('{{ asset('svgs/svgCeleste.svg') }}');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .categoria:hover .svg-overlay {
+        opacity: 1;
+    }
+
+    .svg-overlay {
+        transition: opacity 0.3s ease, background-color 0.3s ease;
+    }
+
+    .svg-overlay:hover,
+    .svg-overlay.active {
+        background-image: url('{{ asset('svgs/svgWhite.svg') }}');
+        cursor: pointer;
+    }
+
+.carousel-indicators {
+    position: absolute;
+    bottom: 10px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+}
+
+.carousel-indicators button {
+    width: 91px;
+height: 6px !important;
+flex-shrink: 0;
+    background-color: #fff; 
+    border: 2px solid #333; 
+    margin: 0 5px; 
+}
+
+.carousel-indicators .active {
+    background-color: #333; 
+}
 
 
 

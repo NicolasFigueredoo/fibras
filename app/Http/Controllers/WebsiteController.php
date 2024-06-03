@@ -6,6 +6,7 @@ use App\Models\Banner;
 use App\Models\Categoria;
 use App\Models\ClienteEmpresa;
 use App\Models\Contacto;
+use App\Models\Idioma;
 use App\Models\Logo;
 use App\Models\Novedad;
 use App\Models\Producto;
@@ -19,6 +20,39 @@ class WebsiteController extends Controller
 {
     public function home()
     {
+
+        $idioma = Idioma::where('activo', 1)->first();
+
+        if($idioma['idioma'] == 'ES'){
+            $tituloSeccionProductos = 'Productos';
+            $tituloSeccionNovedades = 'novedades';
+            $textoBoton = 'Ver todos';
+
+            $opcionesNavegador = [
+                ['name' => 'Nosotros', 'url' => route('nosotros')],
+                ['name' => 'Productos', 'url' => route('productos')],
+                ['name' => 'Aplicaciones', 'url' => '#'],  
+                ['name' => 'Novedades', 'url' => '#'], 
+                ['name' => 'Presupuesto', 'url' => '#'],  
+                ['name' => 'Contacto', 'url' => route('contacto')],
+            ];
+        }else{
+            $tituloSeccionProductos = 'produtos';
+            $tituloSeccionProductos = 'Novidades';
+            $textoBoton = 'Ver tudo';
+
+
+            $opcionesNavegador = [
+                ['name' => 'Sobre nós', 'url' => route('nosotros')],
+                ['name' => 'Produtos', 'url' => route('productos')],
+                ['name' => 'Aplicações', 'url' => '#'],  
+                ['name' => 'Novidades', 'url' => '#'], 
+                ['name' => 'Orçamento', 'url' => '#'], 
+                ['name' => 'Contato', 'url' => route('contacto')],
+        
+            ];
+        }
+
         $sliders = Slider::orderBy('orden')->get();
         $logo = Logo::all();
         $categorias = Categoria::where('destacado', 1)
@@ -26,6 +60,7 @@ class WebsiteController extends Controller
         ->get();
         $seccion = Banner::where('seccion','home')->get();
         $novedades = Novedad::orderBy('orden')->get();
+
 
 
         foreach ($sliders as $slider) {
@@ -45,7 +80,7 @@ class WebsiteController extends Controller
             }
         }
 
-        return view('home', compact('sliders', 'logo', 'categorias', 'seccion', 'novedades'));
+        return view('home', compact('sliders', 'logo', 'categorias', 'seccion', 'novedades', 'tituloSeccionProductos', 'opcionesNavegador', 'idioma', 'tituloSeccionProductos', 'textoBoton'));
     }
 
     public function nosotros()

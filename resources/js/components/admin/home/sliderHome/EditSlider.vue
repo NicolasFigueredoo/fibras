@@ -14,20 +14,35 @@
                 <label class="form-label">Imagen (Tamaño recomendado 768x1400)</label>
                 <input type="file" ref="fotoSlider" class="form-control" @change="guardarFoto()">
             </div>
-            <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Texto</label>
-                <textarea class="summernote" id="editor"></textarea>
-            </div>
-
             <div class="row mb-3">
                 <div class="col-lg-6">
-                    <label class="form-label">Texto boton</label>
-                    <input type="text" class="form-control" id="botonText" :value="this.slider.textoboton">
+
+                <label for="exampleInputPassword1" class="form-label">Texto (Español)</label>
+                <textarea class="summernote" id="editor"></textarea>
                 </div>
                 <div class="col-lg-6">
+                    <label for="exampleInputPassword1" class="form-label">Texto (Portugués)</label>
+                <textarea class="summernote" id="editorAlternativo"></textarea>
+                </div>
+
+            </div>
+
+
+            <div class="row mb-3">
+                <div class="col-lg-4">
+                    <label class="form-label">Texto boton(Español)</label>
+                    <input type="text" class="form-control" id="botonText" :value="this.slider.textoboton">
+                </div>
+                <div class="col-lg-4">
+                    <label class="form-label">Texto boton (Portugués)</label>
+                    <input type="text" class="form-control" id="botonTextAlternativo" :value="this.slider.textobotonAlternativo">
+                </div>
+                <div class="col-lg-4">
                     <label class="form-label">Link boton</label>
                     <input type="text" class="form-control" id="botonLink" :value="this.slider.linkboton">
                 </div>
+
+                
             </div>
          
 
@@ -81,8 +96,10 @@ export default {
             formData.append('idSlider', this.idSlider);
             formData.append('foto', this.foto);
             formData.append('jsonCodigoSlider', $('#editor').summernote('code').toString());
+            formData.append('textoAlternativo', $('#editorAlternativo').summernote('code').toString());
             formData.append('orden', $('#orden').val());
             formData.append('textoboton', $('#botonText').val());
+            formData.append('textobotonAlternativo', $('#botonTextAlternativo').val());
             formData.append('linkboton', $('#botonLink').val());
 
 
@@ -113,6 +130,12 @@ export default {
                 $('#editor').summernote({
                     height: 300,
                 });
+
+                $('#editorAlternativo').summernote({
+                    height: 300,
+                });
+
+
                 var noteBar = $('.note-toolbar');
                 noteBar.find('[data-toggle]').each(function () {
                     $(this).attr('data-bs-toggle', $(this).attr('data-toggle')).removeAttr('data-toggle');
@@ -122,9 +145,10 @@ export default {
         obtenerSliderInformacion() {
             axios.get(`/api/obtenerSlider/${this.idSlider}`)
                 .then(response => {
-                    console.log(response.data)
                     this.slider = response.data;
                     $('#editor').summernote('code', this.slider.texto);
+                    $('#editorAlternativo').summernote('code', this.slider.textoAlternativo);
+
                 })
                 .catch(error => {
                     console.error(error);

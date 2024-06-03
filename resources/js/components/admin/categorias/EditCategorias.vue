@@ -11,20 +11,27 @@
                     <label class="form-label">Orden</label>
                     <input type="text" class="form-control" id="orden" v-model="orden" >
                 </div>
-                <div class="col-lg-5">
-                    <label class="form-label">Nombre</label>
-                    <input type="text" class="form-control" id="titulo" v-model="nombre" >
-                </div>
                 <div class="col-lg-2 d-flex flex-column align-items-center">
                     <label class="form-check-label" for="checkbox3">Destacada</label>
                     <input type="checkbox" class="form-check-input" id="destacado">
                 </div>
             </div>
 
-            <div class="col-md-4 mt-4">
+            <div class="row col-md-12 mt-4">
+                <div class="col-lg-4">
                     <label class="form-label">Imagen tamaño recomendado (120x120)</label>
                     <input type="file" class="form-control" ref="img2" @change="guardarFotoFooter()">
                 </div>
+
+                <div class="col-lg-4">
+                    <label class="form-label">Nombre (Español)</label>
+                    <input type="text" class="form-control" id="titulo" v-model="nombre">
+                </div>
+                <div class="col-lg-4">
+                    <label class="form-label">Nombre (Portugués)</label>
+                    <input type="text" class="form-control" id="tituloAlternativo" v-model="nombreAlternativo">
+                </div>
+            </div>
 
             <div class="w-100 d-flex justify-content-end mt-3">
                 <button @click="updateCategoria()" type="button" class="btn"
@@ -52,6 +59,7 @@ export default {
             orden: null,
             nombre: null,
             categoria: null,
+            nombreAlternativo: null,
             productoDestacado: 0,
             imagen: null
         }
@@ -89,6 +97,7 @@ export default {
             formData.append('idCategoria', this.idCategoria);
             formData.append('orden', this.orden);
             formData.append('titulo', this.nombre);
+            formData.append('tituloAlternativo', this.nombreAlternativo);
             formData.append('destacado', this.productoDestacado);
             formData.append('imagen', this.imagen);
 
@@ -119,9 +128,12 @@ export default {
         obtenerCategoria() {
             axios.get(`/api/obtenerCategoria/${this.idCategoria}`)
                 .then(response => {
+                    console.log(response.data)
                     this.categoria = response.data
                     this.orden = response.data.orden;
                     this.nombre = response.data.nombre;
+                    this.nombreAlternativo = response.data.nombreAlternativo;
+
                     if (response.data.destacado == 1) {
                         $('#destacado').prop('checked', true);
                     }
