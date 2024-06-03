@@ -54,7 +54,7 @@
             <div class="col-md-3">
                 <div class="d-flex flex-column">
                     <p class="seccionSeccion">Suscribite al Newsletter</p>
-                    <form action="{{ route('suscribe') }}" method="POST" class="d-flex mt-3">
+                    <form class="enviarSub d-flex" action="{{ route('suscribe') }}" method="POST" class="d-flex mt-3">
                         @csrf 
                         <input type="email" name="email" class="form-control" placeholder="Ingresa tu Email" aria-label="Recipient's username" aria-describedby="button-addon2" required>
                         <button style="border-radius:0px; background: rgba(217, 217, 217, 0.10);" class="btn" type="submit" id="button-addon2">
@@ -230,5 +230,14 @@ flex-shrink: 0;
 background: rgba(217, 217, 217, 0.10) !important;
 border: none !important;
 border-radius: none;
+    }
+    
+    
+
+
+    @media screen and (max-width: 500px) {
+        .enviarSub{
+            width: 80%
+        }
     }
 </style>

@@ -9,7 +9,8 @@
                 <div class="descripcionSeccion pt-4">{!! $seccion[0]['texto'] !!}</div>
             </div>
             <div class="col-lg-6 contenedorImagen">
-                <div style="background-image: url('{{ url('/getImage/' . basename($seccion[0]['imagen'])) }}'); 
+                <div
+                    style="background-image: url('{{ url('/getImage/' . basename($seccion[0]['imagen'])) }}'); 
                 background-size: cover; 
                 background-position: center;
                 width: 100%;
@@ -23,45 +24,78 @@
 
     <div class="container">
         <div style="margin-top: 80px" class="row d-flex justify-content-between align-items-center">
-                 <div class="col-lg-6">
-                     <div  class="input-group mb-3 d-flex justify-content-start align-items-center">
-                         <span class="input-group-text" id="basic-addon1">
-                             <div class="imagenCertificado"></div>
-                         </span>
-                         <a href="{{ route('downloadFile', ['file' => basename($seccion[0]['textoboton']), 'downloadName' => 'Certificado_Anmat', 'extension' => pathinfo($seccion[0]['textoboton'], PATHINFO_EXTENSION)]) }}" class="btn inputB">
-                            <div class="d-flex justify-content-between align-items-center">
-                                 <p class="m-3 txtBoton">Políticas de calidad</p>
-                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                     <path d="M12 17V3" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                     <path d="M6 11L12 17L18 11" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                     <path d="M19 21H5" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                 </svg>
-                             </div>
-                         </a>
-                     </div>
-                 </div>
-     
-                 <div class="col-lg-6">
-                     <div class="input-group mb-3 d-flex justify-content-start align-items-center">
-                         <span class="input-group-text" id="basic-addon1">
-                             <div class="imagenCertificadoAnmat"></div>
-                         </span>
-                         <a href="{{ route('downloadFile', ['file' => basename($seccion[0]['link']), 'downloadName' => 'Certificado_Anmat', 'extension' => pathinfo($seccion[0]['link'], PATHINFO_EXTENSION)]) }}" class="btn inputB">
-                            <div class="d-flex justify-content-between align-items-center">
-                                 <p class="m-3 txtBoton">Certificado Anmat</p>
-                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                     <path d="M12 17V3" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                     <path d="M6 11L12 17L18 11" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                     <path d="M19 21H5" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                 </svg>
-                             </div>
-                         </a>
-                     </div>
-                 </div>
-             </div>
+            <div class="col-lg-6">
+                <div class="input-group mb-3 d-flex justify-content-start align-items-center">
+                    <span class="input-group-text" id="basic-addon1">
+                        <div class="imagenCertificado"></div>
+                    </span>
+                    <a href="{{ route('downloadFile', ['file' => basename($seccion[0]['textoboton']), 'downloadName' => 'Certificado_Anmat', 'extension' => pathinfo($seccion[0]['textoboton'], PATHINFO_EXTENSION)]) }}"
+                        class="btn inputB">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <p class="m-3 txtBoton">Políticas de calidad</p>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none">
+                                <path d="M12 17V3" stroke="black" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M6 11L12 17L18 11" stroke="black" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M19 21H5" stroke="black" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="d-flex justify-content-around">
+                    <div class="contenedorImagenes ">
+                        <div class="imagenNueva"
+                            style="background-image: url('{{ asset('img/INV.jpg') }}'); background-size: cover; background-position: center;">
+                        </div>
+                    </div>
+                    <div class="contenedorImagenes ">
     
-      </div>
+                        <div class="imagenNueva"
+                            style="background-image: url('{{ asset('img/Habilitaciones.jpg') }}'); background-size: cover; background-position: center;">
+                        </div>
+                    </div>
 
+                        <div class="contenedorImagenes ">
+    
+    
+                        <div class="imagenNueva"
+                            style="background-image: url('{{ asset('img/opds.png') }}'); background-size: cover; background-position: center;">
+                        </div>
+                    </div>
+
+                        <div class="contenedorImagenes ">
+    
+                        <div class="imagenNueva"
+                            style="background-image: url('{{ asset('img/pilar.png') }}'); background-size: cover; background-position: center;">
+    
+                        </div>
+                    </div>
+
+                        <div class="contenedorImagenes ">
+    
+                        <div class="imagenNueva"
+                            style="background-image: url('{{ asset('img/quimico.jpg') }}'); background-size: cover; background-position: center;">
+                        </div>
+    
+    
+                    </div>
+
+    
+    
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
 @endsection
 
 <style>
@@ -107,12 +141,13 @@
 
     .descripcionSeccion {
         color: #000;
-font-family: Inter;
-font-size: 16px;
-font-style: normal;
-font-weight: 400;
-line-height: 160% !important; /* 25.6px */
-padding-right: 80px;
+        font-family: Inter;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 160% !important;
+        /* 25.6px */
+        padding-right: 80px;
     }
 
     .imagenCertificado {
@@ -149,9 +184,9 @@ padding-right: 80px;
         gap: 286px;
         flex-shrink: 0;
         background: #F4F4F4 !important;
-        border-top:  1px solid #EAEAEA !important;
-        border-bottom:  1px solid #EAEAEA !important;
-        border-right:  1px solid #EAEAEA !important;
+        border-top: 1px solid #EAEAEA !important;
+        border-bottom: 1px solid #EAEAEA !important;
+        border-right: 1px solid #EAEAEA !important;
 
         border-radius: 0px 8px 8px 0px !important;
     }
@@ -163,5 +198,17 @@ padding-right: 80px;
         font-style: normal;
         font-weight: 500;
         line-height: 130%;
+    }
+
+    .contenedorImagenes {
+        width: 90px;
+        height: 40px;
+    }
+
+    .imagenNueva {
+        width: 100%;
+        height: 100%;
+        background-size: contain;
+        background-repeat: no-repeat;
     }
 </style>

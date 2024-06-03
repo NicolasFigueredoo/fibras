@@ -2,9 +2,9 @@
 
 @section('content')
     <div class="container">
-        <p class="indicador"><b>Inicio</b> / Sectores</p>
+        <p class="indicador"><b>Inicio</b> / Rubros</p>
 
-        <div class="row flex-wrap sectores">
+        <div class="row flex-wrap justify-content-center sectores">
             @foreach ($sectores as $sector)
                 <div class="col-md-3">
                     <div class="sector">

@@ -2,10 +2,10 @@
 
 @section('content')
 <div class="container">
-    <p class="indicador"><b>Inicio</b> / Empresa</p>
+    <p class="indicador"><b>Inicio</b> / Nosotros</p>
 
 
-    <div class="row d-flex" style="margin-top: 30px;">
+    <div class="row d-flex" style="margin-top: 30px;" >
             <div class="col-lg-6 contenedorImagen">
                 <div style="background-image: url('{{ url('/getImage/' . basename($seccion[0]['imagen'])) }}'); 
                 background-size: cover; 

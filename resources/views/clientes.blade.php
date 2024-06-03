@@ -4,7 +4,7 @@
     <div class="container">
         <p class="indicador"><b>Inicio</b> / Servicios</p>
 
-        <div class="row d-flex flex-wrap" style="margin-top: 40px">
+        <div class="row d-flex flex-wrap" style="margin-top: 40px; row-gap: 15px">
             @foreach ($clientes as $cliente)
                 <div class="justify-content-around col-md-3">
                     <div class="tarjeta d-flex justify-content-center align-items-center">

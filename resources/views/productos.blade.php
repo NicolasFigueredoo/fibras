@@ -191,7 +191,13 @@
 
 
 
-  
+    @media screen and (max-width: 1000px) {
+
+        .categoria{
+            margin-top: 20px
+        }
+
+    }
 
   
 

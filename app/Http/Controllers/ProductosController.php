@@ -40,8 +40,10 @@ class ProductosController extends Controller
 
             $photoPath = $request->file('hojaSeguridad')->store('fotos');
             $producto->hojaseguridad = $photoPath;
+        }else{
+            $producto->hojaseguridad = 'none';
+ 
         }
-
 
         if ($request->hasFile('fichaTecnica')) {
 
@@ -51,6 +53,10 @@ class ProductosController extends Controller
 
             $photoPath = $request->file('fichaTecnica')->store('fotos');
             $producto->fichatecnica = $photoPath;
+        }
+        else{
+            $producto->fichatecnica = 'none';
+
         }
         $producto->save();
 

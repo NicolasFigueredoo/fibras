@@ -2,20 +2,27 @@
     <div class="container">
 
         <div class="w-100 border-bottom d-flex justify-content-between">
-            <h1>HOME</h1>
-        </div>
+            <h1>SLIDER</h1>
 
+            <button @click="crearSlider()" type="button" class="btn mb-1"
+                 id="crearSlider"   style="background-color:  #7F7F7F; color: white;">Crear Slider</button>
+        </div>
+        <div class="input-group mb-3 mt-2">
+            <input type="text" class="form-control" placeholder="Buscar..." v-model="search" style="border-radius: 0%;">
+        </div>
         <div class="table-responsive">
             <table class="table table-bordered mt-3">
                 <thead>
                     <tr>
+                        <th scope="col" class="col-sm-1 encabezado">Orden</th>
                         <th scope="col" class="encabezado">Texto</th>
                         <th scope="col" class="col-sm-2 encabezado">Archivo</th>
                         <th scope="col" class="col-sm-1 encabezado">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="slider in sliders" :key="slider.id">
+                    <tr v-for="slider in filteredSliders" :key="slider.id">
+                        <td>{{ slider.orden }}</td>
                         <td>
                             <div v-html="slider.texto"></div>
                         </td>

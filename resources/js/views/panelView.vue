@@ -149,7 +149,7 @@
 
                     </li>
 
-                    <li class="sidebar-item">
+                    <!-- <li class="sidebar-item">
                         <a @click="mostrarComponenteF(195)" class="nav-link collapsed" data-bs-toggle="collapse"
                             data-bs-target="#collapseContacto" aria-expanded="false" aria-controls="collapseContacto">
                             <div class="nav-link-icon">
@@ -165,7 +165,7 @@
                             </div>
                         </a>
 
-                    </li>
+                    </li> -->
 
                     <li class="sidebar-item">
                         <a @click="mostrarComponenteF(500)" class="nav-link collapsed" data-bs-toggle="collapse"
@@ -272,7 +272,7 @@
 
                     </li> -->
 
-                    <!-- <li class="sidebar-item">
+                   <li class="sidebar-item">
                         <a @click="mostrarComponenteF(40)" class="nav-link collapsed" data-bs-toggle="collapse"
                             data-bs-target="#collapseContacto" aria-expanded="false" aria-controls="collapseContacto">
                             <div class="nav-link-icon">
@@ -288,7 +288,7 @@
                             </div>
                         </a>
 
-                    </li> -->
+                    </li> 
 
                     <!-- <li class="sidebar-item">
                         <a @click="mostrarComponenteF(70)" class="nav-link collapsed" data-bs-toggle="collapse"

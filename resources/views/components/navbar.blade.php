@@ -13,16 +13,16 @@
                 </div>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                data-bs-target="#navbartwp" aria-controls="navbartwp" aria-expanded="false"
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse justify-content-end align-items-end" id="navbarNavAltMarkup">
+            <div class="collapse navbar-collapse justify-content-end align-items-end" id="navbartwp">
                 <div class="navbar-nav">
                     <a class="nav-link text-black "  href="{{route('nosotros')}}" style="{{ Request::path() === 'nosotros' ? 'font-weight: bold;' : '' }}">Nosotros</a>
                     <a class="nav-link text-black "  href="{{route('servicios')}}" style="{{ Request::path() === 'servicios' ? 'font-weight: bold;' : '' }}">Servicios</a>
                     <a class="nav-link text-black "  href="{{route('productos')}}" style="{{ Request::path() === 'productos' ? 'font-weight: bold;' : '' }}">Productos</a>
-                    <a class="nav-link text-black "  href="{{route('sectores')}}" style="{{ Request::path() === 'sectores' ? 'font-weight: bold;' : '' }}">Sectores</a>
+                    <a class="nav-link text-black "  href="{{route('sectores')}}" style="{{ Request::path() === 'sectores' ? 'font-weight: bold;' : '' }}">Rubros</a>
                     <a class="nav-link text-black "  href="{{route('clientes')}}" style="{{ Request::path() === 'clientes' ? 'font-weight: bold;' : '' }}">Clientes</a>
                     <a class="nav-link text-black "  href="{{route('calidad')}}" style="{{ Request::path() === 'calidad' ? 'font-weight: bold;' : '' }}">Calidad</a>
                     <a class="nav-link text-black "  href="{{route('contacto')}}" style="{{ Request::path() === 'contacto' ? 'font-weight: bold;' : '' }}">Contacto</a>
@@ -35,11 +35,11 @@
                             @csrf
                         </form>
                     @else
-                        <a class="nav-link text-white" style="cursor: pointer" data-bs-toggle="modal"
+                        <a class="nav-link text-black" style="cursor: pointer" data-bs-toggle="modal"
                             data-bs-target="#loginModal">
                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                 viewBox="0 0 448 512">
-                                <path fill="#ffffff"
+                                <path fill="#000"
                                     d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z" />
                             </svg>
                         </a>
@@ -85,11 +85,7 @@
                 </div>
             </div>
         </div>
-    
-    
-    
-    
-    
+ 
         <div id="miModalAccount" class="modal" tabindex="-1">
             <div class="modal-dialog modal-dialog-centered" style="width: 400px;">
                 <div class="modal-content" style="border-radius: 0%;">

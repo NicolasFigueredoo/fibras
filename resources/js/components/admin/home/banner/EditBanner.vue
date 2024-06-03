@@ -31,10 +31,7 @@
                 <label class="form-label">Políticas de calidad</label>
                 <input type="file" ref="politicaCalidad" class="form-control" @change="guardarPolitica()">
                 </div>
-                <div class="col-lg-6">
-                <label class="form-label">Certificado Anmat</label>
-                <input type="file" ref="CertificadoAnmat" class="form-control" @change="guardarCertificado()">
-                </div>
+          
 
             </div>
 

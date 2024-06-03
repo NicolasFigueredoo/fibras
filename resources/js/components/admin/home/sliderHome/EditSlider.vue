@@ -18,6 +18,7 @@
                 <label for="exampleInputPassword1" class="form-label">Texto</label>
                 <textarea class="summernote" id="editor"></textarea>
             </div>
+
             <div class="row mb-3">
                 <div class="col-lg-6">
                     <label class="form-label">Texto boton</label>
@@ -28,6 +29,7 @@
                     <input type="text" class="form-control" id="botonLink" :value="this.slider.linkboton">
                 </div>
             </div>
+         
 
             <div class="w-100 d-flex justify-content-end">
                 <button @click="updateSlider()" type="button" class="btn"
@@ -108,17 +110,14 @@ export default {
 
         },
         summerNote() {
-            if (this.getSummer === null && this.getSummer !== true) {
                 $('#editor').summernote({
                     height: 300,
                 });
                 var noteBar = $('.note-toolbar');
                 noteBar.find('[data-toggle]').each(function () {
                     $(this).attr('data-bs-toggle', $(this).attr('data-toggle')).removeAttr('data-toggle');
-                });
-
-                this.$store.commit('setSummer', true);
-            }
+             
+            });
         },
         obtenerSliderInformacion() {
             axios.get(`/api/obtenerSlider/${this.idSlider}`)

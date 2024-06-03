@@ -7,6 +7,7 @@ use App\Models\Categoria;
 use App\Models\ClienteEmpresa;
 use App\Models\Contacto;
 use App\Models\Logo;
+use App\Models\Novedad;
 use App\Models\Producto;
 use App\Models\Sector;
 use App\Models\Servicio;
@@ -18,28 +19,33 @@ class WebsiteController extends Controller
 {
     public function home()
     {
-        $slider = Slider::all();
+        $sliders = Slider::orderBy('orden')->get();
         $logo = Logo::all();
         $categorias = Categoria::where('destacado', 1)
         ->orderBy('orden')
         ->get();
         $seccion = Banner::where('seccion','home')->get();
-        $sectores = Sector::orderBy('orden')->get();
+        $novedades = Novedad::orderBy('orden')->get();
 
 
-        $contentType = 'imagen';
-        if ($slider->isNotEmpty()) {
-            $imagenPath = $slider[0]['imagen'];
+        foreach ($sliders as $slider) {
+            $imagenPath = $slider->imagen;
             $extension = pathinfo($imagenPath, PATHINFO_EXTENSION);
             $validImageExtensions = ['jpg', 'jpeg', 'png', 'gif'];
-            $validVideoExtensions = ['mp4', 'avi', 'mov', 'wmv']; 
-
-            if (in_array($extension, $validVideoExtensions)) {
-                $contentType = 'video';
+            $validVideoExtensions = ['mp4', 'avi', 'mov', 'wmv'];
+    
+            if (in_array($extension, $validImageExtensions)) {
+                $slider->contentType = 'imagen';
+            }
+            elseif (in_array($extension, $validVideoExtensions)) {
+                $slider->contentType = 'video';
+            }
+            else {
+                $slider->contentType = null;
             }
         }
 
-        return view('home', compact('slider', 'contentType', 'logo', 'categorias','seccion','sectores'));
+        return view('home', compact('sliders', 'logo', 'categorias', 'seccion', 'novedades'));
     }
 
     public function nosotros()

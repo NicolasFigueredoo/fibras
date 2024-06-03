@@ -3,19 +3,100 @@
 @section('content')
     <div>
         <div class="imagenPrincipal">
-            @if ($contentType === 'imagen')
-                <div class="background-image"
-                    style="background-image: url('{{ url('/getImage/' . basename($slider[0]['imagen'])) }}');">
+            <div id="carouselExampleIndicators" class="carousel slide w-100" style="height: 600px;">
+                <div class="carousel-inner">
+                    @foreach ($sliders as $index => $slider)
+                        <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
+                            @if ($slider->contentType == 'imagen')
+                                <div style="width: 100%; height: 768px;">
+                                    <div class="background-image"
+                                        style="background-image: url('{{ url('/getImage/' . basename($slider['imagen'])) }}');
+                                        background-size: cover; 
+                                        background-position: center;
+                                        width: 100%;
+                                        height: 100%;                                    ">
+                                    </div>
+                                    <div class="overlay"></div>
+
+                                    <div class="container">
+                                        <div class="d-flex flex-column">
+                                            <div class="container textoEncima">
+                                                <div>
+                                                    {!! $slider->texto !!}
+                                                </div>
+
+
+                                            </div>
+                                            <div style="margin-top: 124px;">
+                                                @if ($slider['linkboton'] !== null)
+                                                    <a href="{{ $slider['linkboton'] }}">
+                                                        <button type="button"
+                                                            class="btn botonSlider">{{ $slider['textoboton'] }}</button>
+                                                    </a>
+                                                @else
+                                                    <a href="/productos">
+                                                        <button type="button"
+                                                            class="btn botonSlider">{{ $slider['textoboton'] }}</button>
+                                                    </a>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            @elseif ($slider->contentType == 'video')
+                                <div class="container" style="position: absolute; z-index: 10; margin-left: 15.5%;">
+                                    <div class="d-flex flex-column">
+                                        <div class="container textoEncima">
+                                            <div>
+                                                {!! $slider->texto !!}
+                                            </div>
+
+
+
+
+                                        </div>
+                                        <div style="margin-top: 124px;">
+                                            @if ($slider['linkboton'] !== null)
+                                                <a href="{{ $slider['linkboton'] }}">
+                                                    <button type="button"
+                                                        class="btn botonSlider">{{ $slider['textoboton'] }}</button>
+                                                </a>
+                                            @else
+                                                <button type="button"
+                                                    class="btn botonSlider">{{ $slider['textoboton'] }}</button>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                                <video class="d-block w-100" style="width: 100%; height: 768px; object-fit: cover;" controls
+                                    autoplay muted>
+                                    <source src="{{ url('/getImage/' . basename($slider['imagen'])) }}" type="video/mp4">
+                                    Tu navegador no soporta la reproducción de videos.
+                                </video>
+                                <div class="carousel-indicators"
+                                    style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);">
+                                    @foreach ($sliders as $i => $slider)
+                                        <button type="button" data-bs-target="#carouselExampleIndicators"
+                                            data-bs-slide-to="{{ $i }}"
+                                            class="{{ $i === $index ? 'active' : '' }}"
+                                            aria-current="{{ $i === $index ? 'true' : null }}"
+                                            aria-label="Slide {{ $i + 1 }}"></button>
+                                    @endforeach
+                                </div>
+                            @endif
+                        </div>
+                    @endforeach
                 </div>
-            @elseif ($contentType === 'video')
-                <video class="background-video" autoplay loop muted>
-                    <source src="{{ url('/getImage/' . basename($slider[0]['imagen'])) }}" type="video/mp4">
-                    Tu navegador no soporta la reproducción de videos.
-                </video>
-            @endif
-            <div class="overlay"></div>
-
-
+                <div class="carousel-indicators">
+                    @foreach ($sliders as $i => $slider)
+                        <button type="button" data-bs-target="#carouselExampleIndicators"
+                            data-bs-slide-to="{{ $i }}" class="{{ $i === 0 ? 'active' : '' }}"
+                            aria-current="{{ $i === 0 ? 'true' : 'false' }}"
+                            aria-label="Slide {{ $i + 1 }}"></button>
+                    @endforeach
+                </div>
+            </div>
 
             <div class="container-fluid">
                 <nav class="navbar navbar-expand-lg">
@@ -37,33 +118,59 @@
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse justify-content-end align-items-end" id="navbarNavAltMarkup">
-                            <div class="navbar-nav">
-                                <a class="nav-link text-white" href="{{ route('nosotros') }}">Nosotros</a>
-                                <a class="nav-link text-white" href="{{ route('servicios') }}">Servicios</a>
-                                <a class="nav-link text-white" href="{{ route('productos') }}">Productos</a>
-                                <a class="nav-link text-white" href="{{ route('sectores') }}">Sectores</a>
-                                <a class="nav-link text-white" href="{{ route('clientes') }}">Clientes</a>
-                                <a class="nav-link text-white" href="{{ route('calidad') }}">Calidad</a>
-                                <a class="nav-link text-white" href="{{ route('contacto') }}">Contacto</a>
-                                @auth
-                                    <a class="nav-link text-white" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                        Cerrar Sesión
-                                    </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                        style="display: none;">
-                                        @csrf
-                                    </form>
-                                @else
-                                    <a class="nav-link text-white" style="cursor: pointer" data-bs-toggle="modal"
-                                        data-bs-target="#loginModal">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-                                            viewBox="0 0 448 512">
-                                            <path fill="#ffffff"
-                                                d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z" />
+                            <div class="navbar-nav flex-column">
+                                <div class="d-flex justify-content-end align-items-center gap-2">
+                                    <div>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            viewBox="0 0 20 20" fill="none">
+                                            <path
+                                                d="M9.16667 15.8333C12.8486 15.8333 15.8333 12.8486 15.8333 9.16667C15.8333 5.48477 12.8486 2.5 9.16667 2.5C5.48477 2.5 2.5 5.48477 2.5 9.16667C2.5 12.8486 5.48477 15.8333 9.16667 15.8333Z"
+                                                stroke="white" stroke-width="2" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path d="M17.5001 17.5001L13.9167 13.9167" stroke="white" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
                                         </svg>
-                                    </a>
-                                @endauth
+                                    </div>
+                                    <div>
+                                        <span class="text-white">|</span>
+                                    </div>
+                                    <div class="w-20">
+                                        <select class="form-select" aria-label="Default select example">
+                                            <option selected>ES</option>
+                                            <option value="1">EN</option>
+                                        </select>
+
+                                    </div>
+
+
+                                </div>
+                                <div class="d-flex justify-content-end align-items-center">
+                                    <a class="nav-link text-white" href="{{ route('nosotros') }}">Nosotros</a>
+                                    <a class="nav-link text-white" href="{{ route('productos') }}">Productos</a>
+                                    <a class="nav-link text-white" href="">Aplicaciones</a>
+                                    <a class="nav-link text-white" href="">Novedades</a>
+                                    <a class="nav-link text-white" href="">Presupuesto</a>
+                                    <a class="nav-link text-white" href="{{ route('contacto') }}">Contacto</a>
+                                    {{-- @auth
+                                        <a class="nav-link text-white" href="{{ route('logout') }}"
+                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                            Cerrar Sesión
+                                        </a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                            style="display: none;">
+                                            @csrf
+                                        </form>
+                                    @else
+                                        <a class="nav-link text-white" style="cursor: pointer" data-bs-toggle="modal"
+                                            data-bs-target="#loginModal">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                                viewBox="0 0 448 512">
+                                                <path fill="#ffffff"
+                                                    d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z" />
+                                            </svg>
+                                        </a>
+                                    @endauth --}}
+                                </div>
 
 
                             </div>
@@ -72,23 +179,46 @@
                 </nav>
             </div>
 
-            <div class="container textoEncima">
-                {!! $slider[0]['texto'] !!}
-            </div>
+
 
         </div>
 
         <!---CATEGORIAS--->
-        <div class="container">
+        <div class="container" style="margin-top: 65px">
 
             <div>
-                <p class="textoProductos">Productos</p>
+                <div class="d-flex justify-content-between align-items-center" style="height: 100px">
+                    <div>
+                        <p class="textoProductos">Productos</p>
+                    </div>
+                    <div>
+                        <a href="{{ route('productos') }}">
+                            <button type="button" id="btnProductos" class="btn">Ver todos</button>
+                        </a>
+
+                    </div>
+                </div>
                 <div class="row flex-wrap categorias">
+                    @php
+                        $totalCategorias = $categorias->count();
+                        $colClass = '';
+                        if ($totalCategorias == 1) {
+                            $colClass = 'col-lg-12';
+                        } elseif ($totalCategorias == 2) {
+                            $colClass = 'col-lg-6';
+                        } elseif ($totalCategorias == 3) {
+                            $colClass = 'col-lg-4';
+                        } elseif ($totalCategorias == 4) {
+                            $colClass = 'col-lg-3';
+                        } else {
+                            $colClass = 'col-lg-4';
+                        }
+                    @endphp
                     @foreach ($categorias as $categoria)
-                        <div class="col-lg-4">
+                        <div class="{{ $colClass }}">
                             <a href="{{ route('categoria', ['id' => $categoria->id, 'idProducto' => 0]) }}"
                                 style="text-decoration: none">
-                                <div class="d-flex justify-content-around align-items-center categoria">
+                                <div class="d-flex flex-column justify-content-around align-items-center categoria">
                                     <div class="contenedor-img">
                                         <div class="categoria-img"
                                             style="
@@ -112,7 +242,7 @@
         <!---SECCION 1 HOME--->
         <div class="w-100">
             <div class="row contenedorSeccion" style="margin-right: 0px">
-                <div class="col-lg-7 contenedorSeccionImagen">
+                <div class="col-lg-6 contenedorSeccionImagen">
                     <div
                         style="background-image: url('{{ url('/getImage/' . basename($seccion[0]['imagen'])) }}'); 
                 background-size: cover; 
@@ -122,15 +252,10 @@
                 height: 100%;">
                     </div>
                 </div>
-                <div class="col-lg-5 contenedor-textoSeccion">
+                <div class="col-lg-6 contenedor-textoSeccion">
                     <p class="tituloSeccion">{!! $seccion[0]['titulo'] !!}</p>
 
                     <div class="descripcionSeccion">{!! $seccion[0]['texto'] !!}</div>
-
-                    <a href="{{ route('nosotros') }}">
-                        <button type="button" id="btnSeccion" class="btn">Ver más</button>
-                    </a>
-
                 </div>
 
             </div>
@@ -138,46 +263,52 @@
         </div>
 
         <!---SECCION SECTORES--->
-        <div class="container" style="margin-top: 100px">
-            <div class="d-flex justify-content-between align-items-center">
-                <div class="tituloSectores">
-                    <p>Sectores</p>
-                </div>
-                <div>
-                    <a href="{{ route('sectores') }}">
-                        <button type="button" id="btnSectores" class="btn">Ver todos</button>
-                    </a>
 
-                </div>
-            </div>
-
-            <div class="row flex-wrap sectores">
-                @foreach ($sectores as $sector)
-                    <div class="col-md-3">
-                        <div class="sector">
-                            <div class="sector-imagen">
-                                <div class="imagen-hover"
-                                    style="background-image: url('{{ url('/getImage/' . basename($sector->imagen)) }}');
-               background-size: cover; 
-               background-position: center;
-                background-repeat: no-repeat;
-                width: 100%;
-                height: 100%;
+        <div class="fondoNovedades">
             
-            ">
-                                </div>
-                                <div class="overlayTwo"></div>
-                                <div class="contenedor-textSector">
-                                    <p class="textSectores">{{ $sector->titulo }}</p>
+            <div class="container">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="tituloSectores">
+                        <p>Novedades</p>
+                    </div>
+                    <div>
+                        <a href="{{ route('sectores') }}">
+                            <button type="button" id="btnProductos" class="btn">Ver todas</button>
+                        </a>
+    
+                    </div>
+                </div>
+    
+                <div class="row flex-wrap sectores">
+                    @foreach ($novedades as $novedad)
+                        <div class="col-lg-4">
+                            <div class="sector">
+                                <div class="sector-imagen">
+                                    <div
+                                        style="background-image: url('{{ url('/getImage/' . basename($novedad->imagen)) }}');
+                   background-size: cover; 
+                   background-position: center;
+                    background-repeat: no-repeat;
+                    width: 100%;
+                    height: 100%;
+                
+                ">
+                                    </div>
+                                    <div class="contenedor-textSector p-4">
+                                        <p class="textEtiqueta">{{ $novedad->etiqueta }}</p>
+                                        <p class="textSectores">{{ $novedad->titulo }}</p>
+                                        <p class="textEpigrafe">{{ $novedad->epigrafe }}</p>
+                                        <p class="textLeer">Leer más</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                @endforeach
-
-
+                    @endforeach
+    
+    
+                </div>
+    
             </div>
-
         </div>
 
     </div>
@@ -211,7 +342,7 @@
                             </div>
                             <div class="mt-3">
                                 <button type="button" id="botonRegistrar" class="btn btn-secondary"
-                                    data-bs-toggle="modal" data-bs-target="#miModalAccount">Crear cuenta</button>
+                                    onclick="openRegisterModal()">Crear cuenta</button>
                             </div>
                         </div>
                     </form>
@@ -221,10 +352,7 @@
     </div>
 
 
-
-
-
-    <div id="miModalAccount" class="modal" tabindex="-1">
+    <div id="miModalAccount" class="modal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" style="width: 400px;">
             <div class="modal-content" style="border-radius: 0%;">
                 <div class="modal-header">
@@ -267,63 +395,9 @@
     </div>
 @endsection
 
-<script>
-    function registerUser() {
-        let form = document.getElementById('registerForm');
-        let formData = new FormData(form);
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+    crossorigin="anonymous"></script>
 
-        axios.post('{{ route('register') }}', formData)
-            .then(response => {
-                document.querySelector('.mensajeCrear').innerHTML =
-                    '<p class="text-success">Usuario registrado con exito!</p>';
-                let modal = bootstrap.Modal.getInstance(document.getElementById('miModalAccount'));
-                let modalLogin = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
-
-                modal.hide();
-                modalLogin.show();
-
-            })
-            .catch(error => {
-                if (error.response && error.response.data.errors) {
-                    let errorMessages = '';
-                    for (const [key, value] of Object.entries(error.response.data.errors)) {
-                        errorMessages += `${value.join(', ')}<br>`;
-                    }
-
-                    let modal = bootstrap.Modal.getInstance(document.getElementById('miModalAccount'));
-                    modal.hide();
-
-                    let modalLogin = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
-                    modalLogin.show();
-
-                    document.querySelector('.mensajeCrear').innerHTML = '<p class="text-danger">' + errorMessages +
-                        '</p>';
-                } else {
-                    console.error('Error:', error);
-                }
-            });
-    }
-
-
-    function loginUser() {
-        let formData = new FormData(document.getElementById('loginForm'));
-
-        axios.post('{{ route('login') }}', formData)
-            .then(response => {
-                let modal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
-                modal.hide();
-                window.location.reload();
-            })
-            .catch(error => {
-                if (error.response && error.response.data.error) {
-                    document.querySelector('.mensajeCrear').innerHTML = '<p class="text-danger">' + error.response
-                        .data.error + '</p>';
-                } else {
-                    console.error('Error:', error);
-                }
-            });
-    }
-</script>
 
 
 <style>
@@ -337,6 +411,11 @@
         left: 0;
         right: 0;
         z-index: 1000;
+    }
+
+    .carousel {
+        position: absolute !important;
+        height: 768px;
     }
 
     .navbar-collapse {
@@ -376,7 +455,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: linear-gradient(180deg, rgba(0, 0, 0, 0.60) 0%, rgba(0, 0, 0, 0.00) 80.27%);
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.43) 0%, rgba(0, 0, 0, 0.00) 100%), rgba(0, 36, 93, 0.60);
         z-index: 2;
     }
 
@@ -399,7 +478,7 @@
     }
 
     .textoEncima {
-        margin-top: 150px;
+        margin-top: 250px;
         display: flex;
         flex-direction: column;
         align-items: left;
@@ -413,12 +492,13 @@
     }
 
     .textoProductos {
-        color: #000;
-        font-family: Inter;
-        font-size: 32px;
+        color: var(--azul, #00245D);
+        font-family: "Futura Bk BT";
+        font-size: 35px;
         font-style: normal;
-        font-weight: 600;
+        font-weight: 400;
         line-height: normal;
+        text-transform: uppercase;
         margin-top: 80px;
         margin-bottom: 58px;
 
@@ -430,24 +510,19 @@
     }
 
     .categoria {
-        height: 196px;
+        height: 392px;
         flex-shrink: 0;
         border-radius: 8px;
-        background: #F5F5F5;
         mix-blend-mode: color;
         cursor: pointer;
     }
 
 
     .contenedor-img {
-        width: 121px;
-        height: 122px;
+        width: 314px;
+        height: 314px;
         flex-shrink: 0;
-    }
-
-    .categoria-img {
-        filter: grayscale(1);
-
+        filter: brightness(80%);
     }
 
     .categoria:hover .categoria-img {
@@ -462,16 +537,15 @@
         font-style: normal;
         font-weight: 400;
         line-height: normal;
+        text-transform: uppercase;
     }
 
-    .contenedor-textCategoria {
-        width: 171px;
-    }
+
 
 
     .contenedorSeccion {
         height: 650px;
-        background: var(--Celeste, #29A2C4);
+        background: var(--azul, #00245D);
         display: flex;
         justify-content: space-between;
 
@@ -489,22 +563,23 @@
 
     .tituloSeccion {
         color: #FFF;
-        font-family: Inter;
-        font-size: 32px;
+        font-family: "Futura Bk BT";
+        font-size: 35px;
         font-style: normal;
-        font-weight: 600;
-        line-height: 130%;
+        font-weight: 400;
+        line-height: normal;
+        text-transform: uppercase;
     }
 
     .descripcionSeccion {
         padding-top: 30px;
         color: #FFF;
-        font-family: Inter;
-        font-size: 16px;
+        font-family: "Futura Bk BT";
+        font-size: 20px;
         font-style: normal;
         font-weight: 400;
-        line-height: 160%;
-        width: 80%;
+        line-height: 33px;
+        width: 60%;
 
     }
 
@@ -528,12 +603,13 @@
     }
 
     .tituloSectores {
-        color: #000;
-        font-family: Inter;
-        font-size: 32px;
+        color: var(--azul, #00245D);
+        font-family: "Futura Bk BT";
+        font-size: 35px;
         font-style: normal;
-        font-weight: 600;
+        font-weight: 400;
         line-height: normal;
+        text-transform: uppercase;
     }
 
 
@@ -557,8 +633,23 @@
     #btnSectores:hover {
         color: white;
         background: #F2AE59;
+    }
 
-
+    #btnProductos {
+        width: 144px;
+        height: 49px;
+        flex-shrink: 0;
+        border-radius: 37px;
+        border: 1px solid var(--azul, #00245D);
+        background: #FFF;
+        color: black !important;
+        color: var(--azul, #00245D);
+        text-align: center;
+        font-family: "Futura Bk BT";
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
     }
 
     .sectores {
@@ -566,74 +657,76 @@
     }
 
     .sector {
-        height: 376px;
+        height: 488px;
         flex-shrink: 0;
         margin-top: 63px;
+        background: white;
+        border-radius: 4px;
     }
 
     .textSectores {
-        color: #FFF;
-        text-align: center;
-        font-family: Inter;
-        font-size: 24px;
+        color: #000;
+        font-family: "Futura Bk BT";
+        font-size: 30px;
         font-style: normal;
-        font-weight: 500;
+        font-weight: 400;
+        line-height: 30px;
+        /* 100% */
+    }
+
+    .textLeer {
+        color: rgba(0, 0, 0, 0.57);
+font-family: "Futura Bk BT";
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+    }
+
+    .textEtiqueta {
+        color: var(--azul, #00245D);
+        font-family: "Futura Md BT";
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
         line-height: normal;
+        text-transform: uppercase;
+
+    }
+
+    .textEpigrafe {
+        color: #000;
+        font-family: "Futura Bk BT";
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 24px;
+        /* 133.333% */
+    }
+
+    .fondoNovedades{
+        background: #F5F5F5;
+        margin-top: 100px;
+        padding-top: 63px;
+        padding-bottom: 50px;
     }
 
     .sector-imagen {
-        position: relative;
         width: 100%;
-        height: 376px;
+        height: 260px;
         background-size: cover;
         background-position: center;
-        border-radius: 8px;
-        overflow: hidden;
+        border-radius: 4px 4px 0px 0px !important;
+        
     }
 
-    .imagen-hover {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        transition: transform 0.3s ease;
-    }
+    .sector-imagen div{
+        border-radius: 4px 4px 0px 0px !important;
 
-    .sector-imagen:hover .imagen-hover {
-        transform: scale(1.1);
-    }
-
-    .sector-imagen:hover .overlayTwo {
-        background: linear-gradient(180deg, rgba(0, 0, 0, 0.00) 30.25%, rgba(0, 0, 0, 0.90) 100%);
     }
 
 
-    .overlayTwo {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 1;
-        background: linear-gradient(180deg, rgba(0, 0, 0, 0.00) 56.25%, rgba(0, 0, 0, 0.70) 100%);
-        border-radius: 8px;
-    }
-
-    .contenedor-textSector {
-        width: 100%;
-        position: absolute;
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 2;
-        text-align: center;
-        color: #FFF;
-        text-align: center;
-        font-family: Inter;
-        font-size: 24px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: normal;
-    }
+    .contenedor-textSector {}
 
     #botonLogin {
         width: 100%;
@@ -676,8 +769,48 @@
         border: none;
     }
 
+    .form-select {
+        background-color: transparent !important;
+        border: none !important;
+        outline: none !important;
+        cursor: pointer;
+        color: white !important;
+        padding: 0.5em 1em;
+        font-size: 1em;
+    }
 
- 
+    .form-select option {
+        color: #000;
+        background-color: #fff;
+    }
+
+    .form-select::after {
+        content: '\25BC';
+        position: absolute;
+        right: 1em;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+        color: white !;
+        font-size: 1em;
+    }
+
+    .botonSlider {
+        width: 248px;
+        height: 49.067px;
+        flex-shrink: 0;
+        border-radius: 37px !important;
+        background: var(--azul, #00245D) !important;
+        color: #FFF !important;
+        text-align: center;
+        font-family: "Futura Bk BT";
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        margin-top: 78px;
+    }
+
 
 
     @media screen and (max-width: 1000px) {
@@ -699,6 +832,10 @@
         .contenedor-textoSeccion {
             width: 100%;
             padding-left: 0;
+        }
+
+        .navbar-nav div {
+            flex-direction: column;
         }
 
 

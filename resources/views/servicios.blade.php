@@ -29,7 +29,7 @@
 
             </div>
 
-            <div class="row d-flex flex-wrap" style="padding-top: 106px;padding-bottom: 71px;">
+               <div class="row d-flex flex-wrap" style="padding-top: 106px;padding-bottom: 71px; ">
                 @foreach ($servicios as $servicio)
                     <div class="justify-content-around col-lg-3">
                         <div class="pt-2 p-3 tarjeta d-flex flex-column justify-content-center align-items-center">
