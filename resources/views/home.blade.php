@@ -340,10 +340,18 @@
                     height: 100%;">
                                     </div>
                                     <div class="contenedor-textSector p-4">
+                                        @if($idioma['idioma'] == 'ES')
                                         <p class="textEtiqueta">{{ $novedad->etiqueta }}</p>
                                         <p class="textSectores">{{ $novedad->titulo }}</p>
                                         <p class="textEpigrafe">{{ $novedad->epigrafe }}</p>
                                         <p class="textLeer">Leer más</p>
+                                        @else
+                                        <p class="textEtiqueta">{{ $novedad->etiquetaAlternativo }}</p>
+                                        <p class="textSectores">{{ $novedad->tituloAlternativo }}</p>
+                                        <p class="textEpigrafe">{{ $novedad->epigrafeAlternativo }}</p>
+                                        <p class="textLeer">ler mais</p>
+
+                                        @endif
                                     </div>
                                 </div>
                             </div>

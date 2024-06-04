@@ -15,7 +15,13 @@
             </div>
             <div class="col-md-2" style="border-left: #274575 solid 1px">
                 <div>
+                    @if($idioma['idioma'] == 'ES')
                     <p class="seccionSeccion">Secciones</p>
+                    @else
+                    <p class="seccionSeccion">Seções</p>
+
+                    @endif
+
                 </div>
                 <div class="d-flex flex-column justify-content-between pt-3 ">
                     @foreach ($opcionesNavegador as $link)
@@ -28,7 +34,11 @@
             </div>
             <div class="col-md-2">
                 <div class="d-flex flex-column">
+                    @if($idioma['idioma'] == 'ES')
                     <p class="seccionSeccion">Suscribite al Newsletter</p>
+                    @else
+                    <p class="seccionSeccion">Assine o boletim informativo</p>
+                    @endif
                     <form class="enviarSub d-flex" action="{{ route('suscribe') }}" method="POST" class="d-flex mt-3">
                         @csrf
                         <input type="email" name="email" class="form-control inputNew"
@@ -47,7 +57,11 @@
             </div>
             <div class="col-md-4">
                 <div class="d-flex flex-column">
+                    @if($idioma['idioma'] == 'ES')
                     <p class="seccionSeccion">Contacto</p>
+                    @else
+                    <p class="seccionSeccion">Contato</p>
+                    @endif
 
                     <div class="row d-flex mt-3">
                         <div class="col-md-1">
@@ -121,7 +135,12 @@
 
     <div class="mt-5 footerTwo">
         <div class="container d-flex justify-content-between mt-3">
-            <p class="derechos">© Copyright 2024 Real Química. Todos los derechos reservados</p>
+            @if($idioma['idioma'] == 'ES')
+
+            <p class="derechos">© Copyright 2024 Fibras Argentinas. Todos los derechos reservados</p>
+            @else
+            <p class="derechos">© Copyright 2024 Fibras Argentinas. Todos os direitos reservados</p>
+            @endif
             <a href="https://osole.com.ar/" target="_blank" style="text-decoration: none; color:#000">
                 <p class="derechos">By osole</p>
             </a>

@@ -251,9 +251,14 @@ class AdminController extends Controller
         $novedad->titulo = $request->titulo;
         $novedad->epigrafe = $request->epigrafe;
         $novedad->etiqueta = $request->etiqueta;
+        $novedad->texto = $request->texto;
+
         $novedad->destacado = $request->destacado;
 
-        $novedad->texto = $request->texto;
+        $novedad->textoAlternativo = $request->textoAlternativo;
+        $novedad->tituloAlternativo = $request->tituloAlternativo;
+        $novedad->epigrafeAlternativo = $request->epigrafeAlternativo;
+        $novedad->etiquetaAlternativo = $request->etiquetaAlternativo;
         if ($request->hasFile('foto')) {
 
             if (!Storage::exists('public/fotos')) {
@@ -278,6 +283,10 @@ class AdminController extends Controller
         $novedad->epigrafe = $request->epigrafe;
         $novedad->etiqueta = $request->etiqueta;
         $novedad->destacado = $request->destacado;
+        $novedad->textoAlternativo = $request->textoAlternativo;
+        $novedad->tituloAlternativo = $request->tituloAlternativo;
+        $novedad->epigrafeAlternativo = $request->epigrafeAlternativo;
+        $novedad->etiquetaAlternativo = $request->etiquetaAlternativo;
 
         $novedad->texto = $request->texto;
         if ($request->hasFile('foto')) {

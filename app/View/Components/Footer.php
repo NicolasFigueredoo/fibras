@@ -33,6 +33,7 @@ class Footer extends Component
         $idioma = Idioma::where('activo', 1)->first();
 
         if($idioma['idioma'] == 'ES'){
+            
 
             $opcionesNavegador = [
                 ['name' => 'Nosotros', 'url' => route('nosotros')],
@@ -54,6 +55,6 @@ class Footer extends Component
             ];
         }
 
-        return view('components.footer', ['logo' => $logo, 'contacto' => $contacto, 'numeroWsp' => $numeroWsp, 'opcionesNavegador' => $opcionesNavegador]);
+        return view('components.footer', ['logo' => $logo, 'contacto' => $contacto, 'numeroWsp' => $numeroWsp, 'opcionesNavegador' => $opcionesNavegador, 'idioma' => $idioma]);
     }
 }
