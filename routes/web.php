@@ -36,7 +36,7 @@ Route::get('/', [WebsiteController::class, 'home'])->name('home');
 //nosotros
 Route::get('/nosotros', [WebsiteController::class, 'nosotros'])->name('nosotros');
 //servicios
-Route::get('/servicios', [WebsiteController::class, 'servicios'])->name('servicios');
+Route::get('/aplicaciones', [WebsiteController::class, 'aplicaciones'])->name('aplicaciones');
 //sectores
 Route::get('/sectores', [WebsiteController::class, 'sectores'])->name('sectores');
 //clientes
@@ -63,6 +63,10 @@ Route::get('/downloadFile/{file}/{downloadName}/{extension}', [FileDownloadContr
 
 Route::post('/logout', [UserController::class, 'destroyLogin'])
     ->name('logout');
+
+//cambiar Idioma
+Route::post('/changeIdioma', [WebsiteController::class, 'changeIdioma']);
+
 
 
 
@@ -260,3 +264,11 @@ Route::post('/api/crearClienteEmpresa', [AdminController::class, 'crearClienteEm
 Route::post('/api/deleteClienteEmpresa', [AdminController::class, 'deleteClienteEmpresa']);
 Route::post('/api/updateClienteEmpresa', [AdminController::class, 'updateClienteEmpresa']);
 Route::get('/api/obtenerClienteEmpresa/{idCliente}', [AdminController::class, 'obtenerClienteEmpresa']);
+
+//APLICACIONES
+Route::get('/api/aplicaciones', [AdminController::class, 'obtenerAplicaciones']);
+Route::post('/api/crearAplicacion', [AdminController::class, 'crearAplicacion']);
+Route::get('/api/obtenerAplicacion/{idAplicacion}', [AdminController::class, 'obtenerAplicacion']);
+Route::post('/api/updateAplicacion', [AdminController::class, 'updateAplicacion']);
+Route::post('/api/deleteAplicacion', [AdminController::class, 'deleteAplicacion']);
+

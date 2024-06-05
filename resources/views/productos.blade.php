@@ -2,23 +2,53 @@
 
 @section('content')
 <div class="container">
-    <p class="indicador"><b>Inicio</b> / Productos</p>
+
+    @if($idiomaActive == 'ES')
+    <p class="indicador"><b>Inicio</b> > Productos</p>
+    @else
+    <p class="indicador"><b>Começar</b> > produtos</p>
+    @endif
+    <div class="container" style="margin-top: 40px">
+
         <div>
             <div class="row flex-wrap categorias">
+                @php
+                    $totalCategorias = $categorias->count();
+                    $colClass = '';
+                    if ($totalCategorias == 1) {
+                        $colClass = 'col-lg-12';
+                    } elseif ($totalCategorias == 2) {
+                        $colClass = 'col-lg-6';
+                    } elseif ($totalCategorias == 3) {
+                        $colClass = 'col-lg-4';
+                    } elseif ($totalCategorias == 4) {
+                        $colClass = 'col-lg-3';
+                    } else {
+                        $colClass = 'col-lg-4';
+                    }
+                @endphp
                 @foreach ($categorias as $categoria)
-                    <div class="col-lg-4">
-                        <a href="{{ route('categoria', ['id' => $categoria->id, 'idProducto' => 0]) }}"  class="text-decoration-none">
-                            <div class="d-flex justify-content-around align-items-center categoria">
+                    <div class="{{ $colClass }}">
+                        <a href="{{ route('categoria', ['id' => $categoria->id, 'idProducto' => 0]) }}"
+                            style="text-decoration: none">
+                            <div class="d-flex flex-column justify-content-around align-items-center categoria">
                                 <div class="contenedor-img">
-                                    <div class="categoria-img" style="
-                                           background-image: url('{{ url('/getImage/' . basename($categoria->imagen)) }}');
-                                              width: 100%;
-                                               height: 100%;
-                                        
-                                        "></div>
+                                    <div class="categoria-img"
+                                        style="
+                                       background-image: url('{{ url('/getImage/' . basename($categoria->imagen)) }}');
+                                        width: 100%;
+                                        height: 100%;
+                                    ">
+                                    </div>
+                                    <div class="svg-overlay"></div>
+
                                 </div>
                                 <div class="contenedor-textCategoria">
-                                    <p class="textCategoria">{{ $categoria->nombre }}</p>
+                                    @if ($idiomaActive == 'ES')
+                                        <p class="textCategoria">{{ $categoria->nombre }}</p>
+                                    @else
+                                        <p class="textCategoria">{{ $categoria->nombreAlternativo }}</p>
+                                    @endif
                                 </div>
                             </div>
                         </a>
@@ -26,123 +56,66 @@
                 @endforeach
             </div>
         </div>
+
+    </div>
 </div>
 @endsection
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+    crossorigin="anonymous"></script>
 
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
-    .indicador {
+<script>
+    $(document).ready(function() {
+
+        $('.svg-overlay').on('click', function() {
+            $(this).toggleClass('active');
+        });
+
+        $('.idioma-select').on('change', function() {
+            var selectedIdioma = $(this).val();
+
+            $.ajax({
+                url: '/changeIdioma',
+                method: 'POST',
+                data: {
+                    idioma: selectedIdioma,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    location.reload();
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error al enviar el idioma seleccionado:', error);
+                }
+            });
+        });
+    });
+</script>
+
+<style scoped>
+
+    .indicador{
         color: #000;
-        font-family: Inter;
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 300;
-        line-height: 50px;
-        padding-top: 20px
+font-family: "FuturaBook";
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: 60px; /* 428.571% */
     }
 
-    .indicador b {
-        color: #000;
-        font-family: Inter;
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 50px;
-    }
-    .navbar {
-        height: 130px;
-        background: transparent;
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        z-index: 1000;
-    }
 
-    .navbar-collapse {
-        height: 100px;
-    }
 
-    .imagenPrincipal {
-        position: relative;
-        height: 768px;
-        width: 100%;
-    }
+   
 
-    .background-image {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-size: cover;
-        background-position: center;
-        z-index: 1;
-    }
 
-    .background-video {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        z-index: 1;
-    }
 
-    .overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(180deg, rgba(0, 0, 0, 0.60) 0%, rgba(0, 0, 0, 0.00) 80.27%);
-        z-index: 2;
-    }
+  
 
-    .imagenNavbar {
-        width: 79px;
-        height: 103px;
-    }
-
-    .nav-link {
-        font-family: 'Inter', sans-serif;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-    }
 
     .container {
         position: relative;
         z-index: 1100;
     }
 
-    .textoEncima {
-        margin-top: 150px;
-        display: flex;
-        flex-direction: column;
-        align-items: left;
-        position: relative;
-        z-index: 3;
-        color: #FFF;
-        font-family: Inter;
-        font-style: normal;
-        font-weight: 700;
-        line-height: 130%;
-    }
-
-    .textoProductos {
-        color: #000;
-        font-family: Inter;
-        font-size: 32px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: normal;
-        margin-top: 80px;
-        margin-bottom: 58px;
-
-    }
 
     .categorias {
         margin-bottom: 80px;
@@ -150,60 +123,88 @@
     }
 
     .categoria {
-        height: 196px;
+        height: 392px;
         flex-shrink: 0;
         border-radius: 8px;
-        background: #F5F5F5;
         mix-blend-mode: color;
         cursor: pointer;
     }
 
 
     .contenedor-img {
-        width: 121px;
-        height: 122px;
+        width: 314px;
+        height: 314px;
         flex-shrink: 0;
+        overflow: hidden;
+        position: relative;
+
     }
 
     .categoria-img {
-        filter: grayscale(1);
-
+        background-size: cover;
+        background-position: center;
+        width: 100%;
+        height: 100%;
+        filter: brightness(80%);
+        transition: transform 0.8s ease;
     }
 
     .categoria:hover .categoria-img {
-        filter: grayscale(0);
+        transform: scale(1.2);
+    }
+
+    .categoria:hover .textCategoria {
+        color: #0397D6;
 
     }
 
     .textCategoria {
         color: #000;
-        font-family: Inter;
+        font-family: 'FuturaBook';
         font-size: 22px;
         font-style: normal;
         font-weight: 400;
         line-height: normal;
-    }
-
-    .contenedor-textCategoria {
-        width: 171px;
+        text-transform: uppercase;
     }
 
 
 
+    .svg-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 50px;
+        height: 50px;
+        background-image: url('{{ asset('svgs/svgCeleste.svg') }}');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
 
-    @media screen and (max-width: 1000px) {
+    .categoria:hover .svg-overlay {
+        opacity: 1;
+    }
 
-        .categoria{
-            margin-top: 20px
-        }
+    .svg-overlay {
+        transition: opacity 0.3s ease, background-color 0.3s ease;
+    }
 
+    .svg-overlay:hover,
+    .svg-overlay.active {
+        background-image: url('{{ asset('svgs/svgWhite.svg') }}');
+        cursor: pointer;
     }
 
   
 
 
-
-
-
-    
+    @media screen and (max-width: 1000px) {
+        .categoria {
+            margin-top: 20px
+        }
+    }
 </style>

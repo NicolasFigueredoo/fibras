@@ -119,8 +119,12 @@ export default {
                 });
     },
         crearSlider(){
+            if(this.idComponente == 1){
+                this.$store.commit('mostrarComponente', 29);
+            }else{
+                this.$store.commit('mostrarComponente', 434);
 
-            this.$store.commit('mostrarComponente', 29);
+            }
         },
         getImagen(fileName) {
             if(fileName){
@@ -135,7 +139,21 @@ export default {
         obtenerSliders() {
             axios.get('/api/obtenerSliders')
                 .then(response => {
-                    this.sliders = response.data
+
+
+                    if(this.idComponente == 433){
+
+                        response.data.forEach(element => {
+                            if(element.seccion == 'home')
+                            this.sliders.push(element);
+                        });
+                    }else{
+                        response.data.forEach(element => {
+                            if(element.seccion == 'nosotros')
+                            this.sliders.push(element);
+                        });
+                    }
+
                     
                 })
                 .catch(error => {
@@ -145,6 +163,7 @@ export default {
     },
     mounted() {
         this.obtenerSliders();
+        console.log(this.idComponente)
     }
 }
 </script>

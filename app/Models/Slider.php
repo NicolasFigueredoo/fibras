@@ -10,7 +10,7 @@ class Slider extends Model
     use HasFactory;
     protected $table = 'slider';
 
-    protected $fillable = ['orden','texto','link','textoboton','imagen','mostrarproducto'];
+    protected $fillable = ['orden','texto','link','textoboton','imagen','mostrarproducto','seccion'];
 
    
 }

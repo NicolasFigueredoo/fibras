@@ -63,7 +63,7 @@
             </div>
 
 
-            <div class="w-100 d-flex justify-content-end">
+            <div class="mt-3 w-100 d-flex justify-content-end">
                 <button @click="crearNovedad()" type="button" class="btn"
                     style="background-color: #7F7F7F; color: white;">Crear</button>
             </div>

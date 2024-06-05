@@ -7,38 +7,41 @@
 
         <form class="mt-3">
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-9">
                     <label class="form-label">Imagen (Tamaño recomendado 804x650) </label>
                     <input type="file" ref="fotoBanner" class="form-control" @change="guardarFoto()">
                 </div>
-                <div class="row col-lg-6">
-                    <div class=" col-lg-6">
+                <div class="row col-lg-3">
+                    <img class="imagen" :src="getImagen(this.imagen)" alt="">
 
+
+                </div>
+          
+            </div>
+    
+
+            <div class="row">
+                <div class="col-lg-6">
                     <label class="form-label">Título (Español)</label>
                     <input type="text" class="form-control" id="titulo" :value="this.bannerTitulo">
+
                 </div>
                 <div class="col-lg-6">
                     <label class="form-label">Título (Portugués)</label>
                     <input type="text" class="form-control" id="tituloAlternativo" :value="this.bannerTituloAlternativo">
 
                 </div>
-
-                </div>
-          
-            </div>
-            <div class="row mt-3 col-md-3">
-                <img class="imagen" :src="getImagen(this.imagen)" alt="">
             </div>
 
             <div class="row mt-3">
                 <div class="col-lg-6">
 
                 <label for="exampleInputPassword1" class="form-label">Texto (Español)</label>
-                <textarea class="summernote" id="editor" :value="bannerTexto"></textarea>
+                <textarea class="summernote" id="editor" ></textarea>
                 </div>
                 <div class="col-lg-6">
                     <label for="exampleInputPassword1" class="form-label">Texto (Portugués)</label>
-                <textarea class="summernote" id="editorAlternativo" :value="bannerTexto"></textarea>
+                <textarea class="summernote" id="editorAlternativo" ></textarea>
                 </div>
             </div>
 
@@ -76,7 +79,8 @@ export default {
             txtBoton: null,
             linkBoton: null,
             calidad: null,
-            certificado: null
+            certificado: null,
+            bannerTextoAlternativo: ''
         }
 
     },
@@ -158,7 +162,9 @@ export default {
         obtenerBannerInformacion() {
             axios.get(`/api/obtenerBanner`)
                 .then(response => {
-                    if (this.idComponente === 7) {
+
+                    if (this.idComponente == 7) {
+                        console.log(response.data[0])
                         this.bannerTexto = response.data[0].texto
                         this.bannerTextoAlternativo = response.data[0].textoAlternativo
                         this.bannerTitulo = response.data[0].titulo
@@ -168,7 +174,7 @@ export default {
                         this.seccion = response.data[0].seccion
                         this.txtBoton = response.data[0].textoboton
                         this.linkBoton = response.data[0].link
-                    } else if(this.idComponente === 120) {
+                    } else if(this.idComponente == 122) {
                         this.bannerTexto = response.data[1].texto
                         this.bannerTextoAlternativo = response.data[1].textoAlternativo
                         this.bannerTitulo = response.data[1].titulo
@@ -181,22 +187,10 @@ export default {
 
                     }
 
-                    else if(this.idComponente === 121) {
-                        this.bannerTexto = response.data[2].texto
-                        this.bannerTextoAlternativo = response.data[2].textoAlternativo
-                        this.bannerTitulo = response.data[2].titulo
-                        this.idBanner = response.data[2].id
-                        this.imagen = response.data[2].imagen
-                        this.seccion = response.data[2].seccion
-                        this.txtBoton = response.data[2].textoboton
-                        this.linkBoton = response.data[2].link
-                        this.bannerTituloAlternativo = response.data[2].tituloAlternativo
-
-                    }
 
             
                     $('#editor').summernote('code', this.bannerTexto);
-                    $('#textoAlternativo').summernote('code', this.bannerTextoAlternativo);
+                    $('#editorAlternativo').summernote('code', this.bannerTextoAlternativo);
 
                 })
                 .catch(error => {

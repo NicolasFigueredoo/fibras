@@ -12,22 +12,35 @@
                     <input type="text" class="form-control" id="orden" :value="this.seccion.orden">
                 </div>
                 <div class="col-md-6">
-                    <label class="form-label">Título</label>
-                    <input type="text" class="form-control" id="titulo" :value="this.seccion.titulo">
-                </div>
-            </div>
-            <div class="row mt-3">
-                <div class="col-md-6">
                 <label class="form-label">Imagen (Tamaño recomendado 66x66)</label>
                 <input type="file" ref="fotoSlider" class="form-control" id="imgs" @change="guardarFoto()">
                 </div>
+            </div>
+            <div class="row mt-3">
                 <div class="col-md-4" style="">
                     <img :src="getImagen(this.seccion.imagen)" alt="">
                 </div>
             </div>
-            <div class="mb-3 mt-3">
-                <label for="exampleInputPassword1" class="form-label">Texto</label>
-                <textarea class="summernote" id="editor"></textarea>
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <label class="form-label">Título (Español)</label>
+                    <input type="text" class="form-control" id="titulo" :value="this.seccion.titulo">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Título (Portugués)</label>
+                    <input type="text" class="form-control" id="tituloAlternativo" :value="this.seccion.tituloAlternativo">
+                </div>
+            </div>
+            <div class="row mb-3 mt-3">
+                <div class="col-lg-6">
+                    <label for="exampleInputPassword1" class="form-label">Texto (Español)</label>
+                    <textarea class="summernote" id="editor"></textarea>
+                </div>
+                <div class="col-lg-6">
+
+<label for="exampleInputPassword1" class="form-label">Texto (Portugués)</label>
+<textarea class="summernote" id="editorAlternativo"></textarea>
+</div>
             </div>
 
             <div class="w-100 d-flex justify-content-end mb-5">
@@ -73,6 +86,8 @@ export default {
             formData.append('orden', $("#orden").val());
             formData.append('titulo', $("#titulo").val());
             formData.append('texto', $('#editor').summernote('code').toString());
+            formData.append('tituloAlternativo', $("#tituloAlternativo").val());
+            formData.append('textoAlternativo', $('#editorAlternativo').summernote('code').toString());
             formData.append('imagen', this.foto);
 
             axios.post('/api/updateSeccion', formData, {})
@@ -91,8 +106,11 @@ export default {
 
         },
         summerNote() {
-            if (this.getSummer === null && this.getSummer !== true) {
                 $('#editor').summernote({
+                    height: 300,
+                });
+
+                $('#editorAlternativo').summernote({
                     height: 300,
                 });
                 var noteBar = $('.note-toolbar');
@@ -100,8 +118,7 @@ export default {
                     $(this).attr('data-bs-toggle', $(this).attr('data-toggle')).removeAttr('data-toggle');
                 });
 
-                this.$store.commit('setSummer', true);
-            }
+            
         },
         getImagen(fileName) {
             if(fileName){
@@ -114,6 +131,8 @@ export default {
                 .then(response => {
                     this.seccion = response.data;
                     $('#editor').summernote('code', this.seccion.texto);
+                    $('#editorAlternativo').summernote('code', this.seccion.textoAlternativo);
+
                 })
                 .catch(error => {
                     console.error(error);

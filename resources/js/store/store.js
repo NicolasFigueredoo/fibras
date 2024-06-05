@@ -21,12 +21,17 @@ export default createStore({
     idCategoria: null,
     idSector:null,
     idLitro: null,
+    idAplicacion: null,
+
     idClienteEmpresa: null,
     inputValue: localStorage.getItem('inputValue') || false,
     summer: null,
 
   },
   mutations: {
+    setAplicacionId(state,idAplicacion){
+      state.idAplicacion = idAplicacion
+    },
     setClienteEmpresaId(state,idClienteEmpresa){
       state.idClienteEmpresa = idClienteEmpresa
 
@@ -103,6 +108,9 @@ export default createStore({
   },
  
   getters: {
+    getIdAplicacion(state){
+      return state.idAplicacion;
+    },
     getIdClienteEmpresa(state) {
       return state.idClienteEmpresa;
     },

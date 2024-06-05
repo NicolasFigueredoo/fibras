@@ -36,7 +36,7 @@
                         </a>
                         <div id="collapseHome" class="collapse">
                             <nav class="sidenav-menu-nested nav ">
-                                <a @click="mostrarComponenteF(1)" class="nav-link ">Header</a>
+                                <a @click="mostrarComponenteF(433)" class="nav-link ">Sliders</a>
                             </nav>
                         </div>
                         <div id="collapseHome" class="collapse">
@@ -64,6 +64,12 @@
                                 </svg>
                             </div>
                         </a>
+
+                        <div id="collapseEmpresa" class="collapse">
+                            <nav class="sidenav-menu-nested nav ">
+                                <a @click="mostrarComponenteF(1)" class="nav-link ">Sliders</a>
+                            </nav>
+                        </div>
                         <div id="collapseEmpresa" class="collapse">
                             <nav class="sidenav-menu-nested nav ">
                                 <a @click="mostrarComponenteF(122)" class="nav-link ">Banner</a>
@@ -76,7 +82,25 @@
                         </div>
                     </li>
 
+                    
                     <li class="sidebar-item">
+                            <a @click="mostrarComponenteF(10)"  class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseAplicaciones"
+                                aria-expanded="false" aria-controls="collapseAplicaciones">
+                                <div class="nav-link-icon">
+    
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 576 512">
+                                        <path fill="#ffffff" d="M264.5 5.2c14.9-6.9 32.1-6.9 47 0l218.6 101c8.5 3.9 13.9 12.4 13.9 21.8s-5.4 17.9-13.9 21.8l-218.6 101c-14.9 6.9-32.1 6.9-47 0L45.9 149.8C37.4 145.8 32 137.3 32 128s5.4-17.9 13.9-21.8L264.5 5.2zM476.9 209.6l53.2 24.6c8.5 3.9 13.9 12.4 13.9 21.8s-5.4 17.9-13.9 21.8l-218.6 101c-14.9 6.9-32.1 6.9-47 0L45.9 277.8C37.4 273.8 32 265.3 32 256s5.4-17.9 13.9-21.8l53.2-24.6 152 70.2c23.4 10.8 50.4 10.8 73.8 0l152-70.2zm-152 198.2l152-70.2 53.2 24.6c8.5 3.9 13.9 12.4 13.9 21.8s-5.4 17.9-13.9 21.8l-218.6 101c-14.9 6.9-32.1 6.9-47 0L45.9 405.8C37.4 401.8 32 393.3 32 384s5.4-17.9 13.9-21.8l53.2-24.6 152 70.2c23.4 10.8 50.4 10.8 73.8 0z"/></svg>
+                            
+                           
+                                </div>
+                                <span>Aplicaciones</span>
+                            </a>
+                            
+                    
+    
+                        </li>
+
+                    <!-- <li class="sidebar-item">
                         <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseServicio"
                             aria-expanded="false" aria-controls="collapseServicio">
                             <div class="nav-link-icon">
@@ -109,7 +133,7 @@
                                 <a @click="mostrarComponenteF(121)" class="nav-link ">Banner 2</a>
                             </nav>
                         </div>
-                    </li>
+                    </li> -->
 
                     <li class="sidebar-item">
                         <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseProductos"
@@ -517,7 +541,11 @@
                     <Alerta style="position: fixed; z-index: 5;" v-if="mostrarAlerta === true" />
                     <!--COMPONENTES SLIDER -->
                     <ShowSlider v-if="mostrarComponente === 1" />
+                    <ShowSlider v-if="mostrarComponente === 433" />
+
                     <CrearSlider v-if="mostrarComponente === 29" />
+                    <CrearSlider v-if="mostrarComponente === 434" />
+
                     <EditSlider v-if="mostrarComponente === 2" />
 
                     <!--COMPONENTES CONTACTO -->
@@ -617,6 +645,11 @@
                     <EditarClienteEmpresa v-if="mostrarComponente === 501" />
                     <CrearClienteEmpresa v-if="mostrarComponente === 502" />
 
+                       <!--COMPONENTES APLICACIONES -->
+                       <ShowAplicaciones v-if="mostrarComponente === 10"/>
+                            <EditAplicaciones v-if="mostrarComponente === 11"/>
+                            <CrearAplicaciones v-if="mostrarComponente === 12"/>
+
 
 
 
@@ -715,6 +748,10 @@ import ShowClienteEmpresa from "@/components/admin/clientesEmpresas/ShowClienteE
 import EditarClienteEmpresa from "@/components/admin/clientesEmpresas/EditarClienteEmpresa.vue";
 import CrearClienteEmpresa from "@/components/admin/clientesEmpresas/CrearClienteEmpresa.vue";
 
+import ShowAplicaciones from "@/components/admin/aplicaciones/ShowAplicaciones.vue";
+import CrearAplicaciones from "@/components/admin/aplicaciones/CrearAplicaciones.vue";
+import EditAplicaciones from "@/components/admin/aplicaciones/EditAplicaciones.vue";
+
 import axios from "axios";
 
 export default {
@@ -770,7 +807,10 @@ export default {
         EditarLitros,
         ShowClienteEmpresa,
         EditarClienteEmpresa,
-        CrearClienteEmpresa
+        CrearClienteEmpresa,
+        ShowAplicaciones,
+        CrearAplicaciones,
+        EditAplicaciones,
 
     },
     data() {

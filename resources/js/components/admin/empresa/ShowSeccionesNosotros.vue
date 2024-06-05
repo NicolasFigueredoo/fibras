@@ -77,7 +77,10 @@ export default {
             return this.secciones.filter(seccion => {
             return seccion.titulo.toLowerCase().includes(this.search.toLowerCase());
             });
-  }
+  },
+  mostrarComponente() {
+            return this.$store.getters['getMostrarComponente'];
+        },
     },
     
 
@@ -122,6 +125,7 @@ methods:{
     },
     mounted(){
         this.obtenerSecciones();
+    console.log(this.idComponente)
     }
 }
 </script>

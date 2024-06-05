@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Aplicacion;
 use App\Models\Banner;
 use App\Models\Catalogo;
 use App\Models\Categoria;
@@ -83,6 +84,8 @@ class AdminController extends Controller
         $slider->textoboton = $request->textoboton;
         $slider->textoAlternativo = $request->textoAlternativo;
         $slider->textobotonAlternativo = $request->textobotonAlternativo;
+        $slider->seccion = $request->seccion;
+
 
         if($request->linkboton){
             $slider->linkboton = $request->linkboton;
@@ -574,6 +577,8 @@ class AdminController extends Controller
         $seccion->orden = $request->orden;
         $seccion->titulo = $request->titulo;
         $seccion->texto = $request->texto;
+        $seccion->tituloAlternativo = $request->tituloAlternativo;
+        $seccion->textoAlternativo = $request->textoAlternativo;
         
         if ($request->hasFile('imagen')) {
 
@@ -603,6 +608,9 @@ class AdminController extends Controller
         $seccion->orden = $request->orden;
         $seccion->titulo = $request->titulo;
         $seccion->texto = $request->texto;
+        $seccion->tituloAlternativo = $request->tituloAlternativo;
+        $seccion->textoAlternativo = $request->textoAlternativo;
+        
         if ($request->hasFile('imagen')) {
 
             if (!Storage::exists('public/fotos')) {
@@ -1080,4 +1088,77 @@ class AdminController extends Controller
          $clienteEmpresa->delete();
          return response()->json($clienteEmpresa);
      }
+
+
+     //aplicaciones
+     public function obtenerAplicaciones()
+     {
+         $aplicaciones = Aplicacion::orderBy('orden', 'asc')->get();
+         return response()->json($aplicaciones);
+     }
+ 
+     public function crearAplicacion(Request $request)
+     {
+ 
+ 
+         $aplicacion = new Aplicacion();
+         $aplicacion->orden = $request->orden;
+         $aplicacion->nombre = $request->nombre;
+         $aplicacion->nombreAlternativo = $request->nombreAlternativo;
+         $aplicacion->texto = $request->texto;
+         $aplicacion->textoAlternativo = $request->textoAlternativo;
+
+     
+         if ($request->hasFile('imagen')) {
+           
+             if (!Storage::exists('public/fotos')) {
+                 Storage::makeDirectory('public/fotos');
+             }
+         
+             $photoPath = $request->file('imagen')->store('fotos');
+             $aplicacion->imagen = $photoPath;
+         }
+ 
+         $aplicacion->save();
+ 
+         return response()->json(['message' => 'Datos subidos correctamente'], 200);
+     }
+ 
+     public function obtenerAplicacion($idAplicacion)
+     {
+         $aplicacion = Aplicacion::find($idAplicacion);
+         return response()->json($aplicacion);
+     }
+     public function updateAplicacion(Request $request)
+     {
+         $aplicacion = Aplicacion::find($request->idAplicacion);
+         $aplicacion->orden = $request->orden;
+         $aplicacion->nombre = $request->nombre;
+         $aplicacion->nombreAlternativo = $request->nombreAlternativo;
+         $aplicacion->texto = $request->texto;
+         $aplicacion->textoAlternativo = $request->textoAlternativo;
+ 
+         if ($request->hasFile('imagen')) {
+           
+             if (!Storage::exists('public/fotos')) {
+                 Storage::makeDirectory('public/fotos');
+             }
+         
+             $photoPath = $request->file('imagen')->store('fotos');
+             $aplicacion->imagen = $photoPath;
+         }
+ 
+         $aplicacion->save();
+ 
+         return response()->json(['message' => 'Datos subidos correctamente'], 200);
+ 
+     }
+     public function deleteAplicacion(Request $request)
+     {
+         $aplicacion = Aplicacion::find($request->idAplicacion);
+         $aplicacion->delete();
+ 
+         return response()->json(['message' => 'Aplicacion Eliminada'], 200);
+     }
+ 
 }

@@ -22,30 +22,34 @@ class WebsiteController extends Controller
     {
 
         $idioma = Idioma::where('activo', 1)->first();
+        $idiomas = Idioma::all();
+
 
         if($idioma['idioma'] == 'ES'){
             $tituloSeccionProductos = 'Productos';
             $tituloSeccionNovedades = 'novedades';
             $textoBoton = 'Ver todos';
+            $idiomaActive = 'ES';
 
             $opcionesNavegador = [
                 ['name' => 'Nosotros', 'url' => route('nosotros')],
                 ['name' => 'Productos', 'url' => route('productos')],
-                ['name' => 'Aplicaciones', 'url' => '#'],  
+                ['name' => 'Aplicaciones', 'url' => route('Aplicaciones')],  
                 ['name' => 'Novedades', 'url' => '#'], 
                 ['name' => 'Presupuesto', 'url' => '#'],  
                 ['name' => 'Contacto', 'url' => route('contacto')],
             ];
         }else{
-            $tituloSeccionProductos = 'produtos';
-            $tituloSeccionProductos = 'Novidades';
+            $tituloSeccionProductos = 'Produtos';
+            $tituloSeccionNovedades = 'Novidades';
             $textoBoton = 'Ver tudo';
+            $idiomaActive = 'POR';
 
 
             $opcionesNavegador = [
                 ['name' => 'Sobre nós', 'url' => route('nosotros')],
                 ['name' => 'Produtos', 'url' => route('productos')],
-                ['name' => 'Aplicações', 'url' => '#'],  
+                ['name' => 'Aplicações', 'url' => route('Aplicaciones')],  
                 ['name' => 'Novidades', 'url' => '#'], 
                 ['name' => 'Orçamento', 'url' => '#'], 
                 ['name' => 'Contato', 'url' => route('contacto')],
@@ -53,7 +57,7 @@ class WebsiteController extends Controller
             ];
         }
 
-        $sliders = Slider::orderBy('orden')->get();
+        $sliders = Slider::orderBy('orden')->where('seccion', 'home')->get();
         $logo = Logo::all();
         $categorias = Categoria::where('destacado', 1)
         ->orderBy('orden')
@@ -61,6 +65,36 @@ class WebsiteController extends Controller
         $seccion = Banner::where('seccion','home')->get();
         $novedades = Novedad::orderBy('orden')->get();
 
+        foreach ($sliders as $slider) {
+            $imagenPath = $slider->imagen;
+            $extension = pathinfo($imagenPath, PATHINFO_EXTENSION);
+            $validImageExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+            $validVideoExtensions = ['mp4', 'avi', 'mov', 'wmv'];
+    
+            if (in_array($extension, $validImageExtensions)) {
+                $slider->contentType = 'imagen';
+            }
+            elseif (in_array($extension, $validVideoExtensions)) {
+                $slider->contentType = 'video';
+            }
+            else {
+                $slider->contentType = null;
+            }
+        }
+
+        return view('home', compact('sliders', 'logo', 'categorias', 'seccion', 'novedades', 'tituloSeccionProductos', 'opcionesNavegador', 'idiomaActive', 'tituloSeccionNovedades', 'textoBoton', 'idiomas'));
+    }
+
+    public function nosotros()
+    {
+
+        $seccion = Banner::where('seccion','nosotros')->get();
+        $servicios = Valores::all();
+        $idioma = Idioma::where('activo', 1)->first();
+        $logo = Logo::all();
+        $sliders = Slider::orderBy('orden')->where('seccion', 'nosotros')->get();
+        $idiomas = Idioma::all();
+        $servicios = Valores::all();
 
 
         foreach ($sliders as $slider) {
@@ -80,24 +114,55 @@ class WebsiteController extends Controller
             }
         }
 
-        return view('home', compact('sliders', 'logo', 'categorias', 'seccion', 'novedades', 'tituloSeccionProductos', 'opcionesNavegador', 'idioma', 'tituloSeccionProductos', 'textoBoton'));
+        if($idioma['idioma'] == 'ES'){
+
+            $idiomaActive = 'ES';
+
+            $opcionesNavegador = [
+                ['name' => 'Nosotros', 'url' => route('nosotros')],
+                ['name' => 'Productos', 'url' => route('productos')],
+                ['name' => 'Aplicaciones', 'url' => route('aplicaciones')],  
+                ['name' => 'Novedades', 'url' => '#'], 
+                ['name' => 'Presupuesto', 'url' => '#'],  
+                ['name' => 'Contacto', 'url' => route('contacto')],
+            ];
+        }else{
+       
+            $idiomaActive = 'POR';
+
+
+            $opcionesNavegador = [
+                ['name' => 'Sobre nós', 'url' => route('nosotros')],
+                ['name' => 'Produtos', 'url' => route('productos')],
+                ['name' => 'Aplicações', 'url' => route('aplicaciones')],  
+                ['name' => 'Novidades', 'url' => '#'], 
+                ['name' => 'Orçamento', 'url' => '#'], 
+                ['name' => 'Contato', 'url' => route('contacto')],
+        
+            ];
+        }
+
+        return view('nosotros',compact('seccion', 'servicios', 'sliders', 'idioma', 'logo', 'idiomas', 'opcionesNavegador', 'idiomaActive', 'servicios'));
+
     }
 
-    public function nosotros()
+    
+    public function productos()
     {
+        $idioma = Idioma::where('activo', 1)->first();
+        if($idioma['idioma'] == 'ES'){
+            $idiomaActive = 'ES';
+            
+        }else{
+            $idiomaActive = 'POR';
 
-        $seccion = Banner::where('seccion','nosotros')->get();
-        $servicios = Valores::all();
-
-        return view('nosotros',compact('seccion', 'servicios'));
-
+        }
+        $categorias = Categoria::orderBy('orden')->get();
+        return view('productos', compact('categorias', 'idiomaActive'));
     }
 
-    public function servicios(){
-        $seccion = Banner::where('seccion','servicio1')->get();
-        $seccion2 = Banner::where('seccion','servicio2')->get();
-
-        $servicios = Servicio::all();
+    public function aplicaciones(){
+    
 
         return view('servicios',compact('seccion', 'servicios', 'seccion2'));
     }
@@ -118,7 +183,6 @@ class WebsiteController extends Controller
         return view('clientes', compact('clientes'));
     }
 
-    
     public function calidad()
     {
     
@@ -133,11 +197,6 @@ class WebsiteController extends Controller
         return view('contacto');
     }
 
-    public function productos()
-    {
-        $categorias = Categoria::orderBy('orden')->get();
-        return view('productos', compact('categorias'));
-    }
 
     public function mostrarProductosCategoria($id, $idProducto){
     
@@ -170,6 +229,23 @@ class WebsiteController extends Controller
 
         return $numeroWhatsApp;
     }
+
+    public function changeIdioma(Request $request){
+        $idiomaId = $request->input('idioma');
+        $idioma = Idioma::where('activo', 1)->first();
+        $idioma->activo = 0;
+        $idioma->save();
+
+        $idiomaActive = Idioma::find($idiomaId);
+        $idiomaActive->activo = 1;
+        $idiomaActive->save();
+
+        return response()->json(['success' => true]);
+        
+
+    }
+
+
 
     
 }

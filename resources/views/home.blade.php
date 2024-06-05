@@ -3,7 +3,7 @@
 @section('content')
     <div>
         <div class="imagenPrincipal">
-      
+
 
             <div id="carouselExampleIndicators" class="carousel slide w-100" style="height: 600px;">
                 <div class="carousel-indicators">
@@ -18,90 +18,88 @@
                     @foreach ($sliders as $index => $slider)
                         <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
                             @if ($slider->contentType == 'imagen')
-
-                            <div style=" height: 768px;">
-                                <div class="background-image"
-                                    style="background-image: url('{{ url('/getImage/' . basename($slider['imagen'])) }}');
+                                <div style=" height: 768px;">
+                                    <div class="background-image"
+                                        style="background-image: url('{{ url('/getImage/' . basename($slider['imagen'])) }}');
                                         background-size: cover; 
                                         background-position: center;
                                         width: 100%;
-                                        height: 100%;                                    ">
-                                </div>
-                                <div class="container carousel-caption textoEncima">
-                                    @if($idioma['idioma'] == 'ES')
-                                    <div>{!! $slider->texto !!}</div>
-                                    <div >
-                                        @if ($slider['linkboton'] !== 'none')
-                                            <a href="{{ $slider['linkboton'] }}">
-                                                <button type="button"
-                                                    class="btn botonSlider">{{ $slider['textoboton'] }}</button>
-                                            </a>
+                                        height: 100%;">
+                                    </div>
+                                    <div class="container carousel-caption textoEncima">
+                                        @if ($idiomaActive == 'ES')
+                                            <div>{!! $slider->texto !!}</div>
+                                            <div>
+                                                @if ($slider['linkboton'] !== 'none')
+                                                    <a href="{{ $slider['linkboton'] }}">
+                                                        <button type="button"
+                                                            class="btn botonSlider">{{ $slider['textoboton'] }}</button>
+                                                    </a>
+                                                @else
+                                                    <a href="{{ route('productos') }}">
+                                                        <button type="button"
+                                                            class="btn botonSlider">{{ $slider['textoboton'] }}</button>
+                                                    </a>
+                                                @endif
+                                            </div>
                                         @else
-                                            <a href="{{ route('productos') }}">
-                                                <button type="button"
-                                                    class="btn botonSlider">{{ $slider['textoboton'] }}</button>
-                                            </a>
+                                            <div>{!! $slider->textoAlternativo !!}</div>
+                                            <div>
+                                                @if ($slider['linkboton'] !== 'none')
+                                                    <a href="{{ $slider['linkboton'] }}">
+                                                        <button type="button"
+                                                            class="btn botonSlider">{{ $slider['textobotonAlternativo'] }}</button>
+                                                    </a>
+                                                @else
+                                                    <a href="{{ route('productos') }}">
+                                                        <button type="button"
+                                                            class="btn botonSlider">{{ $slider['textobotonAlternativo'] }}</button>
+                                                    </a>
+                                                @endif
+                                            </div>
                                         @endif
                                     </div>
-                                    @else
-                                    <div>{!! $slider->textoAlternativo !!}</div>
-                                    <div >
-                                        @if ($slider['linkboton'] !== 'none')
-                                            <a href="{{ $slider['linkboton'] }}">
-                                                <button type="button"
-                                                    class="btn botonSlider">{{ $slider['textobotonAlternativo'] }}</button>
-                                            </a>
-                                        @else
-                                            <a href="{{ route('productos') }}">
-                                                <button type="button"
-                                                    class="btn botonSlider">{{ $slider['textobotonAlternativo'] }}</button>
-                                            </a>
-                                        @endif
-                                    </div>
-                                    @endif
                                 </div>
-                            </div>
                             @else
-                            <div class="container carousel-caption textoEncima">
+                                <div class="container carousel-caption textoEncima">
 
-                                @if($idioma['idioma'] == 'ES')
-                                <div>{!! $slider->texto !!}</div>
-                                <div >
-                                    @if ($slider['linkboton'] !== 'none')
-                                        <a href="{{ $slider['linkboton'] }}">
-                                            <button type="button"
-                                                class="btn botonSlider">{{ $slider['textoboton'] }}</button>
-                                        </a>
+                                    @if ($idiomaActive == 'ES')
+                                        <div>{!! $slider->texto !!}</div>
+                                        <div>
+                                            @if ($slider['linkboton'] !== 'none')
+                                                <a href="{{ $slider['linkboton'] }}">
+                                                    <button type="button"
+                                                        class="btn botonSlider">{{ $slider['textoboton'] }}</button>
+                                                </a>
+                                            @else
+                                                <a href="{{ route('productos') }}">
+                                                    <button type="button"
+                                                        class="btn botonSlider">{{ $slider['textoboton'] }}</button>
+                                                </a>
+                                            @endif
+                                        </div>
                                     @else
-                                        <a href="{{ route('productos') }}">
-                                            <button type="button"
-                                                class="btn botonSlider">{{ $slider['textoboton'] }}</button>
-                                        </a>
+                                        <div>{!! $slider->textoAlternativo !!}</div>
+                                        <div>
+                                            @if ($slider['linkboton'] !== 'none')
+                                                <a href="{{ $slider['linkboton'] }}">
+                                                    <button type="button"
+                                                        class="btn botonSlider">{{ $slider['textobotonAlternativo'] }}</button>
+                                                </a>
+                                            @else
+                                                <a href="{{ route('productos') }}">
+                                                    <button type="button"
+                                                        class="btn botonSlider">{{ $slider['textobotonAlternativo'] }}</button>
+                                                </a>
+                                            @endif
+                                        </div>
                                     @endif
                                 </div>
-                                @else
-                                <div>{!! $slider->textoAlternativo !!}</div>
-                                <div >
-                                    @if ($slider['linkboton'] !== 'none')
-                                        <a href="{{ $slider['linkboton'] }}">
-                                            <button type="button"
-                                                class="btn botonSlider">{{ $slider['textobotonAlternativo'] }}</button>
-                                        </a>
-                                    @else
-                                        <a href="{{ route('productos') }}">
-                                            <button type="button"
-                                                class="btn botonSlider">{{ $slider['textobotonAlternativo'] }}</button>
-                                        </a>
-                                    @endif
-                                </div>
-                                @endif
-                        </div>
-                            <video class="d-block w-100" style="height: 768px; object-fit: cover;" controls
-                            autoplay muted>
-                            <source src="{{ url('/getImage/' . basename($slider['imagen'])) }}" type="video/mp4">
-                            Tu navegador no soporta la reproducción de videos.
-                        </video>
-                    
+                                <video class="d-block w-100" style="height: 768px; object-fit: cover;" controls autoplay
+                                    muted>
+                                    <source src="{{ url('/getImage/' . basename($slider['imagen'])) }}" type="video/mp4">
+                                    Tu navegador no soporta la reproducción de videos.
+                                </video>
                             @endif
 
 
@@ -109,30 +107,6 @@
                     @endforeach
                 </div>
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
             <div class="container-fluid">
                 <nav class="navbar navbar-expand-lg">
@@ -171,9 +145,15 @@
                                         <span class="text-white">|</span>
                                     </div>
                                     <div class="w-20">
-                                        <select class="form-select" aria-label="Default select example">
-                                            <option selected>ES</option>
-                                            <option value="1">EN</option>
+                                        <select class="form-select idioma-select" aria-label="Default select example">
+                                            @foreach ($idiomas as $idioma)
+                                                @if ($idioma->activo == 1)
+                                                    <option value="{{ $idioma->id }}" selected>{{ $idioma->idioma }}
+                                                    </option>
+                                                @else
+                                                    <option value="{{ $idioma->id }}">{{ $idioma->idioma }}</option>
+                                                @endif
+                                            @endforeach
                                         </select>
 
                                     </div>
@@ -182,8 +162,9 @@
                                 </div>
                                 <div class="d-flex justify-content-end align-items-center">
                                     @foreach ($opcionesNavegador as $option)
-                                        <a class="nav-link text-white" href="{{ $option['url'] }}">{{ $option['name'] }}</a>
-                                @endforeach
+                                        <a class="nav-link text-white"
+                                            href="{{ $option['url'] }}">{{ $option['name'] }}</a>
+                                    @endforeach
                                     {{-- @auth
                                         <a class="nav-link text-white" href="{{ route('logout') }}"
                                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -222,11 +203,11 @@
             <div>
                 <div class="d-flex justify-content-between align-items-center" style="height: 100px">
                     <div>
-                        <p class="textoProductos">{{$tituloSeccionProductos}}</p>
+                        <p class="textoProductos">{{ $tituloSeccionProductos }}</p>
                     </div>
                     <div>
                         <a href="{{ route('productos') }}">
-                            <button type="button" id="btnProductos" class="btn">{{$textoBoton}}</button>
+                            <button type="button" id="btnProductos" class="btn">{{ $textoBoton }}</button>
                         </a>
 
                     </div>
@@ -264,11 +245,10 @@
 
                                     </div>
                                     <div class="contenedor-textCategoria">
-                                        @if($idioma['idioma'] == 'ES')
-                                        <p class="textCategoria">{{ $categoria->nombre }}</p>
+                                        @if ($idiomaActive == 'ES')
+                                            <p class="textCategoria">{{ $categoria->nombre }}</p>
                                         @else
-                                        <p class="textCategoria">{{ $categoria->nombreAlternativo }}</p>
-
+                                            <p class="textCategoria">{{ $categoria->nombreAlternativo }}</p>
                                         @endif
                                     </div>
                                 </div>
@@ -293,15 +273,15 @@
                     </div>
                 </div>
                 <div class="col-lg-6 contenedor-textoSeccion">
-                    @if($idioma['idioma'] == 'ES')
+                    
+                    @if ($idiomaActive == 'ES')
+                        <p class="tituloSeccion">{!! $seccion[0]['titulo'] !!}</p>
 
-                    <p class="tituloSeccion">{!! $seccion[0]['titulo'] !!}</p>
-
-                    <div class="descripcionSeccion">{!! $seccion[0]['texto'] !!}</div>
+                        <div class="descripcionSeccion">{!! $seccion[0]['texto'] !!}</div>
                     @else
-                    <p class="tituloSeccion">{!! $seccion[0]['tituloAlternativo'] !!}</p>
+                        <p class="tituloSeccion">{!! $seccion[0]['tituloAlternativo'] !!}</p>
 
-                    <div class="descripcionSeccion">{!! $seccion[0]['textoAlternativo'] !!}</div>
+                        <div class="descripcionSeccion">{!! $seccion[0]['textoAlternativo'] !!}</div>
                     @endif
                 </div>
 
@@ -316,11 +296,11 @@
             <div class="container">
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="tituloSectores">
-                        <p>{{$tituloSeccionProductos}}</p>
+                        <p>{{ $tituloSeccionNovedades }}</p>
                     </div>
                     <div>
                         <a href="{{ route('sectores') }}">
-                            <button type="button" id="btnProductos" class="btn">{{$textoBoton}}</button>
+                            <button type="button" id="btnProductos" class="btn">{{ $textoBoton }}</button>
                         </a>
 
                     </div>
@@ -340,17 +320,16 @@
                     height: 100%;">
                                     </div>
                                     <div class="contenedor-textSector p-4">
-                                        @if($idioma['idioma'] == 'ES')
-                                        <p class="textEtiqueta">{{ $novedad->etiqueta }}</p>
-                                        <p class="textSectores">{{ $novedad->titulo }}</p>
-                                        <p class="textEpigrafe">{{ $novedad->epigrafe }}</p>
-                                        <p class="textLeer">Leer más</p>
+                                        @if ($idiomaActive == 'ES')
+                                            <p class="textEtiqueta">{{ $novedad->etiqueta }}</p>
+                                            <p class="textSectores">{{ $novedad->titulo }}</p>
+                                            <p class="textEpigrafe">{{ $novedad->epigrafe }}</p>
+                                            <p class="textLeer">Leer más</p>
                                         @else
-                                        <p class="textEtiqueta">{{ $novedad->etiquetaAlternativo }}</p>
-                                        <p class="textSectores">{{ $novedad->tituloAlternativo }}</p>
-                                        <p class="textEpigrafe">{{ $novedad->epigrafeAlternativo }}</p>
-                                        <p class="textLeer">ler mais</p>
-
+                                            <p class="textEtiqueta">{{ $novedad->etiquetaAlternativo }}</p>
+                                            <p class="textSectores">{{ $novedad->tituloAlternativo }}</p>
+                                            <p class="textEpigrafe">{{ $novedad->epigrafeAlternativo }}</p>
+                                            <p class="textLeer">ler mais</p>
                                         @endif
                                     </div>
                                 </div>
@@ -452,14 +431,35 @@
     crossorigin="anonymous"></script>
 
 <script>
-    $('.svg-overlay').on('click', function() {
-        $(this).toggleClass('active');
+    $(document).ready(function() {
+
+        $('.svg-overlay').on('click', function() {
+            $(this).toggleClass('active');
+        });
+
+        $('.idioma-select').on('change', function() {
+            var selectedIdioma = $(this).val();
+
+            $.ajax({
+                url: '/changeIdioma',
+                method: 'POST',
+                data: {
+                    idioma: selectedIdioma,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    location.reload();
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error al enviar el idioma seleccionado:', error);
+                }
+            });
+        });
     });
 </script>
 
-<style scoped>
 
-    
+<style scoped>
     .navbar {
         height: 130px;
         background: transparent;
@@ -513,8 +513,9 @@
     }
 
     .imagenNavbar {
-        width: 79px;
-        height: 103px;
+        width: 280px;
+        height: 70px;
+        flex-shrink: 0;
     }
 
     .nav-link {
@@ -856,13 +857,14 @@
     }
 
     .form-select {
+        width: 70px !important;
         background-color: transparent !important;
         border: none !important;
         outline: none !important;
         cursor: pointer;
         color: white !important;
-        padding: 0.5em 1em;
-        font-size: 1em;
+        padding-left: 0px;
+        font-size: 18px;
     }
 
     .form-select option {
@@ -898,17 +900,17 @@
     }
 
 
-  
+
     .carousel-caption {
-  
-    display: flex;
-    justify-content: start;
-    flex-direction: column;
-    align-items: start;
-    text-align: justify !important;
-    margin-bottom: 250px;
-    
-}
+
+        display: flex;
+        justify-content: start;
+        flex-direction: column;
+        align-items: start;
+        text-align: justify !important;
+        margin-bottom: 250px;
+
+    }
 
     .svg-overlay {
         position: absolute;
@@ -939,25 +941,25 @@
         cursor: pointer;
     }
 
-.carousel-indicators {
-    position: absolute;
-    bottom: 10px; 
-    left: 50%; 
-    transform: translateX(-50%); 
-}
+    .carousel-indicators {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
 
-.carousel-indicators button {
-    width: 91px;
-height: 6px !important;
-flex-shrink: 0;
-    background-color: #fff; 
-    border: 2px solid #333; 
-    margin: 0 5px; 
-}
+    .carousel-indicators button {
+        width: 91px;
+        height: 6px !important;
+        flex-shrink: 0;
+        background-color: #fff;
+        border: 2px solid #333;
+        margin: 0 5px;
+    }
 
-.carousel-indicators .active {
-    background-color: #333; 
-}
+    .carousel-indicators .active {
+        background-color: #333;
+    }
 
 
 

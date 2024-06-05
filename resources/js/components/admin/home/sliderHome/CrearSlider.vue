@@ -77,6 +77,9 @@ export default {
     computed: {
         getSummer() {
             return this.$store.getters['getSummer'];
+        },
+        idComponente() {
+            return this.$store.getters['getMostrarComponente'];
         }
     },
     methods: {
@@ -95,6 +98,11 @@ export default {
             formData.append('foto', this.foto);
             formData.append('jsonCodigoSlider', $('#editor').summernote('code').toString());
             formData.append('textoAlternativo', $('#editorAlternativo').summernote('code').toString());
+            if(this.idComponente == 434){
+                formData.append('seccion', 'home');
+            }else{
+                formData.append('seccion', 'nosotros');
+            }
             formData.append('orden', $('#orden').val());
             formData.append('textoboton', $('#botonText').val());
             formData.append('textobotonAlternativo', $('#botonTextAlternativo').val());
@@ -109,7 +117,11 @@ export default {
                     this.$store.commit('setMostrarAlerta', true);
                     this.$store.commit('setClaseAlerta', 1);
                     this.$store.commit('setMensajeAlerta', 'Slider creado con éxito');
-                    this.$store.commit('mostrarComponente', 1);
+                    if(this.idComponente == 434){
+                        this.$store.commit('mostrarComponente', 433);
+            }else{
+                this.$store.commit('mostrarComponente', 1);
+            }
                     this.resetCampos();
                     $('#editor').summernote('code', '');
 

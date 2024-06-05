@@ -39,9 +39,10 @@
 </head>
 <body>
     <div id="app">
-        @if (!request()->is('/'))
+        @if (!Route::is('home') && !Route::is('nosotros'))
         <x-navbar></x-navbar>
         @endif
+
          @yield('content')
         <x-footer></x-footer>
     </div>

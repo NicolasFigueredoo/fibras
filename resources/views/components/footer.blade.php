@@ -2,7 +2,7 @@
     <div class="container" style="margin-top: 70px">
         <div class="row justify-content-around">
 
-            <div class="col-md-2">
+            <div class="col-lg-2">
                 <div class="contenedorLogo" style="width: 206px;
                 height: 51px; flex-shrink: 0;">
                     <div
@@ -13,7 +13,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2" style="border-left: #274575 solid 1px">
+            <div class="col-lg-2" style="border-left: #274575 solid 1px">
                 <div>
                     @if($idioma['idioma'] == 'ES')
                     <p class="seccionSeccion">Secciones</p>
@@ -32,13 +32,10 @@
                 </div>
 
             </div>
-            <div class="col-md-2">
+            <div class="col-lg-2">
                 <div class="d-flex flex-column">
                     @if($idioma['idioma'] == 'ES')
                     <p class="seccionSeccion">Suscribite al Newsletter</p>
-                    @else
-                    <p class="seccionSeccion">Assine o boletim informativo</p>
-                    @endif
                     <form class="enviarSub d-flex" action="{{ route('suscribe') }}" method="POST" class="d-flex mt-3">
                         @csrf
                         <input type="email" name="email" class="form-control inputNew"
@@ -53,9 +50,28 @@
                             </svg>
                         </button>
                     </form>
+                    @else
+                    <p class="seccionSeccion">Assine o boletim informativo</p>
+                    <form class="enviarSub d-flex" action="{{ route('suscribe') }}" method="POST" class="d-flex mt-3">
+                        @csrf
+                        <input type="email" name="email" class="form-control inputNew"
+                            placeholder="Digite seu e-mail" aria-label="Recipient's username"
+                            aria-describedby="button-addon2" required>
+                        <button class="btn inputBotton" type="submit" id="button-addon2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="16" viewBox="0 0 18 16"
+                                fill="none">
+                                <path d="M16.3867 7.73364H1" stroke="#0397D6" stroke-width="2" stroke-linecap="round" />
+                                <path d="M9.65381 1.00391L16.3872 7.89478L9.65381 14.095" stroke="#0397D6"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                    </form>
+                    
+                    @endif
+               
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-lg-4">
                 <div class="d-flex flex-column">
                     @if($idioma['idioma'] == 'ES')
                     <p class="seccionSeccion">Contacto</p>
