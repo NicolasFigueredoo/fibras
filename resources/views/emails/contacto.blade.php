@@ -8,8 +8,8 @@
 <body>
     <p>¡Hola!</p>
     <p>Has recibido un nuevo mensaje de contacto de {{ $nombre }}</p>
-    <p> <strong>Email: </strong>{{ $email }} <strong>Celular: </strong>{{ $celular }} <strong>Empresa: </strong>{{ $empresa }}</p> 
-    <p> <strong>Mensaje: </strong> {{ $mensaje }}</p>
+    <p> <strong>Email: </strong>{{ $email }} @if($celular) <strong>Celular: </strong>{{ $celular }} @endif <strong>Apellido: </strong>{{ $empresa }}</p> 
+    @if($mensaje) <p> <strong>Mensaje: </strong> {{ $mensaje }}</p>@endif
 </body>
 
 

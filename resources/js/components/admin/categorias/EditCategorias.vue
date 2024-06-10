@@ -19,7 +19,7 @@
 
             <div class="row col-md-12 mt-4">
                 <div class="col-lg-4">
-                    <label class="form-label">Imagen tamaño recomendado (120x120)</label>
+                    <label class="form-label">Imagen tamaño recomendado (300x300)</label>
                     <input type="file" class="form-control" ref="img2" @change="guardarFotoFooter()">
                 </div>
 
@@ -111,6 +111,8 @@ export default {
                     this.$store.commit('setClaseAlerta', 1);
                     this.$store.commit('setMensajeAlerta', 'Categoria actualizada con éxito');
                     this.$store.commit('mostrarComponente', 190);
+                    $('#editor').summernote('destroy');
+                    $('#editorAlternativo').summernote('destroy');
                     this.resetCampos();
 
 

@@ -1,25 +1,25 @@
 @extends('layout')
 
 @section('content')
-    <div>
         <div class="imagenPrincipal">
-
-
             <div id="carouselExampleIndicators" class="carousel slide w-100" style="height: 600px;">
-                <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-                        aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                        aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-                        aria-label="Slide 3"></button>
+                <div class="container">
+
+                </div>
+                <div class="container carousel-indicators">
+                    @foreach ($sliders as $index => $slider)
+                        <button type="button" data-bs-target="#carouselExampleIndicators"
+                            data-bs-slide-to="{{ $index }}" class="{{ $index == 0 ? 'active' : '' }}"
+                            aria-current="{{ $index == 0 ? 'true' : 'false' }}"
+                            aria-label="Slide {{ $index + 1 }}"></button>
+                    @endforeach
                 </div>
                 <div class="carousel-inner">
                     @foreach ($sliders as $index => $slider)
                         <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
                             @if ($slider->contentType == 'imagen')
-                                <div style=" height: 768px;">
-                                    <div class="background-image"
+                                <div style="height: 768px;">
+                                    <div class="background-image carousel-filter"
                                         style="background-image: url('{{ url('/getImage/' . basename($slider['imagen'])) }}');
                                         background-size: cover; 
                                         background-position: center;
@@ -95,8 +95,8 @@
                                         </div>
                                     @endif
                                 </div>
-                                <video class="d-block w-100" style="height: 768px; object-fit: cover;" controls autoplay
-                                    muted>
+                                <video class="d-block w-100 carousel-filter" style="height: 768px; object-fit: cover;"
+                                    controls autoplay muted>
                                     <source src="{{ url('/getImage/' . basename($slider['imagen'])) }}" type="video/mp4">
                                     Tu navegador no soporta la reproducción de videos.
                                 </video>
@@ -132,7 +132,8 @@
                                 <div class="d-flex justify-content-end align-items-center gap-2">
                                     <div>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                            viewBox="0 0 20 20" fill="none">
+                                            data-bs-toggle="modal" data-bs-target="#searchModal" viewBox="0 0 20 20"
+                                            fill="none" style="cursor: pointer;">
                                             <path
                                                 d="M9.16667 15.8333C12.8486 15.8333 15.8333 12.8486 15.8333 9.16667C15.8333 5.48477 12.8486 2.5 9.16667 2.5C5.48477 2.5 2.5 5.48477 2.5 9.16667C2.5 12.8486 5.48477 15.8333 9.16667 15.8333Z"
                                                 stroke="white" stroke-width="2" stroke-linecap="round"
@@ -141,21 +142,25 @@
                                                 stroke-linecap="round" stroke-linejoin="round" />
                                         </svg>
                                     </div>
-                                    <div>
+                                    <div class="d-none d-lg-block">
                                         <span class="text-white">|</span>
                                     </div>
-                                    <div class="w-20">
-                                        <select class="form-select idioma-select" aria-label="Default select example">
-                                            @foreach ($idiomas as $idioma)
-                                                @if ($idioma->activo == 1)
-                                                    <option value="{{ $idioma->id }}" selected>{{ $idioma->idioma }}
-                                                    </option>
-                                                @else
-                                                    <option value="{{ $idioma->id }}">{{ $idioma->idioma }}</option>
-                                                @endif
-                                            @endforeach
+                                    <div style="display: flex; align-items: center;">
+                                        @if ($idiomaActive == 'ES')
+                                            <select class="form-select3 idioma-select" aria-label="Default select example">
+                                            @else
+                                                <select class="form-select2 idioma-select"
+                                                    aria-label="Default select example">
+                                        @endif
+                                        @foreach ($idiomas as $idioma)
+                                            @if ($idioma->activo == 1)
+                                                <option value="{{ $idioma->id }}" selected>{{ $idioma->idioma }}
+                                                </option>
+                                            @else
+                                                <option value="{{ $idioma->id }}">{{ $idioma->idioma }}</option>
+                                            @endif
+                                        @endforeach
                                         </select>
-
                                     </div>
 
 
@@ -201,11 +206,11 @@
         <div class="container" style="margin-top: 65px">
 
             <div>
-                <div class="d-flex justify-content-between align-items-center" style="height: 100px">
-                    <div>
+                <div class="row d-flex justify-content-between align-items-center">
+                    <div class="col-lg-6">
                         <p class="textoProductos">{{ $tituloSeccionProductos }}</p>
                     </div>
-                    <div>
+                    <div class="col-lg-6 d-flex justify-content-end">
                         <a href="{{ route('productos') }}">
                             <button type="button" id="btnProductos" class="btn">{{ $textoBoton }}</button>
                         </a>
@@ -273,33 +278,37 @@
                     </div>
                 </div>
                 <div class="col-lg-6 contenedor-textoSeccion">
-                    
-                    @if ($idiomaActive == 'ES')
-                        <p class="tituloSeccion">{!! $seccion[0]['titulo'] !!}</p>
+                    <div class="col-lg-8">
 
-                        <div class="descripcionSeccion">{!! $seccion[0]['texto'] !!}</div>
-                    @else
-                        <p class="tituloSeccion">{!! $seccion[0]['tituloAlternativo'] !!}</p>
+                        @if ($idiomaActive == 'ES')
+                            <p class="tituloSeccion">{!! $seccion[0]['titulo'] !!}</p>
+    
+                            <div class="descripcionSeccion">{!! $seccion[0]['texto'] !!}</div>
+                        @else
+                            <p class="tituloSeccion">{!! $seccion[0]['tituloAlternativo'] !!}</p>
+    
+                            <div class="descripcionSeccion">{!! $seccion[0]['textoAlternativo'] !!}</div>
+                        @endif
+                    </div>
 
-                        <div class="descripcionSeccion">{!! $seccion[0]['textoAlternativo'] !!}</div>
-                    @endif
                 </div>
 
             </div>
 
         </div>
 
-        <!---SECCION SECTORES--->
-
+        <!---SECCION NOVEDADES--->
         <div class="fondoNovedades">
 
             <div class="container">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="tituloSectores">
-                        <p>{{ $tituloSeccionNovedades }}</p>
+     
+
+                <div class="row d-flex justify-content-between align-items-center">
+                    <div class="col-lg-6">
+                        <p class="textoProductos">{{ $tituloSeccionNovedades }}</p>
                     </div>
-                    <div>
-                        <a href="{{ route('sectores') }}">
+                    <div class="col-lg-6 d-flex justify-content-end">
+                        <a href="{{ route('novedades') }}">
                             <button type="button" id="btnProductos" class="btn">{{ $textoBoton }}</button>
                         </a>
 
@@ -309,31 +318,37 @@
                 <div class="row flex-wrap sectores">
                     @foreach ($novedades as $novedad)
                         <div class="col-lg-4">
-                            <div class="sector">
-                                <div class="sector-imagen">
-                                    <div
-                                        style="background-image: url('{{ url('/getImage/' . basename($novedad->imagen)) }}');
+
+                            <a href="{{ route('novedad', ['idNovedad' => $novedad->id]) }}"
+                                style="text-decoration: none">
+
+                                <div class="sector">
+                                    <div class="sector-imagen">
+                                        <div
+                                            style="background-image: url('{{ url('/getImage/' . basename($novedad->imagen)) }}');
                    background-size: cover; 
                    background-position: center;
                     background-repeat: no-repeat;
                     width: 100%;
                     height: 100%;">
-                                    </div>
-                                    <div class="contenedor-textSector p-4">
-                                        @if ($idiomaActive == 'ES')
-                                            <p class="textEtiqueta">{{ $novedad->etiqueta }}</p>
-                                            <p class="textSectores">{{ $novedad->titulo }}</p>
-                                            <p class="textEpigrafe">{{ $novedad->epigrafe }}</p>
-                                            <p class="textLeer">Leer más</p>
-                                        @else
-                                            <p class="textEtiqueta">{{ $novedad->etiquetaAlternativo }}</p>
-                                            <p class="textSectores">{{ $novedad->tituloAlternativo }}</p>
-                                            <p class="textEpigrafe">{{ $novedad->epigrafeAlternativo }}</p>
-                                            <p class="textLeer">ler mais</p>
-                                        @endif
+                                        </div>
+                                        <div class="contenedor-textSector p-4">
+                                            @if ($idiomaActive == 'ES')
+                                                <p class="textEtiqueta">{{ $novedad->etiqueta }}</p>
+                                                <p class="textSectores">{{ $novedad->titulo }}</p>
+                                                <p class="textEpigrafe">{{ $novedad->epigrafe }}</p>
+                                                <p class="textLeer">Leer más</p>
+                                            @else
+                                                <p class="textEtiqueta">{{ $novedad->etiquetaAlternativo }}</p>
+                                                <p class="textSectores">{{ $novedad->tituloAlternativo }}</p>
+                                                <p class="textEpigrafe">{{ $novedad->epigrafeAlternativo }}</p>
+                                                <p class="textLeer">ler mais</p>
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </a>
+
                         </div>
                     @endforeach
 
@@ -343,88 +358,64 @@
             </div>
         </div>
 
-    </div>
 
 
-
-
-    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" style="width: 400px;">
-            <div class="modal-content" style="border-radius: 0%;">
+    <!-- Search Modal -->
+    <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Inicio de Sesión</h5>
+                    <h5 class="modal-title" id="searchModalLabel">Buscar Productos</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="loginForm">
-                        @csrf
-                        <div class="mensajeCrear"></div>
-                        <div>
-                            <label class="form-label textZona">Usuario</label>
-                            <input type="text" class="form-control" name="nombre" placeholder="Correo electrónico">
-                        </div>
-                        <div class="mt-3">
-                            <label class="form-label textZona">Contraseña</label>
-                            <input type="password" class="form-control" name="contraseña" placeholder="Contraseña">
-                        </div>
-                        <div class="d-flex flex-column mt-4">
-                            <div>
-                                <button type="button" id="botonLogin" class="btn btn-primary"
-                                    onclick="loginUser()">Ingresar</button>
-                            </div>
-                            <div class="mt-3">
-                                <button type="button" id="botonRegistrar" class="btn btn-secondary"
-                                    onclick="openRegisterModal()">Crear cuenta</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+                    <input type="text" class="form-control" id="searchInput" placeholder="Ingrese su búsqueda">
+                    <div id="productResults" class="mt-3">
+                        @foreach ($productos as $producto)
+                            <div class="product-item mb-2" data-name="{{ strtolower($producto->nombre) }}"
+                                data-description="{{ strtolower($producto->descripcion) }}">
+                                <a href="{{ route('categoria', ['id' => $producto->categorias[0]->id, 'idProducto' => $producto->id]) }}"
+                                    class="row d-flex text-decoration-none">
+                                    @foreach ($producto->imagenes as $index => $imagen)
+                                        @if ($index == 0)
+                                            <div class="col-lg-6" style="width: 200px; height: 200px">
+                                                <div class="categoria-img"
+                                                    style="
+                               background-image: url('{{ url('/getImage/' . basename($imagen->path)) }}');
+                               background-size: contain;
+                                width: 100%;
+                                height: 100%;
+                                background-repeat: no-repeat;
+                            ">
+                                                </div>
+
+                                            </div>
+                                        @endif
+                                    @endforeach
 
 
-    <div id="miModalAccount" class="modal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" style="width: 400px;">
-            <div class="modal-content" style="border-radius: 0%;">
-                <div class="modal-header">
-                    <h5 class="modal-title">Cliente</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="registerForm">
-                        @csrf
-                        <div>
-                            <label class="form-label textZona">Usuario</label>
-                            <input type="text" class="form-control" id="name" name="name"
-                                placeholder="Usuario" required>
-                        </div>
-                        <div class="mt-3">
-                            <label class="form-label textZona">Email</label>
-                            <input type="email" class="form-control" id="mail" name="email"
-                                placeholder="Email" required>
-                        </div>
-                        <div class="mt-3">
-                            <label class="form-label textZona">Contraseña</label>
-                            <input type="password" class="form-control" id="pass" name="password"
-                                placeholder="Contraseña" required>
-                        </div>
-                        <div class="mt-3">
-                            <label class="form-label textZona">Confirmar Contraseña</label>
-                            <input type="password" class="form-control" id="password_confirmation"
-                                name="password_confirmation" placeholder="Confirmar Contraseña" required>
-                        </div>
-                    </form>
-                    <div class="d-flex flex-column mt-4">
-                        <div class="mt-3">
-                            <button type="button" id="botonRegistrar" class="btn btn-primary"
-                                onclick="registerUser()">Crear cuenta</button>
-                        </div>
+                                    <div class="col-lg-6 m-3">
+                                        @if ($idiomaActive == 'ES')
+                                            <p class="categoriaText">{{ $producto->categorias[0]->nombre }}</p>
+                                            <p class="categoriaTextProducto">{{ $producto->nombre }}</p>
+                                        @else
+                                            <p class="categoriaText">{{ $producto->categorias[0]->nombreAlternativo }}</p>
+                                            <p class="categoriaTextProducto">{{ $producto->nombreAlternativo }}</p>
+                                        @endif
+                                    </div>
+
+                                </a>
+
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+
+
 @endsection
 
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
@@ -455,6 +446,22 @@
                 }
             });
         });
+
+        $('#searchInput').on('input', function() {
+            const query = $(this).val().toLowerCase();
+            $('.product-item').each(function() {
+                const name = $(this).data('name');
+                const description = $(this).data('description');
+                if (name.includes(query) || description.includes(query)) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        });
+
+        
+
     });
 </script>
 
@@ -473,10 +480,6 @@
     .carousel {
         position: absolute !important;
         height: 768px;
-    }
-
-    .navbar-collapse {
-        height: 100px;
     }
 
     .imagenPrincipal {
@@ -534,7 +537,6 @@
     }
 
     .textoEncima {
-        margin-top: 250px;
         display: flex;
         flex-direction: column;
         align-items: left;
@@ -650,7 +652,6 @@
         font-style: normal;
         font-weight: 400;
         line-height: 33px;
-        width: 60%;
 
     }
 
@@ -856,30 +857,91 @@
         border: none;
     }
 
-    .form-select {
-        width: 70px !important;
+
+    .form-select3 {
+
         background-color: transparent !important;
         border: none !important;
         outline: none !important;
         cursor: pointer;
-        color: white !important;
-        padding-left: 0px;
+        color: #fff !important;
         font-size: 18px;
+        padding: 0.375rem 0.25rem 0.375rem 0rem !important;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background-repeat: no-repeat;
+        background-position: right 0px center !important;
+        background-image: url('{{ asset('svgs/chevron-down.svg') }}') !important;
+        background-size: 18px !important;
+        color: #FFF;
+        text-align: right;
+        font-family: "FuturaBook" !important;
+        font-size: 18px !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+
     }
 
-    .form-select option {
+    .form-select3 option {
         color: #000;
         background-color: #fff;
+        text-align: start;
     }
 
-    .form-select::after {
+    .form-select3::after {
         content: '\25BC';
         position: absolute;
         right: 1em;
         top: 50%;
         transform: translateY(-50%);
         pointer-events: none;
-        color: white !;
+        color: white !important;
+        font-size: 1em;
+    }
+
+
+    .form-select2 {
+
+        background-color: transparent !important;
+        border: none !important;
+        outline: none !important;
+        cursor: pointer;
+        color: #fff !important;
+        font-size: 18px;
+        padding: 0.375rem 1.20rem 0.375rem 0rem !important;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background-repeat: no-repeat;
+        background-position: right 0px center !important;
+        background-image: url('{{ asset('svgs/chevron-down.svg') }}') !important;
+        color: #FFF;
+        text-align: right;
+        font-family: "FuturaBook" !important;
+        font-size: 18px !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        background-size: 18px !important;
+
+    }
+
+    .form-select2 option {
+        color: #000;
+        background-color: #fff;
+        text-align: start;
+    }
+
+    .form-select2::after {
+        content: '\25BC';
+        position: absolute;
+        right: 1em;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+        color: white !important;
         font-size: 1em;
     }
 
@@ -896,18 +958,19 @@
         font-style: normal;
         font-weight: 400;
         line-height: normal;
-        margin-top: 78px;
     }
 
 
 
     .carousel-caption {
-
         display: flex;
         justify-content: start;
         flex-direction: column;
         align-items: start;
         text-align: justify !important;
+   
+        right: calc(var(--bs-gutter-x)* .5) !important;
+        left: calc(var(--bs-gutter-x)* .5) !important;
         margin-bottom: 250px;
 
     }
@@ -944,8 +1007,10 @@
     .carousel-indicators {
         position: absolute;
         bottom: 10px;
-        left: 50%;
-        transform: translateX(-50%);
+        justify-content: start !important;
+        margin-right: auto !important;
+        margin-left: auto !important;
+
     }
 
     .carousel-indicators button {
@@ -961,7 +1026,41 @@
         background-color: #333;
     }
 
+    .carousel-filter::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.43) 0%, rgba(0, 0, 0, 0.00) 100%), rgba(0, 36, 93, 0.60);
+        z-index: 1;
+    }
 
+  
+
+    .categoriaText {
+        color: var(--azul, #00245D);
+        font-family: "FuturaBookMd";
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        text-transform: uppercase;
+    }
+
+    .categoriaTextProducto {
+        color: var(--azul, #000);
+        font-family: "FuturaBookMd";
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        text-transform: uppercase;
+    }
+
+
+   
 
     @media screen and (max-width: 1000px) {
         .categoria {

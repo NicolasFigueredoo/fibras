@@ -3,6 +3,8 @@ import '../../node_modules/bootstrap/dist/js/bootstrap';
 
 import { createApp } from 'vue';
 import formulario from './components/Formulario.vue'
+import presupuesto from './components/Presupuesto.vue'
+
 import VueRecaptcha from 'vue-recaptcha-v3';
 
 
@@ -10,6 +12,12 @@ import VueRecaptcha from 'vue-recaptcha-v3';
 const appContacto = createApp({
   components: {
     formulario
+  }
+});
+
+const appPresupuesto = createApp({
+  components: {
+    presupuesto
   }
 });
 
@@ -22,3 +30,4 @@ appContacto.use(VueRecaptcha, {
 });
 
 appContacto.mount('#appContacto');
+appPresupuesto.mount('#appPresupuesto');

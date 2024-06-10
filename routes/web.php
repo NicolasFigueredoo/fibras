@@ -38,9 +38,9 @@ Route::get('/nosotros', [WebsiteController::class, 'nosotros'])->name('nosotros'
 //servicios
 Route::get('/aplicaciones', [WebsiteController::class, 'aplicaciones'])->name('aplicaciones');
 //sectores
-Route::get('/sectores', [WebsiteController::class, 'sectores'])->name('sectores');
+Route::get('/novedades', [WebsiteController::class, 'novedades'])->name('novedades');
 //clientes
-Route::get('/clientes', [WebsiteController::class, 'clientes'])->name('clientes');
+Route::get('/presupuesto', [WebsiteController::class, 'presupuesto'])->name('presupuesto');
 //calidad
 Route::get('/calidad', [WebsiteController::class, 'calidad'])->name('calidad');
 //contacto
@@ -55,6 +55,8 @@ Route::get('/getImage/{fileName}', [ImagenController::class, 'getImage']);
 
 //mostrarProductosCategorias
 Route::get('/categoria/{id}/{idProducto}', [WebsiteController::class, 'mostrarProductosCategoria'])->name('categoria');
+//mostrar novedad
+Route::get('/novedad/{idNovedad}', [WebsiteController::class, 'mostrarNovedad'])->name('novedad');
 
 
 Route::get('/downloadFile/{file}/{downloadName}/{extension}', [FileDownloadController::class, 'downloadTwo'])->name('downloadFile');
@@ -203,6 +205,7 @@ Route::get('/api/obtenerZona/{idZona}', [AdminController::class, 'obtenerZona'])
 
 //EMAILS
 Route::post('/enviarCorreo', [EmailsController::class, 'enviarCorreoContacto']);
+Route::post('/api/enviarPresupuesto', [EmailsController::class, 'enviarPresupuesto']);
 
 //METADATOS
 Route::get('/api/obtenerMetadatos', [AdminController::class, 'obtenerMetadatos']);

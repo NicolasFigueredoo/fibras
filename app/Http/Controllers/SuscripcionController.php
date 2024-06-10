@@ -14,7 +14,7 @@ class SuscripcionController extends Controller
         $suscripcion->email = $email;
         $suscripcion->save();
 
-        return redirect('/');
+        return redirect(route('home'));
 
       
     }

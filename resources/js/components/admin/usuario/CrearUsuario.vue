@@ -15,7 +15,7 @@
                     <label class="form-label">Rol</label>
                     
                     <select v-model="this.admin" id="aplicacionSelect" class="form-select"
-                        aria-label="Default select example" style="height: 50px;">
+                        aria-label="Default select example">
                         <option :value="0" selected>Usuario</option>
                         <option :value="1" >Administrador</option>
                     </select>

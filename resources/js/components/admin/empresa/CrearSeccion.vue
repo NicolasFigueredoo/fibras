@@ -13,7 +13,7 @@
                 </div>
                 <div class="col-md-6">
                     <div>
-                <label class="form-label">Imagen (Tamaño recomendado 80x80)</label>
+                <label class="form-label">Imagen (Tamaño recomendado 60x60)</label>
                 <input type="file" ref="fotoSlider" class="form-control" id="imgs" @change="guardarFoto()">
                 </div>
 
@@ -101,6 +101,8 @@ export default {
                     this.$store.commit('setMensajeAlerta', 'Valor creado con éxito');
                     this.resetCampos()
                     $('#editor').summernote('code', '');
+                    $('#editor').summernote('destroy');
+                    $('#editorAlternativo').summernote('destroy');
                     this.$store.commit('mostrarComponente', 32);
 
                 })

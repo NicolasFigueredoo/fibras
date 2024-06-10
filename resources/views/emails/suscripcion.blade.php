@@ -7,7 +7,7 @@
 </head>
 <body>
     <p>¡Hola!</p>
-    <p>Has recibido un nuevo mensaje de tu suscripcion real quimica:</p>
+    <p>Has recibido un nuevo mensaje de tu suscripcion de Fibras Argentinas:</p>
     <p>{{ $texto }}</p>
     <p>Gracias.</p>
 </body>

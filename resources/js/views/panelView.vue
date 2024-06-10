@@ -5,7 +5,7 @@
         <div class="div1">
             <nav id="sidebar" class="sidebar bg-body-light shadow-right" style="height: 100vh;">
                 <a class="sidebar-brand mt-4" style="height: 50px;">
-                    <img src="../../../public/img/logoWhite.png" style="background-size: contain; height: 80px;">
+                    <img src="../../../public/img/logo.png" style="background-size: contain; height: 40px;">
                 </a>
                 <ul class="sidebar-nav nav">
                
@@ -165,11 +165,11 @@
                             </nav>
                         </div>
 
-                        <div id="collapseProductos" class="collapse">
+                        <!-- <div id="collapseProductos" class="collapse">
                             <nav class="sidenav-menu-nested nav ">
                                 <a @click="mostrarComponenteF(200)" class="nav-link">Litros</a>
                             </nav>
-                        </div>
+                        </div> -->
 
                     </li>
 
@@ -191,7 +191,7 @@
 
                     </li> -->
 
-                    <li class="sidebar-item">
+                    <!-- <li class="sidebar-item">
                         <a @click="mostrarComponenteF(500)" class="nav-link collapsed" data-bs-toggle="collapse"
                             data-bs-target="#collapseContacto" aria-expanded="false" aria-controls="collapseContacto">
                             <div class="nav-link-icon">
@@ -207,11 +207,11 @@
                             </div>
                         </a>
 
-                    </li>
+                    </li> -->
 
 
 
-                    <li class="sidebar-item">
+                    <!-- <li class="sidebar-item">
                         <a @click="mostrarComponenteF(123)" class="nav-link collapsed" data-bs-toggle="collapse"
                             data-bs-target="#collapseContacto" aria-expanded="false" aria-controls="collapseContacto">
                             <div class="nav-link-icon">
@@ -227,7 +227,7 @@
                             </div>
                         </a>
 
-                    </li>
+                    </li> -->
 
         
                     <!-- <li class="sidebar-item">
@@ -418,7 +418,7 @@
                             </div>
                         </li>
     
-                      <li class="sidebar-item">
+                      <!-- <li class="sidebar-item">
                             <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseClientes"
                                 aria-expanded="false" aria-controls="collapseClientes">
                                 <div class="nav-link-icon">
@@ -441,7 +441,7 @@
                                     <a @click="mostrarComponenteF(105)" class="nav-link">Mostrar</a>
                                 </nav>
                             </div>
-                        </li> 
+                        </li>  -->
                         <li class="sidebar-item">
                             <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseSuscripciones"
                                 aria-expanded="false" aria-controls="collapseSuscripciones">
@@ -539,6 +539,8 @@
                 <div class="componentesV" style="overflow-y: scroll; overflow-x: hidden; max-height: 88vh">
 
                     <Alerta style="position: fixed; z-index: 5;" v-if="mostrarAlerta === true" />
+                    <MensajePrincipal v-if="mostrarComponente === 0" />
+
                     <!--COMPONENTES SLIDER -->
                     <ShowSlider v-if="mostrarComponente === 1" />
                     <ShowSlider v-if="mostrarComponente === 433" />
@@ -752,6 +754,9 @@ import ShowAplicaciones from "@/components/admin/aplicaciones/ShowAplicaciones.v
 import CrearAplicaciones from "@/components/admin/aplicaciones/CrearAplicaciones.vue";
 import EditAplicaciones from "@/components/admin/aplicaciones/EditAplicaciones.vue";
 
+import MensajePrincipal from "@/components/admin/mensajePrincipal.vue";
+
+
 import axios from "axios";
 
 export default {
@@ -811,6 +816,7 @@ export default {
         ShowAplicaciones,
         CrearAplicaciones,
         EditAplicaciones,
+        MensajePrincipal
 
     },
     data() {
@@ -860,6 +866,7 @@ export default {
         }
     },
     mounted() {
+        
         this.obtenerUsuario();
         if (this.getIdLogin == null) {
             this.$router.push('/');

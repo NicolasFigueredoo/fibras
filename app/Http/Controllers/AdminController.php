@@ -11,6 +11,7 @@ use App\Models\ClienteEmpresa;
 use App\Models\Contacto;
 use App\Models\Descarga;
 use App\Models\Feria;
+use App\Models\Idioma;
 use App\Models\ImagenesFeria;
 use App\Models\Litro;
 use App\Models\Logo;
@@ -133,8 +134,9 @@ class AdminController extends Controller
     public function obtenerContacto()
     {
         $contacto = Contacto::all();
+        $idioma = Idioma::all();
 
-        return response()->json($contacto);
+        return response()->json(['contacto' => $contacto, 'idioma' => $idioma]);
     }
 
     //LOGO

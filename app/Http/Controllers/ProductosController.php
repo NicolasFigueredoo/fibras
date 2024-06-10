@@ -19,8 +19,6 @@ class ProductosController extends Controller
             $query->orderBy('orden', 'asc');
         }])->with(['imagenes' => function ($query) {
             $query->orderBy('orden', 'asc');
-        }])->with(['litros' => function ($query) {
-            $query->orderBy('cantidad', 'asc');
         }])->orderBy('orden', 'asc')->get();
         return response()->json($productos);
     }
@@ -31,33 +29,9 @@ class ProductosController extends Controller
         $producto->orden = $request->orden;
         $producto->nombre = $request->nombre;
         $producto->texto = $request->texto;
+        $producto->nombreAlternativo = $request->nombreAlternativo;
+        $producto->textoAlternativo = $request->textoAlternativo;
 
-        if ($request->hasFile('hojaSeguridad')) {
-
-            if (!Storage::exists('public/fotos')) {
-                Storage::makeDirectory('public/fotos');
-            }
-
-            $photoPath = $request->file('hojaSeguridad')->store('fotos');
-            $producto->hojaseguridad = $photoPath;
-        }else{
-            $producto->hojaseguridad = 'none';
- 
-        }
-
-        if ($request->hasFile('fichaTecnica')) {
-
-            if (!Storage::exists('public/fotos')) {
-                Storage::makeDirectory('public/fotos');
-            }
-
-            $photoPath = $request->file('fichaTecnica')->store('fotos');
-            $producto->fichatecnica = $photoPath;
-        }
-        else{
-            $producto->fichatecnica = 'none';
-
-        }
         $producto->save();
 
 
@@ -69,16 +43,6 @@ class ProductosController extends Controller
             $producto->categorias()->sync($categoriasIds);
         }
         
-        if($request->litros){
-            $litrosIds = array_map(function($litro) {
-                return $litro['id'];
-            }, $request->litros);
-        
-            $producto->litros()->sync($litrosIds);
-        }
-        
-        
-
         return response()->json($request);
     }
 
@@ -88,29 +52,9 @@ class ProductosController extends Controller
         $producto->orden = $request->orden;
         $producto->nombre = $request->nombre;
         $producto->texto = $request->texto;
-        
-        if ($request->hasFile('hojaSeguridad')) {
-
-            if (!Storage::exists('public/fotos')) {
-                Storage::makeDirectory('public/fotos');
-            }
-
-            $photoPath = $request->file('hojaSeguridad')->store('fotos');
-            $producto->hojaseguridad = $photoPath;
-        }
-
-
-        if ($request->hasFile('fichaTecnica')) {
-
-            if (!Storage::exists('public/fotos')) {
-                Storage::makeDirectory('public/fotos');
-            }
-
-            $photoPath = $request->file('fichaTecnica')->store('fotos');
-            $producto->fichatecnica = $photoPath;
-        }
-
-
+        $producto->nombreAlternativo = $request->nombreAlternativo;
+        $producto->textoAlternativo = $request->textoAlternativo;
+    
         $producto->save();
         
         if($request->categorias){
@@ -121,13 +65,7 @@ class ProductosController extends Controller
             $producto->categorias()->sync($categoriasIds);
         }
         
-        if($request->litros){
-            $litrosIds = array_map(function($litro) {
-                return $litro['id'];
-            }, $request->litros);
-        
-            $producto->litros()->sync($litrosIds);
-        }
+   
         
         
 
@@ -149,9 +87,6 @@ class ProductosController extends Controller
         }])
         ->with(['imagenes' => function ($query) {
             $query->orderBy('orden', 'asc');
-        }])
-        ->with(['litros' => function ($query) {
-            $query->orderBy('cantidad', 'asc');
         }])->find($idProducto);;
 
         return response()->json($producto);

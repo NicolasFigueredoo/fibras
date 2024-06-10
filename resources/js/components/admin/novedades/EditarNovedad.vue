@@ -145,6 +145,8 @@ export default {
                     this.$store.commit('setClaseAlerta', 1);
                     this.$store.commit('setMensajeAlerta', 'Novedad modificada con éxito');
                     this.$store.commit('mostrarComponente', 40);
+                    $('#editor').summernote('destroy');
+                    $('#editorAlternativo').summernote('destroy');
                   
                 })
                 .catch(error => {

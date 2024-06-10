@@ -4,9 +4,9 @@
       <div class="col-md-3 formulario">
         <form>
           <div class="mb-3 d-flex justify-content-center align-items-center">
-            <div style="width: 100px; height: 150px;">
+            <div style="width: 280px; height: 70px;">
               <div style="
-              background-image: url('../../../img/quimicaLogo.png');
+              background-image: url('../../../img/logo2.png');
               background-size: contain;
 
               background-repeat: no-repeat;

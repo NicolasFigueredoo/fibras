@@ -18,13 +18,6 @@ class Producto extends Model
         return $this->belongsToMany(Categoria::class, 'categoria_producto');
     }
 
-    
-    public function litros()
-    {
-        return $this->belongsToMany(Litro::class, 'litro_producto');
-    }
-
-
     public function imagenes()
     {
         return $this->hasMany(Imagenes::class, 'id_producto', 'id');

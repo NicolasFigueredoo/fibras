@@ -3,15 +3,13 @@
 @section('content')
     <div class="imagenPrincipal">
 
-
         <div id="carouselExampleIndicators" class="carousel slide w-100" style="height: 600px;">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-                    aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                    aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-                    aria-label="Slide 3"></button>
+            <div class="container carousel-indicators">
+                @foreach ($sliders as $index => $slider)
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ $index }}"
+                        class="{{ $index == 0 ? 'active' : '' }}" aria-current="{{ $index == 0 ? 'true' : 'false' }}"
+                        aria-label="Slide {{ $index + 1 }}"></button>
+                @endforeach
             </div>
             <div class="carousel-inner">
                 @foreach ($sliders as $index => $slider)
@@ -24,15 +22,16 @@
                                 background-position: center;
                                 width: 100%;
                                 height: 100%;                                    ">
-                                </div>e
+                                </div>
+
 
                                 <div class="container carousel-caption textoEncima">
                                     @if ($idiomaActive == 'ES')
                                         <p class="indicador"><b>Inicio</b> > Nosotros</p>
-                                        <div>{!! $slider->texto !!}</div>
+                                        <div class="textoSlider">{!! $slider->texto !!}</div>
                                     @else
                                         <p class="indicador"><b>Começar</b> > Nós</p>
-                                        <div>{!! $slider->textoAlternativo !!}</div>
+                                        <div class="textoSlider">{!! $slider->textoAlternativo !!}</div>
                                     @endif
                                 </div>
                             </div>
@@ -41,10 +40,10 @@
 
                                 @if ($idiomaActive == 'ES')
                                     <p class="indicador"><b>Inicio</b> > Nosotros</p>
-                                    <div>{!! $slider->texto !!}</div>
+                                    <div class="textoSlider">{!! $slider->texto !!}</div>
                                 @else
-                                <p class="indicador"><b>Começar</b> > Nós</p>
-                                <div>{!! $slider->textoAlternativo !!}</div>
+                                    <p class="indicador"><b>Começar</b> > Nós</p>
+                                    <div class="c">{!! $slider->textoAlternativo !!}</div>
                                 @endif
                             </div>
                             <video class="d-block w-100" style="height: 768px; object-fit: cover;" controls autoplay muted>
@@ -85,7 +84,8 @@
                             <div class="d-flex justify-content-end align-items-center gap-2">
                                 <div>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                        viewBox="0 0 20 20" fill="none">
+                                        viewBox="0 0 20 20" fill="none" data-bs-toggle="modal"
+                                        data-bs-target="#searchModal" style="cursor: pointer">
                                         <path
                                             d="M9.16667 15.8333C12.8486 15.8333 15.8333 12.8486 15.8333 9.16667C15.8333 5.48477 12.8486 2.5 9.16667 2.5C5.48477 2.5 2.5 5.48477 2.5 9.16667C2.5 12.8486 5.48477 15.8333 9.16667 15.8333Z"
                                             stroke="white" stroke-width="2" stroke-linecap="round"
@@ -97,25 +97,29 @@
                                 <div>
                                     <span class="text-white">|</span>
                                 </div>
-                                <div class="w-20">
-                                    <select class="form-select idioma-select" aria-label="Default select example">
-                                        @foreach ($idiomas as $idioma)
-                                            @if ($idioma->activo == 1)
-                                                <option value="{{ $idioma->id }}" selected>{{ $idioma->idioma }}
-                                                </option>
-                                            @else
-                                                <option value="{{ $idioma->id }}">{{ $idioma->idioma }}</option>
-                                            @endif
-                                        @endforeach
+                                <div style="display: flex; align-items: center;">
+                                    @if ($idiomaActive == 'ES')
+                                        <select class="form-select3 idioma-select" aria-label="Default select example">
+                                        @else
+                                            <select class="form-select2 idioma-select" aria-label="Default select example">
+                                    @endif
+                                    @foreach ($idiomas as $idioma)
+                                        @if ($idioma->activo == 1)
+                                            <option value="{{ $idioma->id }}" selected>{{ $idioma->idioma }}
+                                            </option>
+                                        @else
+                                            <option value="{{ $idioma->id }}">{{ $idioma->idioma }}</option>
+                                        @endif
+                                    @endforeach
                                     </select>
-
                                 </div>
 
 
                             </div>
                             <div class="d-flex justify-content-end align-items-center">
                                 @foreach ($opcionesNavegador as $option)
-                                    <a class="nav-link text-white" href="{{ $option['url'] }}">{{ $option['name'] }}</a>
+                                    <a class="nav-link text-white {{ $option['active'] ? 'font-weight-bold' : '' }}"
+                                        href="{{ $option['url'] }}">{{ $option['name'] }}</a>
                                 @endforeach
                                 {{-- @auth
                                 <a class="nav-link text-white" href="{{ route('logout') }}"
@@ -219,10 +223,10 @@
 
                             @if ($idiomaActive == 'ES')
                                 <p class="textoIcon" style="padding-top: 10px;">{{ $servicio->titulo }}</p>
-                                <p class="infoIcon">{!! $servicio->texto !!}</p>
+                                <div class="infoIcon">{!! $servicio->texto !!}</div>
                             @else
                                 <p class="textoIcon" style="padding-top: 10px;">{{ $servicio->tituloAlternativo }}</p>
-                                <p class="infoIcon">{!! $servicio->textoAlternativo !!}</p>
+                                <div class="infoIcon">{!! $servicio->textoAlternativo !!}</div>
                             @endif
 
                         </div>
@@ -236,6 +240,60 @@
     </div>
 
 
+    </div>
+
+    <!-- Search Modal -->
+    <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="searchModalLabel">Buscar Productos</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" class="form-control" id="searchInput" placeholder="Ingrese su búsqueda">
+                    <div id="productResults" class="mt-3">
+                        @foreach ($productos as $producto)
+                            <div class="product-item mb-2" data-name="{{ strtolower($producto->nombre) }}"
+                                data-description="{{ strtolower($producto->descripcion) }}">
+                                <a href="{{ route('categoria', ['id' => $producto->categorias[0]->id, 'idProducto' => $producto->id]) }}"
+                                    class="row d-flex text-decoration-none">
+                                    @foreach ($producto->imagenes as $index => $imagen)
+                                        @if ($index == 0)
+                                            <div class="col-lg-6" style="width: 200px; height: 200px">
+                                                <div class="categoria-img"
+                                                    style="
+                               background-image: url('{{ url('/getImage/' . basename($imagen->path)) }}');
+                               background-size: contain;
+                                width: 100%;
+                                height: 100%;
+                                background-repeat: no-repeat;
+                            ">
+                                                </div>
+
+                                            </div>
+                                        @endif
+                                    @endforeach
+
+
+                                    <div class="col-lg-6 m-3">
+                                        @if ($idiomaActive == 'ES')
+                                            <p class="categoriaText">{{ $producto->categorias[0]->nombre }}</p>
+                                            <p class="categoriaTextProducto">{{ $producto->nombre }}</p>
+                                        @else
+                                            <p class="categoriaText">{{ $producto->categorias[0]->nombreAlternativo }}</p>
+                                            <p class="categoriaTextProducto">{{ $producto->nombreAlternativo }}</p>
+                                        @endif
+                                    </div>
+
+                                </a>
+
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
@@ -265,10 +323,45 @@
                 }
             });
         });
+
+        $('#searchInput').on('input', function() {
+            const query = $(this).val().toLowerCase();
+            $('.product-item').each(function() {
+                const name = $(this).data('name');
+                const description = $(this).data('description');
+                if (name.includes(query) || description.includes(query)) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        });
     });
 </script>
-<style>
+<style scoped>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+    .indicador {
+        color: white;
+        font-family: Montserrat;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 300;
+        line-height: 60px;
+        position: absolute;
+        top: -142%;
+    }
+
+    .indicador b {
+        color: white;
+        font-family: Montserrat;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 60px;
+        /* 428.571% */
+    }
+
 
     .services {
         background-color: #F5F5F5;
@@ -318,9 +411,7 @@
         height: 768px;
     }
 
-    .navbar-collapse {
-        height: 100px;
-    }
+
 
 
     .imagenPrincipal {
@@ -329,31 +420,6 @@
         width: 100%;
     }
 
-    .indicador b {
-        color: #FFF;
-        font-family: "FuturaBook";
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 60px;
-    }
-
-    .indicador {
-        gap: 5px;
-        display: flex;
-        align-items: left;
-        position: relative;
-        z-index: 3;
-        color: #FFF;
-        font-family: "FuturaBook";
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 60px;
-        margin-bottom: 150px;
-
-
-    }
 
 
     .background-image {
@@ -406,7 +472,6 @@
     }
 
     .textoEncima {
-        margin-top: 250px;
         display: flex;
         flex-direction: column;
         align-items: left;
@@ -419,32 +484,94 @@
         line-height: 130%;
     }
 
-    .form-select {
-        width: 70px !important;
+    .form-select3 {
+
         background-color: transparent !important;
         border: none !important;
         outline: none !important;
         cursor: pointer;
-        color: white !important;
-        padding-left: 0px;
+        color: #fff !important;
         font-size: 18px;
+        padding: 0.375rem 0.25rem 0.375rem 0rem !important;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background-repeat: no-repeat;
+        background-position: right 0px center !important;
+        background-image: url('{{ asset('svgs/chevron-down.svg') }}') !important;
+        background-size: 18px !important;
+        color: #FFF;
+        text-align: right;
+        font-family: "FuturaBook" !important;
+        font-size: 18px !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+
     }
 
-    .form-select option {
+    .form-select3 option {
         color: #000;
         background-color: #fff;
+        text-align: start;
     }
 
-    .form-select::after {
+    .form-select3::after {
         content: '\25BC';
         position: absolute;
         right: 1em;
         top: 50%;
         transform: translateY(-50%);
         pointer-events: none;
-        color: white !;
+        color: white !important;
         font-size: 1em;
     }
+
+
+    .form-select2 {
+
+        background-color: transparent !important;
+        border: none !important;
+        outline: none !important;
+        cursor: pointer;
+        color: #fff !important;
+        font-size: 18px;
+        padding: 0.375rem 1.20rem 0.375rem 0rem !important;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background-repeat: no-repeat;
+        background-position: right 0px center !important;
+        background-image: url('{{ asset('svgs/chevron-down.svg') }}') !important;
+        color: #FFF;
+        text-align: right;
+        font-family: "FuturaBook" !important;
+        font-size: 18px !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        background-size: 18px !important;
+
+    }
+
+    .form-select2 option {
+        color: #000;
+        background-color: #fff;
+        text-align: start;
+    }
+
+    .form-select2::after {
+        content: '\25BC';
+        position: absolute;
+        right: 1em;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+        color: white !important;
+        font-size: 1em;
+    }
+
+
 
 
 
@@ -455,6 +582,9 @@
         flex-direction: column;
         align-items: start;
         text-align: justify !important;
+        
+        right: calc(var(--bs-gutter-x)* .5) !important;
+        left: calc(var(--bs-gutter-x)* .5) !important;
         margin-bottom: 250px;
 
     }
@@ -462,8 +592,9 @@
     .carousel-indicators {
         position: absolute;
         bottom: 10px;
-        left: 55%;
-        transform: translateX(-50%);
+        justify-content: start !important;
+        margin-right: auto !important;
+        margin-left: auto !important;
     }
 
     .carousel-indicators button {
@@ -561,11 +692,36 @@
 
     .tarjeta {
         height: 362px;
+        max-height: 500px;
         flex-shrink: 0;
         border-radius: 4px;
         background: #FFF;
         text-align: center !important;
 
+    }
+
+    .textoSlider {
+        height: 100px;
+    }
+
+    .categoriaText {
+        color: var(--azul, #00245D);
+        font-family: "FuturaBookMd";
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        text-transform: uppercase;
+    }
+
+    .categoriaTextProducto {
+        color: var(--azul, #000);
+        font-family: "FuturaBookMd";
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        text-transform: uppercase;
     }
 
     @media screen and (max-width: 1000px) {

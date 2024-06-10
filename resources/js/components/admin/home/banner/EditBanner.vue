@@ -8,7 +8,7 @@
         <form class="mt-3">
             <div class="row">
                 <div class="col-lg-9">
-                    <label class="form-label">Imagen (Tamaño recomendado 804x650) </label>
+                    <label class="form-label">Imagen (Tamaño recomendado 750x600) </label>
                     <input type="file" ref="fotoBanner" class="form-control" @change="guardarFoto()">
                 </div>
                 <div class="row col-lg-3">
@@ -16,11 +16,11 @@
 
 
                 </div>
-          
-            </div>
-    
 
-            <div class="row">
+            </div>
+
+
+            <div class="row mt-3">
                 <div class="col-lg-6">
                     <label class="form-label">Título (Español)</label>
                     <input type="text" class="form-control" id="titulo" :value="this.bannerTitulo">
@@ -28,24 +28,24 @@
                 </div>
                 <div class="col-lg-6">
                     <label class="form-label">Título (Portugués)</label>
-                    <input type="text" class="form-control" id="tituloAlternativo" :value="this.bannerTituloAlternativo">
+                    <input type="text" class="form-control" id="tituloAlternativo"
+                        :value="this.bannerTituloAlternativo">
 
                 </div>
             </div>
 
             <div class="row mt-3">
                 <div class="col-lg-6">
-
-                <label for="exampleInputPassword1" class="form-label">Texto (Español)</label>
-                <textarea class="summernote" id="editor" ></textarea>
+                    <label for="exampleInputPassword1" class="form-label">Texto (Español)</label>
+                    <textarea class="summernote" id="editor"></textarea>
                 </div>
                 <div class="col-lg-6">
                     <label for="exampleInputPassword1" class="form-label">Texto (Portugués)</label>
-                <textarea class="summernote" id="editorAlternativo" ></textarea>
+                    <textarea class="summernote" id="editorAlternativo"></textarea>
                 </div>
             </div>
 
-        
+
 
             <div class="w-100 d-flex justify-content-end mt-3">
                 <button @click="updateBanner()" type="button" class="btn"
@@ -140,24 +140,19 @@ export default {
         },
         summerNote() {
 
-                $('#editor').summernote({
-                    height: 300,
-                });
-                var noteBar = $('.note-toolbar');
-                noteBar.find('[data-toggle]').each(function () {
-                    $(this).attr('data-bs-toggle', $(this).attr('data-toggle')).removeAttr('data-toggle');
-                });
+
+            $('#editor').summernote({
+                height: 300,
+            });
+         
 
 
-                $('#editorAlternativo').summernote({
-                    height: 300,
-                });
-                var noteBar = $('.note-toolbar');
-                noteBar.find('[data-toggle]').each(function () {
-                    $(this).attr('data-bs-toggle', $(this).attr('data-toggle')).removeAttr('data-toggle');
-                });
+            $('#editorAlternativo').summernote({
+                height: 300,
+            });
+     
 
-            
+
         },
         obtenerBannerInformacion() {
             axios.get(`/api/obtenerBanner`)
@@ -174,7 +169,8 @@ export default {
                         this.seccion = response.data[0].seccion
                         this.txtBoton = response.data[0].textoboton
                         this.linkBoton = response.data[0].link
-                    } else if(this.idComponente == 122) {
+
+                    } else if (this.idComponente == 122) {
                         this.bannerTexto = response.data[1].texto
                         this.bannerTextoAlternativo = response.data[1].textoAlternativo
                         this.bannerTitulo = response.data[1].titulo
@@ -187,10 +183,11 @@ export default {
 
                     }
 
-
-            
                     $('#editor').summernote('code', this.bannerTexto);
                     $('#editorAlternativo').summernote('code', this.bannerTextoAlternativo);
+
+
+
 
                 })
                 .catch(error => {
@@ -198,7 +195,11 @@ export default {
                 });
         }
     },
+    beforeDestroy() {
 
+        $('#editor').summernote('destroy');
+        $('#editorAlternativo').summernote('destroy');
+   },
     mounted() {
 
         this.summerNote();

@@ -84,8 +84,7 @@ export default {
         obtenerContacto() {
             axios.get('/api/obtenerContacto')
                 .then(response => {
-                    console.log(response.data)
-                    this.contacto = response.data[0]
+                    this.contacto = response.data.contacto[0]
                 })
                 .catch(error => {
                     console.error(error);

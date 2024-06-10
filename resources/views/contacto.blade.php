@@ -1,8 +1,12 @@
 @extends('layout')
 
 @section('content')
-<div class="container">
-    <p class="indicador"><b>Inicio</b> / Contacto</p>
+<div class="container" style="padding-top: 30px;">
+    @if ($idiomaActive == 'ES')
+    <p class="indicador"><b>Inicio</b> > Contacto</p>
+@else
+    <p class="indicador"><b>Começar</b> > Contato</p>
+@endif  
 
 </div>
 
@@ -21,21 +25,20 @@
 
     .indicador {
         color: #000;
-        font-family: Inter;
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 300;
-        line-height: 50px;
-        padding-top: 20px
+font-family: Montserrat;
+font-size: 14px;
+font-style: normal;
+font-weight: 300;
+line-height: 60px;
     }
 
     .indicador b {
         color: #000;
-        font-family: Inter;
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 50px;
+font-family: Montserrat;
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: 60px; /* 428.571% */
     }
 
 </style>

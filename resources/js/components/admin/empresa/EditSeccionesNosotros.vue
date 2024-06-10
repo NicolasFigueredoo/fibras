@@ -12,7 +12,7 @@
                     <input type="text" class="form-control" id="orden" :value="this.seccion.orden">
                 </div>
                 <div class="col-md-6">
-                <label class="form-label">Imagen (Tamaño recomendado 66x66)</label>
+                <label class="form-label">Imagen (Tamaño recomendado 60x60)</label>
                 <input type="file" ref="fotoSlider" class="form-control" id="imgs" @change="guardarFoto()">
                 </div>
             </div>
@@ -44,7 +44,7 @@
             </div>
 
             <div class="w-100 d-flex justify-content-end mb-5">
-                <button @click="updateSeccion()" type="btn" class="btn"
+                <button @click="updateSeccion()" type="button" class="btn"
                     style="background-color: #7F7F7F; color: white;">Guardar</button>
             </div>
         </form>
@@ -97,6 +97,8 @@ export default {
                     this.$store.commit('setClaseAlerta', 1);
                     this.$store.commit('setMensajeAlerta', 'Valores modificado con éxito');
                     this.$store.commit('mostrarComponente', 32);
+                    $('#editor').summernote('destroy');
+                    $('#editorAlternativo').summernote('destroy');
 
                 })
                 .catch(error => {

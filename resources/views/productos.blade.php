@@ -3,12 +3,12 @@
 @section('content')
 <div class="container">
 
-    @if($idiomaActive == 'ES')
-    <p class="indicador"><b>Inicio</b> > Productos</p>
-    @else
-    <p class="indicador"><b>Começar</b> > produtos</p>
-    @endif
-    <div class="container" style="margin-top: 40px">
+    <div class="container" style="margin-top: 30px">
+        @if($idiomaActive == 'ES')
+        <p class="indicador"><b>Inicio</b> > Productos</p>
+        @else
+        <p class="indicador"><b>Começar</b> > Produtos</p>
+        @endif
 
         <div>
             <div class="row flex-wrap categorias">
@@ -93,14 +93,25 @@
 
 <style scoped>
 
-    .indicador{
-        color: #000;
-font-family: "FuturaBook";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+.indicador {
+    color: #000;
+font-family: Montserrat;
 font-size: 14px;
 font-style: normal;
-font-weight: 400;
+font-weight: 300;
+line-height: 60px;
+}
+
+.indicador b {
+    color: #000;
+font-family: Montserrat;
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
 line-height: 60px; /* 428.571% */
-    }
+}
 
 
 

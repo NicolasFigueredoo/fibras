@@ -109,7 +109,6 @@ export default {
         obtenerProductos() {
             axios.get('/api/obtenerProductos')
                 .then(response => {
-                    console.log(response.data, '?s')
                     this.productos = response.data
                     this.cantidadProductos = this.productos.length;
                 })

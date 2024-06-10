@@ -13,7 +13,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-2" style="border-left: #274575 solid 1px">
+            <div class="col-lg-2" id="secciones">
                 <div>
                     @if($idioma['idioma'] == 'ES')
                     <p class="seccionSeccion">Secciones</p>
@@ -32,7 +32,7 @@
                 </div>
 
             </div>
-            <div class="col-lg-2">
+            <div class="col-lg-2" id="newsletter">
                 <div class="d-flex flex-column">
                     @if($idioma['idioma'] == 'ES')
                     <p class="seccionSeccion">Suscribite al Newsletter</p>
@@ -71,7 +71,7 @@
                
                 </div>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-4" id="contactoS">
                 <div class="d-flex flex-column">
                     @if($idioma['idioma'] == 'ES')
                     <p class="seccionSeccion">Contacto</p>
@@ -81,7 +81,7 @@
 
                     <div class="row d-flex mt-3">
                         <div class="col-md-1">
-                            <a href="https://maps.app.goo.gl/MLPczGsi4hM8JoqeA" target="_blank">
+                            <a href="https://maps.app.goo.gl/EjZZtMituNzmSFUK7" target="_blank">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24" fill="none">
                                     <path fill-rule="evenodd" clip-rule="evenodd"
@@ -92,7 +92,7 @@
 
                         </div>
                         <div class="col-md-10" style="margin-left: 10px">
-                            <a href="https://maps.app.goo.gl/MLPczGsi4hM8JoqeA" target="_blank"
+                            <a href="https://maps.app.goo.gl/EjZZtMituNzmSFUK7" target="_blank"
                                 style="text-decoration: none; color:#000">
                                 <p class="seccionLink">{{ $contacto[0]['direccion'] }}</p>
                             </a>
@@ -147,6 +147,8 @@
             </div>
 
         </div>
+
+        
     </div>
 
     <div class="mt-5 footerTwo">
@@ -187,7 +189,7 @@
 
     .seccionLink {
         color: #FFF;
-        font-family: "Futura Bk BT";
+        font-family: "FuturaBook";
         font-size: 15px;
         font-style: normal;
         font-weight: 400;
@@ -198,7 +200,7 @@
 
     .seccionSeccion {
         color: #FFF;
-        font-family: "Futura Bk BT";
+        font-family: "FuturaBook";
         font-size: 18px;
         font-style: normal;
         font-weight: 400;
@@ -237,7 +239,7 @@
 
     .derechos {
         color: #FFF;
-        font-family: "Futura Bk BT";
+        font-family: "FuturaBook";
         font-size: 14px;
         font-style: normal;
         font-weight: 400;
@@ -254,12 +256,43 @@
     .footerTwo {
         background: #002157;
         padding-top: 20px;
+        width: 100%;
+    }
+
+    #secciones{
+       border-left: #274575 solid 1px; 
+       margin-left:50px;
+    }
+
+    #contactoS{
+        margin-left: 100px
+    }
+
+    #newsletter{
+        width: 20% !important
     }
 
 
 
+    @media screen and (max-width: 1200px) {
+        #secciones{
+            margin-left: auto;
+            margin-top: 50px
+        }
 
-    @media screen and (max-width: 500px) {
+        #contactoS{
+            margin-left: auto;
+            margin-top: 10px
+        }
+
+        #newsletter{
+            width: 100% !important;
+            margin-top: 10px
+
+        }
+
+    }
+    @media screen and (max-width: 700px) {
         .enviarSub {
             width: 80%
         }

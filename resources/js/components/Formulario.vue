@@ -1,107 +1,221 @@
 <template>
     <div>
         <div class="container contacto" style="margin-bottom: 80px">
-            <div class="row">
-                <div class="col-lg-4 informacion">
-                    <p class="textoC ">Para mayor información, no dude en contactarse mediante el siguiente formulario,
-                        o
-                        a través de nuestras vías de comunicación.</p>
 
-
-                    <div class="ubicacion" style="cursor: pointer; margin-top: 30px;">
-                        <div style="width: 20px">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none">
-                                <path
-                                    d="M20 10C20 16 12 22 12 22C12 22 4 16 4 10C4 7.87827 4.84285 5.84344 6.34315 4.34315C7.84344 2.84285 9.87827 2 12 2C14.1217 2 16.1566 2.84285 17.6569 4.34315C19.1571 5.84344 20 7.87827 20 10Z"
-                                    stroke="#F2AE59" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                <path
-                                    d="M12 13C13.6569 13 15 11.6569 15 10C15 8.34315 13.6569 7 12 7C10.3431 7 9 8.34315 9 10C9 11.6569 10.3431 13 12 13Z"
-                                    stroke="#F2AE59" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            <template v-if="this.idioma == 'ES'">
+                <div class="row">
+                    <div class="col-lg-4 informacion">
+    
+                        <div class="ubicacion" style="cursor: pointer; ">
+                            <div style="width: 20px">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"
+                                    fill="none">
+                                    <path
+                                        d="M16.6663 8.33341C16.6663 13.3334 9.99967 18.3334 9.99967 18.3334C9.99967 18.3334 3.33301 13.3334 3.33301 8.33341C3.33301 6.5653 4.03539 4.86961 5.28563 3.61937C6.53587 2.36913 8.23156 1.66675 9.99967 1.66675C11.7678 1.66675 13.4635 2.36913 14.7137 3.61937C15.964 4.86961 16.6663 6.5653 16.6663 8.33341Z"
+                                        stroke="#0397D6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path
+                                        d="M10 10.8333C11.3807 10.8333 12.5 9.71396 12.5 8.33325C12.5 6.95254 11.3807 5.83325 10 5.83325C8.61929 5.83325 7.5 6.95254 7.5 8.33325C7.5 9.71396 8.61929 10.8333 10 10.8333Z"
+                                        stroke="#0397D6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <a href="https://maps.app.goo.gl/EjZZtMituNzmSFUK7" target="_blank"
+                                style="text-decoration: none; color: black;">
+                                <p id="ubi" style="margin-left: 20px">
+                                    {{ direccion }}
+                                </p>
+                            </a>
+                        </div>
+                        <div class="telefono" style="cursor: pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <g clip-path="url(#clip0_2204_9067)">
+                                    <path
+                                        d="M18.3332 14.0999V16.5999C18.3341 16.832 18.2866 17.0617 18.1936 17.2744C18.1006 17.487 17.9643 17.6779 17.7933 17.8348C17.6222 17.9917 17.4203 18.1112 17.2005 18.1855C16.9806 18.2599 16.7477 18.2875 16.5165 18.2666C13.9522 17.988 11.489 17.1117 9.32486 15.7083C7.31139 14.4288 5.60431 12.7217 4.32486 10.7083C2.91651 8.53426 2.04007 6.05908 1.76653 3.48325C1.7457 3.25281 1.77309 3.02055 1.84695 2.80127C1.9208 2.58199 2.03951 2.38049 2.1955 2.2096C2.3515 2.03871 2.54137 1.90218 2.75302 1.80869C2.96468 1.7152 3.19348 1.6668 3.42486 1.66658H5.92486C6.32928 1.6626 6.72136 1.80582 7.028 2.06953C7.33464 2.33324 7.53493 2.69946 7.59153 3.09992C7.69705 3.89997 7.89274 4.68552 8.17486 5.44158C8.28698 5.73985 8.31125 6.06401 8.24478 6.37565C8.17832 6.68729 8.02392 6.97334 7.79986 7.19992L6.74153 8.25825C7.92783 10.3445 9.65524 12.072 11.7415 13.2583L12.7999 12.1999C13.0264 11.9759 13.3125 11.8215 13.6241 11.755C13.9358 11.6885 14.2599 11.7128 14.5582 11.8249C15.3143 12.107 16.0998 12.3027 16.8999 12.4083C17.3047 12.4654 17.6744 12.6693 17.9386 12.9812C18.2029 13.2931 18.3433 13.6912 18.3332 14.0999Z"
+                                        stroke="#0397D6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_2204_9067">
+                                        <rect width="20" height="20" fill="white" />
+                                    </clipPath>
+                                </defs>
                             </svg>
+                            <p style="margin-left: 20px">{{ telefono }}</p>
                         </div>
-                        <a href="https://maps.app.goo.gl/z5x58zQqzVjJCyiQ6" target="_blank"
-                            style="text-decoration: none; color: black;">
-                            <p id="ubi" style="margin-left: 20px">
-                                {{ direccion }}
-                            </p>
-                        </a>
+    
+                        <div class="email mt-2" style="cursor: pointer">
+    
+                            <svg @click="abrirEmail()" xmlns="http://www.w3.org/2000/svg" width="24" height="20"
+                                viewBox="0 0 24 20" fill="none">
+                                <path
+                                    d="M20 3.33337H4C2.89543 3.33337 2 4.07957 2 5.00004V15C2 15.9205 2.89543 16.6667 4 16.6667H20C21.1046 16.6667 22 15.9205 22 15V5.00004C22 4.07957 21.1046 3.33337 20 3.33337Z"
+                                    stroke="#0397D6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                <path
+                                    d="M22 5.83337L13.03 10.5834C12.7213 10.7446 12.3643 10.83 12 10.83C11.6357 10.83 11.2787 10.7446 10.97 10.5834L2 5.83337"
+                                    stroke="#0397D6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            <p style="margin-left: 20px" @click="abrirEmail()">{{ emailC }}</p>
+                        </div>
                     </div>
-                    <div class="telefono" style="cursor: pointer">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path
-                                d="M22.0004 16.92V19.92C22.0016 20.1985 21.9445 20.4741 21.8329 20.7293C21.7214 20.9845 21.5577 21.2136 21.3525 21.4018C21.1473 21.5901 20.905 21.7335 20.6412 21.8227C20.3773 21.9119 20.0978 21.945 19.8204 21.92C16.7433 21.5856 13.7874 20.5341 11.1904 18.85C8.77425 17.3146 6.72576 15.2661 5.19042 12.85C3.5004 10.2412 2.44866 7.27097 2.12042 4.17997C2.09543 3.90344 2.1283 3.62474 2.21692 3.3616C2.30555 3.09846 2.44799 2.85666 2.63519 2.6516C2.82238 2.44653 3.05023 2.28268 3.30421 2.1705C3.5582 2.05831 3.83276 2.00024 4.11042 1.99997H7.11042C7.59573 1.9952 8.06621 2.16705 8.43418 2.48351C8.80215 2.79996 9.0425 3.23942 9.11042 3.71997C9.23704 4.68004 9.47187 5.6227 9.81042 6.52997C9.94497 6.8879 9.97408 7.27689 9.89433 7.65086C9.81457 8.02482 9.62928 8.36809 9.36042 8.63998L8.09042 9.90997C9.51398 12.4135 11.5869 14.4864 14.0904 15.91L15.3604 14.64C15.6323 14.3711 15.9756 14.1858 16.3495 14.1061C16.7235 14.0263 17.1125 14.0554 17.4704 14.19C18.3777 14.5285 19.3204 14.7634 20.2804 14.89C20.7662 14.9585 21.2098 15.2032 21.527 15.5775C21.8441 15.9518 22.0126 16.4296 22.0004 16.92Z"
-                                stroke="#F2AE59" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                        <p style="margin-left: 20px">{{ telefono }}</p>
-                    </div>
-
-                    <div class="email mt-2" style="cursor: pointer">
-                        <svg @click="abrirEmail()" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                            viewBox="0 0 24 24" fill="none">
-                            <path
-                                d="M20 4H4C2.89543 4 2 4.89543 2 6V18C2 19.1046 2.89543 20 4 20H20C21.1046 20 22 19.1046 22 18V6C22 4.89543 21.1046 4 20 4Z"
-                                stroke="#F2AE59" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                            <path
-                                d="M22 7L13.03 12.7C12.7213 12.8934 12.3643 12.996 12 12.996C11.6357 12.996 11.2787 12.8934 10.97 12.7L2 7"
-                                stroke="#F2AE59" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                        <p style="margin-left: 20px" @click="abrirEmail()">{{ emailC }}</p>
-                    </div>
+    
+                    <form id="formularioI" class="col-lg-8">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <label for="nombre">Nombre*</label>
+                                <input type="text" class="mt-2 form-control" v-model="nombre" />
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="nombre">Apellido*</label>
+                                <input type="text" class="mt-2 form-control" v-model="empresa" />
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 20px">
+                            <div class="col-lg-6">
+                                <label for="nombre">Email*</label>
+                                <input type="text" class="mt-2 form-control" v-model="email" />
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="nombre">Celular</label>
+                                <input type="text" class="mt-2 form-control" v-model="celular" />
+                            </div>
+                         
+                        </div>
+    
+                        <div class="row" style="margin-top: 20px">
+                            <div class="col-lg-6">
+                                <label for="nombre">Mensaje</label>
+    
+                                <textarea class="form-control mt-2" id="mensajeInput" style="
+                                          width: 100%;
+                                          height: 150px;
+                                          border-radius: 0%;
+                                      " v-model="mensaje"></textarea>
+                            </div>
+                            <div id="content" class="d-flex flex-column justify-content-start align-items-start col-lg-6 mt-4 gap-5">
+    
+                                <div style="margin-top: 20px;">
+                                    <p class="campoO">*Datos obligatorios</p>
+                                </div>
+                                <div>
+                                    <button id="enviarContacto" type="button" style="border-radius: 30px"
+                                        class="btn btn-primary" @click="enviarCorreo()">
+                                        ENVIAR CONSULTA
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="mensajePresupuesto"></div>
+    
+                        </div>
+                    </form>
                 </div>
-
-                <form id="formularioI" class="col-lg-8">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <label for="nombre">Nombre y apellido*</label>
-                            <input type="text" class="mt-2 form-control" v-model="nombre" />
-                        </div>
-                        <div class="col-lg-6">
-                            <label for="nombre">E-mail*</label>
-                            <input type="text" class="mt-2 form-control" v-model="email" />
-                        </div>
-                    </div>
-                    <div class="row" style="margin-top: 20px">
-                        <div class="col-lg-6">
-                            <label for="nombre">Telefono*</label>
-                            <input type="text" class="mt-2 form-control" v-model="celular" />
-                        </div>
-                        <div class="col-lg-6">
-                            <label for="nombre">Empresa*</label>
-                            <input type="text" class="mt-2 form-control" v-model="empresa" />
-                        </div>
-                    </div>
-
-                    <div class="row" style="margin-top: 20px">
-                        <div class="col-lg-12">
-                            <label for="nombre">Mensaje*</label>
-
-                            <textarea class="form-control mt-2" id="mensajeInput" style="
-                                      width: 100%;
-                                      height: 150px;
-                                      border-radius: 0%;
-                                  " v-model="mensaje"></textarea>
-                        </div>
-                        <div id="mensajePresupuesto"></div>
-                        <div id="content" class="d-flex justify-content-end align-items-center col-lg-12 mt-3 gap-5">
-
-                            <div style="margin-top: 20px;">
-                                <p class="campoO">*Campos obligatorios</p>
+            </template>
+            <template v-else>
+                <div class="row">
+                    <div class="col-lg-4 informacion">
+    
+                        <div class="ubicacion" style="cursor: pointer; ">
+                            <div style="width: 20px">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"
+                                    fill="none">
+                                    <path
+                                        d="M16.6663 8.33341C16.6663 13.3334 9.99967 18.3334 9.99967 18.3334C9.99967 18.3334 3.33301 13.3334 3.33301 8.33341C3.33301 6.5653 4.03539 4.86961 5.28563 3.61937C6.53587 2.36913 8.23156 1.66675 9.99967 1.66675C11.7678 1.66675 13.4635 2.36913 14.7137 3.61937C15.964 4.86961 16.6663 6.5653 16.6663 8.33341Z"
+                                        stroke="#0397D6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path
+                                        d="M10 10.8333C11.3807 10.8333 12.5 9.71396 12.5 8.33325C12.5 6.95254 11.3807 5.83325 10 5.83325C8.61929 5.83325 7.5 6.95254 7.5 8.33325C7.5 9.71396 8.61929 10.8333 10 10.8333Z"
+                                        stroke="#0397D6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
                             </div>
-                            <div>
-                                <button id="enviarContacto" type="button" style="border-radius: 0%"
-                                    class="btn btn-primary" @click="enviarCorreo()">
-                                    Enviar formulario
-                                </button>
-                            </div>
+                            <a href="https://maps.app.goo.gl/EjZZtMituNzmSFUK7" target="_blank"
+                                style="text-decoration: none; color: black;">
+                                <p id="ubi" style="margin-left: 20px">
+                                    {{ direccion }}
+                                </p>
+                            </a>
+                        </div>
+                        <div class="telefono" style="cursor: pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <g clip-path="url(#clip0_2204_9067)">
+                                    <path
+                                        d="M18.3332 14.0999V16.5999C18.3341 16.832 18.2866 17.0617 18.1936 17.2744C18.1006 17.487 17.9643 17.6779 17.7933 17.8348C17.6222 17.9917 17.4203 18.1112 17.2005 18.1855C16.9806 18.2599 16.7477 18.2875 16.5165 18.2666C13.9522 17.988 11.489 17.1117 9.32486 15.7083C7.31139 14.4288 5.60431 12.7217 4.32486 10.7083C2.91651 8.53426 2.04007 6.05908 1.76653 3.48325C1.7457 3.25281 1.77309 3.02055 1.84695 2.80127C1.9208 2.58199 2.03951 2.38049 2.1955 2.2096C2.3515 2.03871 2.54137 1.90218 2.75302 1.80869C2.96468 1.7152 3.19348 1.6668 3.42486 1.66658H5.92486C6.32928 1.6626 6.72136 1.80582 7.028 2.06953C7.33464 2.33324 7.53493 2.69946 7.59153 3.09992C7.69705 3.89997 7.89274 4.68552 8.17486 5.44158C8.28698 5.73985 8.31125 6.06401 8.24478 6.37565C8.17832 6.68729 8.02392 6.97334 7.79986 7.19992L6.74153 8.25825C7.92783 10.3445 9.65524 12.072 11.7415 13.2583L12.7999 12.1999C13.0264 11.9759 13.3125 11.8215 13.6241 11.755C13.9358 11.6885 14.2599 11.7128 14.5582 11.8249C15.3143 12.107 16.0998 12.3027 16.8999 12.4083C17.3047 12.4654 17.6744 12.6693 17.9386 12.9812C18.2029 13.2931 18.3433 13.6912 18.3332 14.0999Z"
+                                        stroke="#0397D6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_2204_9067">
+                                        <rect width="20" height="20" fill="white" />
+                                    </clipPath>
+                                </defs>
+                            </svg>
+                            <p style="margin-left: 20px">{{ telefono }}</p>
+                        </div>
+    
+                        <div class="email mt-2" style="cursor: pointer">
+    
+                            <svg @click="abrirEmail()" xmlns="http://www.w3.org/2000/svg" width="24" height="20"
+                                viewBox="0 0 24 20" fill="none">
+                                <path
+                                    d="M20 3.33337H4C2.89543 3.33337 2 4.07957 2 5.00004V15C2 15.9205 2.89543 16.6667 4 16.6667H20C21.1046 16.6667 22 15.9205 22 15V5.00004C22 4.07957 21.1046 3.33337 20 3.33337Z"
+                                    stroke="#0397D6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                <path
+                                    d="M22 5.83337L13.03 10.5834C12.7213 10.7446 12.3643 10.83 12 10.83C11.6357 10.83 11.2787 10.7446 10.97 10.5834L2 5.83337"
+                                    stroke="#0397D6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            <p style="margin-left: 20px" @click="abrirEmail()">{{ emailC }}</p>
                         </div>
                     </div>
-                </form>
-            </div>
-            <iframe class="mapa"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3291.5926291472765!2d-58.95970538843187!3d-34.41169887291124!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bb7d6a8f2c1c45%3A0x6c65f2d8ec589e53!2sReal%20Quimica%20SRL!5e0!3m2!1ses!2sar!4v1716913688940!5m2!1ses!2sar"
-                width="800" height="516" style="border:0;" allowfullscreen="" loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"></iframe>
+    
+                    <form id="formularioI" class="col-lg-8">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <label for="nombre">Nome*</label>
+                                <input type="text" class="mt-2 form-control" v-model="nombre" />
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="nombre">Sobrenome*</label>
+                                <input type="text" class="mt-2 form-control" v-model="empresa" />
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 20px">
+                            <div class="col-lg-6">
+                                <label for="nombre">E-mail*</label>
+                                <input type="text" class="mt-2 form-control" v-model="email" />
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="nombre">Celular</label>
+                                <input type="text" class="mt-2 form-control" v-model="celular" />
+                            </div>
+                         
+                        </div>
+    
+                        <div class="row" style="margin-top: 20px">
+                            <div class="col-lg-6">
+                                <label for="nombre">Mensagem</label>
+    
+                                <textarea class="form-control mt-2" id="mensajeInput" style="
+                                          width: 100%;
+                                          height: 150px;
+                                          border-radius: 0%;
+                                      " v-model="mensaje"></textarea>
+                            </div>
+                            <div id="content" class="d-flex flex-column justify-content-start align-items-start col-lg-6 mt-4 gap-5">
+    
+                                <div style="margin-top: 20px;">
+                                    <p class="campoO">*Dados requeridos</p>
+                                </div>
+                                <div>
+                                    <button id="enviarContacto" type="button" style="border-radius: 30px"
+                                        class="btn btn-primary" @click="enviarCorreo()">
+                                        ENVIAR CONSULTA
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="mensajePresupuesto"></div>
+    
+                        </div>
+                    </form>
+                </div>
+            </template>
+
+
+                <iframe class="mapa" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1088.4803844929622!2d-58.31496047857967!3d-34.732196589982024!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95a32d9a0773059b%3A0x28d59f00b155088b!2sFibras%20Argentinas!5e0!3m2!1ses!2sar!4v1717699004654!5m2!1ses!2sar" 
+                width="800" height="516" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
     </div>
 </template>
@@ -122,7 +236,8 @@ export default {
             emailC: null,
             whatsappLink: null,
             direccion: null,
-            telefono_secundario: null
+            telefono_secundario: null,
+            idioma: null
         };
     },
     methods: {
@@ -140,11 +255,15 @@ export default {
             axios
                 .get(`/api/obtenerContacto`)
                 .then((response) => {
-                    this.telefono = response.data[0].telefono;
-                    this.emailC = response.data[0].email;
-                    this.direccion = response.data[0].direccion;
-                    this.telefono_secundario = response.data[0].telefono_secundario;
-
+                    this.telefono = response.data.contacto[0].telefono;
+                    this.emailC = response.data.contacto[0].email;
+                    this.direccion = response.data.contacto[0].direccion;
+                    this.telefono_secundario = response.data.contacto[0].telefono_secundario;
+                    response.data.idioma.forEach(element => {
+                        if(element.activo == 1){
+                            this.idioma = element.idioma
+                        }
+                    });
                 })
                 .catch((error) => {
                     console.error("Error al traer los contactos:", error);
@@ -152,14 +271,7 @@ export default {
         },
         enviarCorreo() {
             let self = this;
-            if (!this.nombre || !this.empresa || !this.email) {
-                $("#mensajePresupuesto").html(
-                    '<p class="text-danger">Mensaje fallido faltan rellenar campos obligatorios</p>'
-                );
-                return;
-            }
-
-
+       
             $("#mensajePresupuesto").html(
                 '<p class="text-success">Enviando..</p>'
             );
@@ -178,9 +290,9 @@ export default {
                     );
                 })
                 .catch((error) => {
-                    $("#mensajePresupuesto").html(
-                        '<p class="text-danger">Mensaje fallido revisar campos</p>'
-                    );
+                    let errorMessage = error.response.data.message || 'Error al enviar correo';
+                    $('#mensajePresupuesto').html(`<p class="textE text-danger">${errorMessage}</p>`);
+                    console.error(errorMessage);
                 });
 
         },
@@ -209,6 +321,15 @@ input {
     flex-shrink: 0;
     border-radius: 4px !important;
     border: 1px solid #D9D9D9 !important;
+}
+
+label{
+    color: #000;
+font-family: "FuturaBook";
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
 }
 
 .mapa {
@@ -310,22 +431,17 @@ input {
 }
 
 #enviarContacto {
-    display: inline-flex;
-    height: 40px;
-    padding: 10px 32px;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    flex-shrink: 0;
-    border: none;
-    border-radius: 40px !important;
-    background: var(--Naranja, #F2AE59);
-    color: #FFF;
-    font-family: 'Inter';
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+    width: 392px;
+height: 49px;
+flex-shrink: 0;
+background: var(--azul, #00245D) !important;
+color: #FFF;
+text-align: center;
+font-family: "FuturaBook";
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
 }
 
 .enviar {

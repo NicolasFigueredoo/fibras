@@ -11,7 +11,7 @@
                 <input type="text" class="form-control" id="orden">
             </div>
             <div class="mb-3">
-                <label class="form-label">Imagen (Tamaño recomendado 586x1400)</label>
+                <label class="form-label">Imagen (Tamaño recomendado 1366x768)</label>
                 <input type="file" ref="fotoSlider" class="form-control" id="imgs" @change="guardarFoto()">
             </div>
             <div class="row mb-3">
@@ -26,7 +26,7 @@
                 </div>
 
             </div>
-            <div class="row mb-3">
+            <div v-if="this.slider.seccion == 'home'" class="row mb-3">
                 <div class="col-lg-4">
                     <label class="form-label">Texto boton (Español)</label>
                     <input type="text" class="form-control" id="botonText">
@@ -117,6 +117,9 @@ export default {
                     this.$store.commit('setMostrarAlerta', true);
                     this.$store.commit('setClaseAlerta', 1);
                     this.$store.commit('setMensajeAlerta', 'Slider creado con éxito');
+                    $('#editor').summernote('destroy');
+                    $('#editorAlternativo').summernote('destroy');
+                    
                     if(this.idComponente == 434){
                         this.$store.commit('mostrarComponente', 433);
             }else{

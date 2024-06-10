@@ -8,15 +8,15 @@
         <form class="mt-3" >
             <div class="row">
                 <div class="col-md-4">
-                    <label class="form-label">HEADER (Tamaño recomendado 79x103)</label>
+                    <label class="form-label">HEADER (Tamaño recomendado 280x70)</label>
                     <input type="file" class="form-control" ref="img3" @change="guardarFotoBlank()">
                 </div>
                 <div class="col-md-4">
-                    <label class="form-label">FONDO BLANCO (Tamaño recomendado 79x103)</label>
+                    <label class="form-label">FONDO BLANCO (Tamaño recomendado 280x70)</label>
                     <input type="file" class="form-control" ref="img1"  @change="guardarFotoNavbar()">
                 </div>
                 <div class="col-md-4">
-                    <label class="form-label">FOOTER (Tamaño recomendado 79x103)</label>
+                    <label class="form-label">FOOTER (Tamaño recomendado 280x70)</label>
                     <input type="file" class="form-control" ref="img2" @change="guardarFotoFooter()">
                 </div>
             </div>
@@ -172,8 +172,7 @@ h1 {
 }
 
 .imagen{
-    width: 103px;
-height: 134px;
+height: 70px;
 flex-shrink: 0;
 }
 

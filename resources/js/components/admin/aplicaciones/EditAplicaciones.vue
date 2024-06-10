@@ -12,7 +12,7 @@
                 <input type="text" class="form-control" v-model="this.aplicacion.orden" id="orden">
             </div>
             <div class="mb-3">
-                <label class="form-label">Imagen (Tamaño recomendado 220x223)</label>
+                <label class="form-label">Imagen (Tamaño recomendado 442x517)</label>
                 <input type="file" ref="fotoAplicacion" class="form-control" @change="guardarFoto()">
             </div>
             <div class="row mb-3">
@@ -96,6 +96,8 @@ export default {
                     this.$store.commit('setClaseAlerta', 1);
                     this.$store.commit('setMensajeAlerta', 'Aplicacíon actualizada con éxito');
                     this.$store.commit('mostrarComponente', 10);
+                    $('#editor').summernote('destroy');
+                    $('#editorAlternativo').summernote('destroy');
 
                 })
                 .catch(error => {
