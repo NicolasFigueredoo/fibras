@@ -80,7 +80,7 @@
                     @endif
 
                     <div class="row d-flex mt-3">
-                        <div class="col-md-1">
+                        <div class="col-1">
                             <a href="https://maps.app.goo.gl/EjZZtMituNzmSFUK7" target="_blank">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24" fill="none">
@@ -91,7 +91,7 @@
                             </a>
 
                         </div>
-                        <div class="col-md-10" style="margin-left: 10px">
+                        <div class="col-10" style="margin-left: 10px">
                             <a href="https://maps.app.goo.gl/EjZZtMituNzmSFUK7" target="_blank"
                                 style="text-decoration: none; color:#000">
                                 <p class="seccionLink">{{ $contacto[0]['direccion'] }}</p>
@@ -100,7 +100,7 @@
 
                     </div>
                     <div class="row d-flex mt-3">
-                        <div class="col-md-1">
+                        <div class="col-1">
                             <a href="https://wa.me/{{ $numeroWsp }}?text=Hola,%20quiero%20enviar%20un%20mensaje"
                                 target="_blank">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -113,7 +113,7 @@
                             </a>
 
                         </div>
-                        <div class="col-md-10" style="margin-left: 10px">
+                        <div class="col-10" style="margin-left: 10px">
                             <a href="https://wa.me/{{ $numeroWsp }}?text=Hola,%20quiero%20enviar%20un%20mensaje"
                                 target="_blank" style="text-decoration: none; color:#000">
 
@@ -124,7 +124,7 @@
                     </div>
 
                     <div class="row d-flex mt-3">
-                        <div class="col-md-1">
+                        <div class="col-1">
                             <a href="mailto:{{ $contacto[0]['email'] }}" style="text-decoration: none; color:#000">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="20"
                                     viewBox="0 0 24 20" fill="none">
@@ -134,7 +134,7 @@
                                 </svg>
                             </a>
                         </div>
-                        <div class="col-md-10" style="margin-left: 10px">
+                        <div class="col-10" style="margin-left: 10px">
                             <a href="mailto:{{ $contacto[0]['email'] }}" style="text-decoration: none; color:#000">
                                 <p class="seccionLink">{{ $contacto[0]['email'] }}</p>
                             </a>
@@ -169,27 +169,17 @@
     </div>
 
 
-    <a href="https://api.whatsapp.com/send?phone={{ $contacto[0]['email'] }}" target="_blank"
-        class="whatsapp-btn mb-5">
-        <svg xmlns="http://www.w3.org/2000/svg" width="75" height="75" viewBox="0 0 75 75" fill="none">
-            <path
-                d="M37.5 75C58.2107 75 75 58.2107 75 37.5C75 16.7893 58.2107 0 37.5 0C16.7893 0 0 16.7893 0 37.5C0 58.2107 16.7893 75 37.5 75Z"
-                fill="#22BE4A" />
-            <path
-                d="M50.8896 24.0202C43.7496 16.8902 32.1896 16.9002 25.0596 24.0302C19.2296 29.8702 18.0296 38.9002 22.1496 46.0502L19.5596 55.5102L29.2396 52.9602C31.9196 54.4202 34.9196 55.1802 37.9696 55.1802C47.9896 55.3402 56.2396 47.3502 56.3996 37.3302C56.4796 32.3202 54.4796 27.5002 50.8896 24.0202ZM37.9796 52.1102C35.2596 52.1102 32.5896 51.3802 30.2496 50.0002L29.6996 49.6702L23.9596 51.1802L25.4896 45.5802L25.1296 45.0002C20.7696 37.8202 23.0596 28.4702 30.2296 24.1102C37.4096 19.7502 46.7596 22.0402 51.1196 29.2102C52.5296 31.5402 53.2996 34.2002 53.3296 36.9302C53.2396 45.3402 46.3996 52.1102 37.9796 52.1102ZM46.2996 40.7402C45.8496 40.5102 43.5996 39.4102 43.1796 39.2602C42.7596 39.1102 42.4596 39.0302 42.1496 39.4902C41.8396 39.9502 40.9696 40.9702 40.6996 41.2802C40.4296 41.5902 40.1696 41.6302 39.7096 41.4002C37.0296 40.0602 35.2696 39.0102 33.4996 35.9702C33.0296 35.1602 33.9696 35.2202 34.8396 33.4802C34.9596 33.2202 34.9496 32.9202 34.7996 32.6802C34.6896 32.4502 33.7696 30.2002 33.3896 29.2902C33.0196 28.4002 32.6396 28.5302 32.3596 28.5102C32.0996 28.4902 31.7896 28.4902 31.4896 28.4902C31.0196 28.5002 30.5796 28.7102 30.2696 29.0602C29.2296 30.0502 28.6496 31.4302 28.6696 32.8702C28.8196 34.5902 29.4696 36.2302 30.5296 37.5902C30.7596 37.8902 33.7496 42.5002 38.3296 44.4802C41.2296 45.7302 42.3596 45.8402 43.8096 45.6202C44.6896 45.4902 46.5096 44.5202 46.8896 43.4502C47.1896 42.7702 47.2796 42.0102 47.1496 41.2802C47.0396 41.0802 46.7396 40.9602 46.2896 40.7402H46.2996Z"
-                fill="white" />
-        </svg>
-    </a>
+
 
 </div>
 
 
 <style scoped>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
     .seccionLink {
         color: #FFF;
-        font-family: "FuturaBook";
+        font-family: "Poppins";
         font-size: 15px;
         font-style: normal;
         font-weight: 400;
@@ -200,7 +190,7 @@
 
     .seccionSeccion {
         color: #FFF;
-        font-family: "FuturaBook";
+        font-family: "Poppins";
         font-size: 18px;
         font-style: normal;
         font-weight: 400;
@@ -239,7 +229,7 @@
 
     .derechos {
         color: #FFF;
-        font-family: "FuturaBook";
+        font-family: "Poppins";
         font-size: 14px;
         font-style: normal;
         font-weight: 400;
@@ -273,7 +263,7 @@
     }
 
 
-
+   
     @media screen and (max-width: 1200px) {
         #secciones{
             margin-left: auto;

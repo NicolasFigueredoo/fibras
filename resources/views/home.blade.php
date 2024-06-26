@@ -36,7 +36,7 @@
                                                             class="btn botonSlider">{{ $slider['textoboton'] }}</button>
                                                     </a>
                                                 @else
-                                                    <a href="{{ route('productos') }}">
+                                                    <a href="{{ route('nosotros') }}">
                                                         <button type="button"
                                                             class="btn botonSlider">{{ $slider['textoboton'] }}</button>
                                                     </a>
@@ -51,7 +51,7 @@
                                                             class="btn botonSlider">{{ $slider['textobotonAlternativo'] }}</button>
                                                     </a>
                                                 @else
-                                                    <a href="{{ route('productos') }}">
+                                                    <a href="{{ route('nosotros') }}">
                                                         <button type="button"
                                                             class="btn botonSlider">{{ $slider['textobotonAlternativo'] }}</button>
                                                     </a>
@@ -72,7 +72,7 @@
                                                         class="btn botonSlider">{{ $slider['textoboton'] }}</button>
                                                 </a>
                                             @else
-                                                <a href="{{ route('productos') }}">
+                                                <a href="{{ route('nosotros') }}">
                                                     <button type="button"
                                                         class="btn botonSlider">{{ $slider['textoboton'] }}</button>
                                                 </a>
@@ -87,7 +87,7 @@
                                                         class="btn botonSlider">{{ $slider['textobotonAlternativo'] }}</button>
                                                 </a>
                                             @else
-                                                <a href="{{ route('productos') }}">
+                                                <a href="{{ route('nosotros') }}">
                                                     <button type="button"
                                                         class="btn botonSlider">{{ $slider['textobotonAlternativo'] }}</button>
                                                 </a>
@@ -95,11 +95,13 @@
                                         </div>
                                     @endif
                                 </div>
-                                <video class="d-block w-100 carousel-filter" style="height: 768px; object-fit: cover;"
-                                    controls autoplay muted>
+                                <video class="d-block w-100" style="height: 768px; object-fit: cover;"
+                                    autoplay muted loop>
                                     <source src="{{ url('/getImage/' . basename($slider['imagen'])) }}" type="video/mp4">
                                     Tu navegador no soporta la reproducción de videos.
                                 </video>
+                                <div class="carousel-filter"></div>
+
                             @endif
 
 
@@ -130,21 +132,21 @@
                         <div class="collapse navbar-collapse justify-content-end align-items-end" id="navbarNavAltMarkup">
                             <div class="navbar-nav flex-column">
                                 <div class="d-flex justify-content-end align-items-center gap-2">
-                                    <div>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                            data-bs-toggle="modal" data-bs-target="#searchModal" viewBox="0 0 20 20"
-                                            fill="none" style="cursor: pointer;">
-                                            <path
-                                                d="M9.16667 15.8333C12.8486 15.8333 15.8333 12.8486 15.8333 9.16667C15.8333 5.48477 12.8486 2.5 9.16667 2.5C5.48477 2.5 2.5 5.48477 2.5 9.16667C2.5 12.8486 5.48477 15.8333 9.16667 15.8333Z"
-                                                stroke="white" stroke-width="2" stroke-linecap="round"
-                                                stroke-linejoin="round" />
-                                            <path d="M17.5001 17.5001L13.9167 13.9167" stroke="white" stroke-width="2"
-                                                stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
-                                    </div>
-                                    <div class="d-none d-lg-block">
-                                        <span class="text-white">|</span>
-                                    </div>
+                                    <!--<div>-->
+                                    <!--    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"-->
+                                    <!--        data-bs-toggle="modal" data-bs-target="#searchModal" viewBox="0 0 20 20"-->
+                                    <!--        fill="none" style="cursor: pointer;">-->
+                                    <!--        <path-->
+                                    <!--            d="M9.16667 15.8333C12.8486 15.8333 15.8333 12.8486 15.8333 9.16667C15.8333 5.48477 12.8486 2.5 9.16667 2.5C5.48477 2.5 2.5 5.48477 2.5 9.16667C2.5 12.8486 5.48477 15.8333 9.16667 15.8333Z"-->
+                                    <!--            stroke="white" stroke-width="2" stroke-linecap="round"-->
+                                    <!--            stroke-linejoin="round" />-->
+                                    <!--        <path d="M17.5001 17.5001L13.9167 13.9167" stroke="white" stroke-width="2"-->
+                                    <!--            stroke-linecap="round" stroke-linejoin="round" />-->
+                                    <!--    </svg>-->
+                                    <!--</div>-->
+                                    <!--<div class="d-none d-lg-block">-->
+                                    <!--    <span class="text-white">|</span>-->
+                                    <!--</div>-->
                                     <div style="display: flex; align-items: center;">
                                         @if ($idiomaActive == 'ES')
                                             <select class="form-select3 idioma-select" aria-label="Default select example">
@@ -203,12 +205,12 @@
         </div>
 
         <!---CATEGORIAS--->
-        <div class="container" style="margin-top: 65px">
+        <div class="container" style="margin-top: 84px">
 
             <div>
-                <div class="row d-flex justify-content-between align-items-center">
+                <div class="row d-flex justify-content-between align-items-center" style="height: 78px">
                     <div class="col-lg-6">
-                        <p class="textoProductos">{{ $tituloSeccionProductos }}</p>
+                        <span class="textoProductos">{{ $tituloSeccionProductos }}</span>
                     </div>
                     <div class="col-lg-6 d-flex justify-content-end">
                         <a href="{{ route('productos') }}">
@@ -266,7 +268,7 @@
         </div>
         <!---SECCION 1 HOME--->
         <div class="w-100">
-            <div class="row contenedorSeccion" style="margin-right: 0px">
+            <div class="row contenedorSeccion" style="margin-right: 0px; margin-top:102px;">
                 <div class="col-lg-6 contenedorSeccionImagen">
                     <div
                         style="background-image: url('{{ url('/getImage/' . basename($seccion[0]['imagen'])) }}'); 
@@ -278,7 +280,7 @@
                     </div>
                 </div>
                 <div class="col-lg-6 contenedor-textoSeccion">
-                    <div class="col-lg-8">
+                    <div class="col-lg-10">
 
                         @if ($idiomaActive == 'ES')
                             <p class="tituloSeccion">{!! $seccion[0]['titulo'] !!}</p>
@@ -305,17 +307,17 @@
 
                 <div class="row d-flex justify-content-between align-items-center">
                     <div class="col-lg-6">
-                        <p class="textoProductos">{{ $tituloSeccionNovedades }}</p>
+                        <span class="textoProductos">{{ $tituloSeccionNovedades }}</span>
                     </div>
                     <div class="col-lg-6 d-flex justify-content-end">
                         <a href="{{ route('novedades') }}">
-                            <button type="button" id="btnProductos" class="btn">{{ $textoBoton }}</button>
+                            <button type="button" id="btnProductos" class="btn">{{ $textoBotonNovedad }}</button>
                         </a>
 
                     </div>
                 </div>
 
-                <div class="row flex-wrap sectores">
+                <div class="row flex-wrap sectores" style="margin-top: 30px">
                     @foreach ($novedades as $novedad)
                         <div class="col-lg-4">
 
@@ -460,6 +462,25 @@
             });
         });
 
+        let i = 0;
+
+        $('.navbar-toggler').on('click', function() {
+
+            if(i > 0){
+                if($('#navbarNavAltMarkup').hasClass('collapsing')){
+                    location.reload()
+
+                }
+
+            }
+
+            i++
+
+
+
+
+        });
+
         
 
     });
@@ -467,6 +488,8 @@
 
 
 <style scoped>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
     .navbar {
         height: 130px;
         background: transparent;
@@ -522,7 +545,7 @@
     }
 
     .nav-link {
-        font-family: 'FuturaBook';
+        font-family: 'Poppins';
         color: #FFF;
         text-align: center;
         font-size: 15px;
@@ -543,7 +566,7 @@
         position: relative;
         z-index: 3;
         color: #FFF;
-        font-family: 'FuturaBook';
+        font-family: 'Poppins';
         font-style: normal;
         font-weight: 700;
         line-height: 130%;
@@ -551,14 +574,12 @@
 
     .textoProductos {
         color: var(--azul, #00245D);
-        font-family: "FuturaBook";
+        font-family: 'Poppins';
         font-size: 35px;
         font-style: normal;
         font-weight: 400;
         line-height: normal;
         text-transform: uppercase;
-        margin-top: 80px;
-        margin-bottom: 58px;
 
     }
 
@@ -577,7 +598,7 @@
 
 
     .contenedor-img {
-        width: 314px;
+        width: 100%;
         height: 314px;
         flex-shrink: 0;
         overflow: hidden;
@@ -590,7 +611,6 @@
         background-position: center;
         width: 100%;
         height: 100%;
-        filter: brightness(80%);
         transition: transform 0.8s ease;
     }
 
@@ -605,7 +625,6 @@
 
     .textCategoria {
         color: #000;
-        font-family: 'FuturaBook';
         font-size: 22px;
         font-style: normal;
         font-weight: 400;
@@ -630,28 +649,30 @@
     }
 
     .contenedor-textoSeccion {
-        padding-top: 100px;
+        padding-top: 57px;
         padding-left: 80px !important;
     }
 
     .tituloSeccion {
         color: #FFF;
-        font-family: "FuturaBook";
         font-size: 35px;
         font-style: normal;
         font-weight: 400;
         line-height: normal;
         text-transform: uppercase;
+        font-family: 'Poppins';
+
     }
 
     .descripcionSeccion {
         padding-top: 30px;
         color: #FFF;
-        font-family: "FuturaBook";
         font-size: 20px;
         font-style: normal;
         font-weight: 400;
         line-height: 33px;
+        font-family: 'Poppins';
+
 
     }
 
@@ -667,7 +688,7 @@
         justify-content: center;
         align-items: center;
 
-        font-family: 'FuturaBook';
+        font-family: 'Poppins';
         font-size: 16px;
         font-style: normal;
         font-weight: 400;
@@ -676,7 +697,7 @@
 
     .tituloSectores {
         color: var(--azul, #00245D);
-        font-family: "FuturaBook";
+        font-family: 'Poppins';
         font-size: 35px;
         font-style: normal;
         font-weight: 400;
@@ -695,7 +716,7 @@
         justify-content: center;
         align-items: center;
         color: #131313;
-        font-family: 'FuturaBook';
+        font-family: 'Poppins';
         font-size: 16px;
         font-style: normal;
         font-weight: 400;
@@ -714,15 +735,15 @@
         border-radius: 37px;
         border: 1px solid var(--azul, #00245D);
         background: #FFF;
-
         color: var(--azul, #00245D);
         text-align: center;
-        font-family: "FuturaBook";
         font-size: 16px;
         font-style: normal;
         font-weight: 400;
         line-height: normal;
-        text-transform: uppercase
+        text-transform: uppercase;
+        font-family: 'Poppins';
+
     }
 
     .sectores {
@@ -732,24 +753,23 @@
     .sector {
         height: 488px;
         flex-shrink: 0;
-        margin-top: 63px;
         background: white;
         border-radius: 4px;
     }
 
     .textSectores {
         color: #000;
-        font-family: "FuturaBook";
-        font-size: 30px;
+        font-family: 'Poppins';
+        font-size: 25px;
         font-style: normal;
-        font-weight: bold !important;
+        font-weight: 400 ;
         line-height: 30px;
         padding-right: 50px;
     }
 
     .textLeer {
         color: rgba(0, 0, 0, 0.57);
-        font-family: "FuturaBook";
+        font-family: 'Poppins';
         font-size: 16px;
         font-style: normal;
         font-weight: 400;
@@ -759,19 +779,19 @@
 
     .textEtiqueta {
         color: var(--azul, #00245D);
-        font-family: "FuturaBookMd";
+        font-family: 'Poppins';
         font-size: 16px;
         font-style: normal;
         line-height: normal;
         text-transform: uppercase;
-        font-weight: bold !important;
+        font-weight: 600;
         margin-bottom: 4px;
 
     }
 
     .textEpigrafe {
         color: #000;
-        font-family: "FuturaBook";
+        font-family: 'Poppins';
         font-size: 18px;
         font-style: normal;
         font-weight: 400;
@@ -789,8 +809,8 @@
     .fondoNovedades {
         background: #F5F5F5;
         margin-top: 100px;
-        padding-top: 63px;
-        padding-bottom: 50px;
+        padding-top: 50px;
+        padding-bottom: 30px;
     }
 
     .sector-imagen {
@@ -846,7 +866,7 @@
 
     .modal-title {
         color: var(--Celeste, #29A2C4);
-        font-family: 'FuturaBook';
+        font-family: 'Poppins';
         font-size: 30px;
         font-style: normal;
         font-weight: 400;
@@ -876,7 +896,7 @@
         background-size: 18px !important;
         color: #FFF;
         text-align: right;
-        font-family: "FuturaBook" !important;
+        font-family: 'Poppins';
         font-size: 18px !important;
         font-style: normal;
         font-weight: 400;
@@ -885,10 +905,10 @@
     }
 
     .form-select3 option {
-        color: #000;
-        background-color: #fff;
+        color: white !important;
+        background-color: #00245D !important;
         text-align: start;
-    }
+        }
 
     .form-select3::after {
         content: '\25BC';
@@ -919,7 +939,7 @@
         background-image: url('{{ asset('svgs/chevron-down.svg') }}') !important;
         color: #FFF;
         text-align: right;
-        font-family: "FuturaBook" !important;
+        font-family: 'Poppins';
         font-size: 18px !important;
         font-style: normal;
         font-weight: 400;
@@ -929,9 +949,10 @@
     }
 
     .form-select2 option {
-        color: #000;
-        background-color: #fff;
+        color: white !important;
+        background-color: #00245D !important;
         text-align: start;
+
     }
 
     .form-select2::after {
@@ -953,7 +974,7 @@
         background: var(--azul, #00245D) !important;
         color: #FFF !important;
         text-align: center;
-        font-family: "FuturaBook";
+        font-family: 'Poppins';
         font-size: 16px;
         font-style: normal;
         font-weight: 400;
@@ -1026,22 +1047,24 @@
         background-color: #333;
     }
 
-    .carousel-filter::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(180deg, rgba(0, 0, 0, 0.43) 0%, rgba(0, 0, 0, 0.00) 100%), rgba(0, 36, 93, 0.60);
-        z-index: 1;
-    }
+    .carousel-filter::after,
+.carousel-filter::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.43) 0%, rgba(0, 0, 0, 0.00) 100%), rgba(0, 36, 93, 0.30) !important;
+    z-index: 1;
+    pointer-events: none; /* Ensures the filter does not interfere with interactions */
+}
 
   
 
     .categoriaText {
         color: var(--azul, #00245D);
-        font-family: "FuturaBookMd";
+        font-family: 'Poppins';
         font-size: 14px;
         font-style: normal;
         font-weight: 700;
@@ -1051,17 +1074,35 @@
 
     .categoriaTextProducto {
         color: var(--azul, #000);
-        font-family: "FuturaBookMd";
+        font-family: 'Poppins';
         font-size: 18px;
         font-style: normal;
-        font-weight: 700;
+        font-weight: 600;
         line-height: normal;
         text-transform: uppercase;
     }
+    .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-width='1' d='M1 2h14M1 8h14M1 14h14'/%3E%3C/svg%3E") !important;
+    }
+
+    .navbar-toggler{
+        border-color: white !important
+    }
+
+    .show{
+        background-color: rgba(0, 0, 0, 0.6);    }
 
 
-   
+     
+    @media screen and (max-width: 1400px) {
+        
+        .textCategoria {
+        font-size: 20px;
+            white-space: nowrap;
 
+      
+    }
+    }
     @media screen and (max-width: 1000px) {
         .categoria {
             margin-top: 20px
@@ -1087,7 +1128,14 @@
             flex-direction: column;
         }
 
+        .navbar{
+            height: auto;
+        }
+
 
 
     }
+
+   
+    
 </style>

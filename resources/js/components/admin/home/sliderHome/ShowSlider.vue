@@ -105,19 +105,23 @@ export default {
         },
 
         eliminarSlider(idSlider){
-        axios.post('/api/deleteSlider',{
-            idSlider: idSlider
+    axios.post('/api/deleteSlider', { idSlider: idSlider })
+        .then(response => {
+            this.$store.commit('setMostrarAlerta', true);
+            this.$store.commit('setClaseAlerta', 1);
+            this.$store.commit('setMensajeAlerta', 'Slider eliminado con éxito');  
+            // Eliminar el slider de la lista sliders
+            this.sliders = this.sliders.filter(slider => slider.id !== idSlider);
+            // Volver a filtrar la lista de sliders
+            this.filteredSliders = this.sliders.filter(slider => {
+                return slider.texto.toLowerCase().includes(this.search.toLowerCase());
+            });
         })
-                .then(response => {
-                    this.$store.commit('setMostrarAlerta', true);
-                    this.$store.commit('setClaseAlerta', 1);
-                    this.$store.commit('setMensajeAlerta', 'Slider eliminado con éxito');  
-                    this.obtenerSliders();
-                })
-                .catch(error => {
-                    console.error(error);
-                });
-    },
+        .catch(error => {
+            console.error(error);
+        });
+},
+
         crearSlider(){
             if(this.idComponente == 1){
                 this.$store.commit('mostrarComponente', 29);
@@ -142,7 +146,6 @@ export default {
 
 
                     if(this.idComponente == 433){
-
                         response.data.forEach(element => {
                             if(element.seccion == 'home')
                             this.sliders.push(element);
@@ -154,6 +157,7 @@ export default {
                         });
                     }
 
+
                     
                 })
                 .catch(error => {
@@ -163,7 +167,7 @@ export default {
     },
     mounted() {
         this.obtenerSliders();
-        console.log(this.idComponente)
+        console.log('hola')
     }
 }
 </script>

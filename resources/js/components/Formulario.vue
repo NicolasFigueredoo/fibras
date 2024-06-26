@@ -58,21 +58,21 @@
     
                     <form id="formularioI" class="col-lg-8">
                         <div class="row">
-                            <div class="col-lg-6">
+                            <div class="col-lg-6 inputs">
                                 <label for="nombre">Nombre*</label>
                                 <input type="text" class="mt-2 form-control" v-model="nombre" />
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-6 inputs">
                                 <label for="nombre">Apellido*</label>
                                 <input type="text" class="mt-2 form-control" v-model="empresa" />
                             </div>
                         </div>
                         <div class="row" style="margin-top: 20px">
-                            <div class="col-lg-6">
+                            <div class="col-lg-6 inputs">
                                 <label for="nombre">Email*</label>
                                 <input type="text" class="mt-2 form-control" v-model="email" />
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-6 inputs">
                                 <label for="nombre">Celular</label>
                                 <input type="text" class="mt-2 form-control" v-model="celular" />
                             </div>
@@ -163,21 +163,21 @@
     
                     <form id="formularioI" class="col-lg-8">
                         <div class="row">
-                            <div class="col-lg-6">
+                            <div class="col-lg-6 inputs">
                                 <label for="nombre">Nome*</label>
                                 <input type="text" class="mt-2 form-control" v-model="nombre" />
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-6 inputs">
                                 <label for="nombre">Sobrenome*</label>
                                 <input type="text" class="mt-2 form-control" v-model="empresa" />
                             </div>
                         </div>
                         <div class="row" style="margin-top: 20px">
-                            <div class="col-lg-6">
+                            <div class="col-lg-6 inputs">
                                 <label for="nombre">E-mail*</label>
                                 <input type="text" class="mt-2 form-control" v-model="email" />
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-6 inputs">
                                 <label for="nombre">Celular</label>
                                 <input type="text" class="mt-2 form-control" v-model="celular" />
                             </div>
@@ -304,12 +304,12 @@ export default {
 </script>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 
 textarea::placeholder {
     color: rgba(0, 0, 0, 0.50);
-    font-family: 'Inter';
+    font-family: 'Poppins';
     font-size: 16px;
     font-style: normal;
     font-weight: 300;
@@ -319,13 +319,13 @@ textarea::placeholder {
 input {
     height: 48px;
     flex-shrink: 0;
-    border-radius: 4px !important;
+    border-radius: 6px !important;
     border: 1px solid #D9D9D9 !important;
 }
 
 label{
     color: #000;
-font-family: "FuturaBook";
+    font-family: 'Poppins';
 font-size: 16px;
 font-style: normal;
 font-weight: 400;
@@ -339,7 +339,7 @@ line-height: normal;
 
 .titleForm {
     color: #000;
-    font-family: 'Inter';
+    font-family: 'Poppins';
     font-size: 18px;
     font-style: normal;
     font-weight: 300;
@@ -349,7 +349,7 @@ line-height: normal;
 
 .campoO {
     color: #131313;
-    font-family: 'Inter';
+    font-family: 'Poppins';
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -363,7 +363,7 @@ line-height: normal;
 
 .titulo {
     color: #000;
-    font-family: 'Inter';
+    font-family: 'Poppins';
     font-size: 35px;
     font-style: normal;
     font-weight: 500;
@@ -372,7 +372,7 @@ line-height: normal;
 
 .informacion {
     font-size: 18px;
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Poppins';
     font-weight: 400;
     line-height: 21.94px;
     margin-top: 18px;
@@ -385,7 +385,7 @@ line-height: normal;
     width: 350px;
 
     color: #000;
-    font-family: 'Inter';
+    font-family: 'Poppins';
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -395,7 +395,7 @@ line-height: normal;
 .telefono {
     display: flex;
     color: #000;
-    font-family: 'Inter';
+    font-family: 'Poppins';
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -406,7 +406,7 @@ line-height: normal;
     display: flex;
     font-size: 16px;
     color: #000;
-    font-family: 'Inter';
+    font-family: 'Poppins';
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -426,7 +426,7 @@ line-height: normal;
 
 .casilla span {
     font-size: 16px;
-    font-family: "Montserrat";
+    font-family: 'Poppins';
     font-weight: 400;
 }
 
@@ -437,11 +437,12 @@ flex-shrink: 0;
 background: var(--azul, #00245D) !important;
 color: #FFF;
 text-align: center;
-font-family: "FuturaBook";
+font-family: 'Poppins';
 font-size: 16px;
 font-style: normal;
 font-weight: 400;
 line-height: normal;
+border: none !important;
 }
 
 .enviar {
@@ -456,7 +457,7 @@ line-height: normal;
 
 .textoC {
     color: #131313;
-    font-family: 'Inter';
+    font-family: 'Poppins';
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -474,6 +475,22 @@ line-height: normal;
 
 .email p:hover {
     font-weight: 500;
+}
+
+label{
+    color: #000;
+font-family: "Poppins";
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
+
+@media screen and (max-width: 1000px) {
+        .inputs{
+            margin-top: 20px;
+        }
+
 }
 
 @media only screen and (max-width: 600px) {

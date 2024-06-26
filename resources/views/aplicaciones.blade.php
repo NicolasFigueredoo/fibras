@@ -25,10 +25,9 @@
                 @endphp
                 @foreach ($aplicaciones as $aplicacion)
                     <div class="{{ $colClass }}">
-                        <a href="#modalAplicacion" data-toggle="modal" class="aplicacion-link"
-                            data-id="{{ $aplicacion->id }}"
+                        <a href="#modalAplicacion" data-toggle="modal" class="aplicacion-link" data-id="{{ $aplicacion->id }}"
                             data-nombre="{{ $idiomaActive == 'ES' ? $aplicacion->nombre : $aplicacion->nombreAlternativo }}"
-                            data-texto="{{ $idiomaActive == 'ES' ?  $aplicacion->texto : $aplicacion->textoAlternativo }}"
+                            data-texto="{{ $idiomaActive == 'ES' ? $aplicacion->texto : $aplicacion->textoAlternativo }}"
                             data-imagen="{{ url('/getImage/' . basename($aplicacion->imagen)) }}"
                             style="text-decoration: none">
                             <div class="d-flex flex-column justify-content-around align-items-center aplicacion">
@@ -42,7 +41,9 @@
                                     height: 100%;
                                 ">
                                         <div class="contenedor-textaplicacion">
-                                            <p class="textaplicacion">{{ $idiomaActive == 'ES' ? $aplicacion->nombre : $aplicacion->nombreAlternativo }}</p>
+                                            <p class="textaplicacion">
+                                                {{ $idiomaActive == 'ES' ? $aplicacion->nombre : $aplicacion->nombreAlternativo }}
+                                            </p>
                                         </div>
                                     </div>
                                     <div class="svg-overlay"></div>
@@ -55,32 +56,40 @@
         </div>
 
         <!-- Modal -->
-        <div class="modal fade modal-xl" id="modalAplicacion" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal fade modal-xl" id="modalAplicacion" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
+            aria-hidden="true">
             <div class="modal-dialog" role="document" style="background: white">
-                <div class="row d-flex" >
+                <div class="row d-flex">
                     <div class="col-lg-5">
                         <img src="" alt="Imagen de la aplicación" class="img-fluid" id="modalImagen">
 
                     </div>
                     <div class="col-lg-7">
                         <div class="d-flex flex-column justify-content-start align-items-end m-3" style="cursor: pointer;">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="background: none; border:none; cursor: pointer;">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" style="cursor: pointer;">
-                                    <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M15 9L9 15" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M9 9L15 15" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                  </svg>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                                style="background: none; border:none; cursor: pointer;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" style="cursor: pointer;">
+                                    <path
+                                        d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                                        stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M15 9L9 15" stroke="black" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path d="M9 9L15 15" stroke="black" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg>
                             </button>
                         </div>
                         <div class="m-4">
                             <h5 class="modal-title" id="modalLabel">Título de la aplicación</h5>
-                            <div class="modal-title mt-4" style="padding-right: 100px" id="modalTexto">Texto de la aplicación</div>
+                            <div class="modal-title mt-4" style="padding-right: 100px" id="modalTexto">Texto de la
+                                aplicación</div>
 
                         </div>
                     </div>
-           
-                
-             
+
+
+
                 </div>
             </div>
         </div>
@@ -88,25 +97,26 @@
 @endsection
 
 <style>
-     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-.indicador {
-    color: #000;
-font-family: Montserrat;
-font-size: 14px;
-font-style: normal;
-font-weight: 300;
-line-height: 60px;
-}
+    .indicador {
+        color: #000;
+        font-family: 'Poppins';
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 300;
+        line-height: 60px;
+    }
 
-.indicador b {
-    color: #000;
-font-family: Montserrat;
-font-size: 14px;
-font-style: normal;
-font-weight: 500;
-line-height: 60px; /* 428.571% */
-}
+    .indicador b {
+        color: #000;
+        font-family: 'Poppins';
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 60px;
+        /* 428.571% */
+    }
 
     .aplicacion {
         height: 288px;
@@ -153,7 +163,7 @@ line-height: 60px; /* 428.571% */
         margin: 0;
         color: #FFF;
         text-align: center;
-        font-family: "FuturaBook";
+        font-family: 'Poppins';
         font-size: 20px;
         font-style: normal;
         font-weight: 300 !important;
@@ -168,28 +178,29 @@ line-height: 60px; /* 428.571% */
         width: 100%;
         height: 100%;
     }
-    #modalImagen{
-height: 517px;
-flex-shrink: 0;
+
+    #modalImagen {
+        height: 517px;
+        flex-shrink: 0;
     }
 
-    #modalLabel{
+    #modalLabel {
         color: #000;
-font-family: "FuturaBook";
-font-size: 24px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
-text-transform: uppercase;
+        font-family: 'Poppins';
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        text-transform: uppercase;
     }
 
-    #modalTexto{
+    #modalTexto {
         color: #000;
-font-family: "FuturaBook";
-font-size: 18px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
+        font-family: 'Poppins';
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
     }
 </style>
 

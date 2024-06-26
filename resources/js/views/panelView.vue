@@ -153,11 +153,6 @@
                                 </svg>
                             </div>
                         </a>
-                        <div id="collapseProductos" class="collapse">
-                            <nav class="sidenav-menu-nested nav ">
-                                <a @click="mostrarComponenteF(25)" class="nav-link">Mostrar</a>
-                            </nav>
-                        </div>
 
                         <div id="collapseProductos" class="collapse">
                             <nav class="sidenav-menu-nested nav ">
@@ -165,6 +160,12 @@
                             </nav>
                         </div>
 
+                        <div id="collapseProductos" class="collapse">
+                            <nav class="sidenav-menu-nested nav ">
+                                <a @click="mostrarComponenteF(25)" class="nav-link">Productos</a>
+                            </nav>
+                        </div>
+                        
                         <!-- <div id="collapseProductos" class="collapse">
                             <nav class="sidenav-menu-nested nav ">
                                 <a @click="mostrarComponenteF(200)" class="nav-link">Litros</a>
@@ -565,9 +566,7 @@
                     <!--COMPONENTES SECCION -->
                     <EditBanner v-if="mostrarComponente === 7" /> <!--COMPONENTES SECCION HOME -->
                     <EditBanner v-if="mostrarComponente === 122" /> <!--COMPONENTES SECCION NOSOTROS-->
-                    <EditBanner v-if="mostrarComponente === 120" /> <!--COMPONENTES SECCION SERVICIO 1-->
-                    <EditBanner v-if="mostrarComponente === 121" /> <!--COMPONENTES SECCION SERVICIO 2-->
-                    <EditBanner v-if="mostrarComponente === 123" /> <!--COMPONENTES SECCION CALIDAD-->
+            
 
 
                     <!--COMPONENTES NOVEDADES -->
@@ -861,6 +860,8 @@ export default {
         },
 
         mostrarComponenteF(idComponente) {
+            $('#editor').summernote('destroy');
+            $('#editorAlternativo').summernote('destroy');
 
             this.$store.commit('mostrarComponente', idComponente);
         }

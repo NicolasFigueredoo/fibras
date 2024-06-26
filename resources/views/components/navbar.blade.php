@@ -20,26 +20,13 @@
             </button>
             <div class="collapse navbar-collapse justify-content-end align-items-end" id="navbarNavAltMarkup">
                 <div class="navbar-nav flex-column">
-                    <div class="d-flex justify-content-end align-items-center gap-2">
-                        <div>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"
-                                fill="none" data-bs-toggle="modal" data-bs-target="#searchModal" style="cursor: pointer">
-                                <path
-                                    d="M9.16667 15.8333C12.8486 15.8333 15.8333 12.8486 15.8333 9.16667C15.8333 5.48477 12.8486 2.5 9.16667 2.5C5.48477 2.5 2.5 5.48477 2.5 9.16667C2.5 12.8486 5.48477 15.8333 9.16667 15.8333Z"
-                                    stroke="#00245D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                <path d="M17.5001 17.5001L13.9167 13.9167" stroke="#00245D" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                        </div>
-                        <div>
-                            <span style="color: #00245D">|</span>
-                        </div>
+                    <div class="d-flex justify-content-end align-items-center gap-2" id="idiomaSelect">
+
                         <div style="display: flex; align-items: center;">
                             @if ($idiomaActive == 'ES')
                                 <select class="form-select3 idioma-select" aria-label="Default select example">
                                 @else
-                                    <select class="form-select2 idioma-select"
-                                        aria-label="Default select example">
+                                    <select class="form-select2 idioma-select" aria-label="Default select example">
                             @endif
                             @foreach ($idiomas as $idioma)
                                 @if ($idioma->activo == 1)
@@ -54,7 +41,7 @@
 
 
                     </div>
-                    <div class="d-flex justify-content-end align-items-center">
+                    <div class="d-flex justify-content-end align-items-center" id="linksSelect">
                         @foreach ($opcionesNavegador as $option)
                             <a class="nav-link text-black {{ $option['active'] ? 'font-weight-bold' : '' }}"
                                 href="{{ $option['url'] }}">{{ $option['name'] }}</a>
@@ -81,7 +68,8 @@
                 <input type="text" class="form-control" id="searchInput" placeholder="Ingrese su búsqueda">
                 <div id="productResults" class="mt-3">
                     @foreach ($productos as $producto)
-                    <div class="product-item mb-2" data-name="{{ strtolower($producto->nombre) }}" data-description="{{ strtolower($producto->descripcion) }}">
+                        <div class="product-item mb-2" data-name="{{ strtolower($producto->nombre) }}"
+                            data-description="{{ strtolower($producto->descripcion) }}">
                             <a href="{{ route('categoria', ['id' => $producto->categorias[0]->id, 'idProducto' => $producto->id]) }}"
                                 class="row d-flex text-decoration-none">
                                 @foreach ($producto->imagenes as $index => $imagen)
@@ -104,19 +92,18 @@
 
                                 <div class="col-lg-6 m-3">
                                     @if ($idiomaActive == 'ES')
-
-                                    <p class="categoriaText">{{ $producto->categorias[0]->nombre }}</p>
-                                    <p class="categoriaTextProducto">{{ $producto->nombre }}</p>
+                                        <p class="categoriaText">{{ $producto->categorias[0]->nombre }}</p>
+                                        <p class="categoriaTextProducto">{{ $producto->nombre }}</p>
                                     @else
-                                    <p class="categoriaText">{{ $producto->categorias[0]->nombreAlternativo }}</p>
-                                    <p class="categoriaTextProducto">{{ $producto->nombreAlternativo }}</p>
+                                        <p class="categoriaText">{{ $producto->categorias[0]->nombreAlternativo }}</p>
+                                        <p class="categoriaTextProducto">{{ $producto->nombreAlternativo }}</p>
                                     @endif
                                 </div>
 
                             </a>
 
                         </div>
-                @endforeach
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -163,18 +150,43 @@
                 }
             });
         });
+
+        let i = 0;
+
+        $('.navbar-toggler').on('click', function() {
+
+            if (i > 0) {
+                if ($('#navbarNavAltMarkup').hasClass('collapsing')) {
+                    location.reload()
+
+                }
+
+            }
+
+            i++
+
+
+
+
+        });
     });
 </script>
 
 <style scoped>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
     .navbar {
         height: 130px;
-        background: transparent;
+    }
+
+    .nav-link {
+        font-family: "Poppins";
+
     }
 
     .categoriaText {
         color: var(--azul, #00245D);
-        font-family: "FuturaBookMd";
+        font-family: "Poppins";
         font-size: 14px;
         font-style: normal;
         font-weight: 700;
@@ -184,7 +196,7 @@
 
     .categoriaTextProducto {
         color: var(--azul, #000);
-        font-family: "FuturaBookMd";
+        font-family: "Poppins";
         font-size: 18px;
         font-style: normal;
         font-weight: 700;
@@ -195,89 +207,91 @@
 
     .form-select3 {
 
-background-color: transparent !important;
-border: none !important;
-outline: none !important;
-cursor: pointer;
-color: #00245D !important;
-font-size: 18px;
-padding: 0.375rem 0.25rem 0.375rem 0rem !important;
--webkit-appearance: none;
--moz-appearance: none;
-appearance: none;
-background-repeat: no-repeat;
-background-position: right 0px center !important;
-background-image: url('{{ asset('svgs/chevron-down2.svg') }}') !important;
-background-size: 18px !important;
-color: #FFF;
-text-align: right;
-font-family: "FuturaBook" !important;
-font-size: 18px !important;
-font-style: normal;
-font-weight: 500;
-line-height: normal;
+        background-color: transparent !important;
+        border: none !important;
+        outline: none !important;
+        cursor: pointer;
+        color: #00245D !important;
+        font-size: 18px;
+        padding: 0.375rem 0.25rem 0.375rem 0rem !important;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background-repeat: no-repeat;
+        background-position: right 0px center !important;
+        background-image: url('{{ asset('svgs/chevron-down2.svg') }}') !important;
+        background-size: 18px !important;
+        color: #FFF;
+        text-align: right;
+        font-family: "Poppins";
+        font-size: 18px !important;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
 
-}
+    }
 
-.form-select3 option {
-color: #000;
-background-color: #fff;
-text-align: start;
-}
+    .form-select3 option {
+        color: white !important;
+        background-color: #00245D !important;
+        text-align: start;
+    }
 
-.form-select3::after {
-content: '\25BC';
-position: absolute;
-right: 1em;
-top: 50%;
-transform: translateY(-50%);
-pointer-events: none;
-color: white !important;
-font-size: 1em;
-}
+    .form-select3::after {
+        content: '\25BC';
+        position: absolute;
+        right: 1em;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+        color: white !important;
+        font-size: 1em;
+    }
 
 
-.form-select2 {
+    .form-select2 {
 
-background-color: transparent !important;
-border: none !important;
-outline: none !important;
-cursor: pointer;
-color: #00245D !important;
-font-size: 18px;
-padding: 0.375rem 1.20rem 0.375rem 0rem !important;
--webkit-appearance: none;
--moz-appearance: none;
-appearance: none;
-background-repeat: no-repeat;
-background-position: right 0px center !important;
-background-image: url('{{ asset('svgs/chevron-down2.svg') }}') !important;
-text-align: right;
-font-family: "FuturaBook" !important;
-font-size: 18px !important;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
-background-size: 18px !important;
+        background-color: transparent !important;
+        border: none !important;
+        outline: none !important;
+        cursor: pointer;
+        color: #00245D !important;
+        font-size: 18px;
+        padding: 0.375rem 1.20rem 0.375rem 0rem !important;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background-repeat: no-repeat;
+        background-position: right 0px center !important;
+        background-image: url('{{ asset('svgs/chevron-down2.svg') }}') !important;
+        text-align: right;
+        font-family: "Poppins";
+        font-size: 18px !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        background-size: 18px !important;
 
-}
+    }
 
-.form-select2 option {
-color: #000;
-background-color: #fff;
-text-align: start;
-}
 
-.form-select2::after {
-content: '\25BC';
-position: absolute;
-right: 1em;
-top: 50%;
-transform: translateY(-50%);
-pointer-events: none;
-color: white !important;
-font-size: 1em;
-}
+    .form-select2 option {
+        color: white !important;
+        background-color: #00245D !important;
+        text-align: start;
+
+    }
+
+    .form-select2::after {
+        content: '\25BC';
+        position: absolute;
+        right: 1em;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+        color: white !important;
+        font-size: 1em;
+    }
 
     .imagenNavbar {
         width: 280px;
@@ -287,5 +301,32 @@ font-size: 1em;
 
     .font-weight-bold {
         font-weight: bold;
+    }
+
+    @media screen and (max-width: 1000px) {
+
+        .navbar {
+            height: auto;
+        }
+
+        .tarjeta {
+            margin-top: 20px
+        }
+
+        #idiomaSelect {
+            display: flex !important;
+            justify-content: center !important;
+            flex-direction: column !important;
+        }
+
+        #linksSelect {
+            display: flex !important;
+            justify-content: center !important;
+            flex-direction: column !important;
+
+        }
+
+
+
     }
 </style>

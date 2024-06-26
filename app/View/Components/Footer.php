@@ -38,18 +38,18 @@ class Footer extends Component
             $opcionesNavegador = [
                 ['name' => 'Nosotros', 'url' => route('nosotros')],
                 ['name' => 'Productos', 'url' => route('productos')],
-                ['name' => 'Aplicaciones', 'url' => '#'],  
-                ['name' => 'Novedades', 'url' => '#'], 
-                ['name' => 'Solicitud de presupuesto', 'url' => '#'],  
+                ['name' => 'Aplicaciones', 'url' => route('aplicaciones')],  
+                ['name' => 'Novedades', 'url' => route('novedades')], 
+                ['name' => 'Solicitud de presupuesto', 'url' => route('presupuesto')],  
                 ['name' => 'Contacto', 'url' => route('contacto')],
             ];
         }else{
             $opcionesNavegador = [
                 ['name' => 'Sobre nós', 'url' => route('nosotros')],
                 ['name' => 'Produtos', 'url' => route('productos')],
-                ['name' => 'Aplicações', 'url' => '#'],  
-                ['name' => 'Novidades', 'url' => '#'], 
-                ['name' => 'Solicitação de orçamento', 'url' => '#'], 
+                ['name' => 'Aplicações', 'url' => route('aplicaciones')],  
+                ['name' => 'Novidades', 'url' => route('novedades')], 
+                ['name' => 'Solicitação de orçamento', 'url' => route('presupuesto')], 
                 ['name' => 'Contato', 'url' => route('contacto')],
         
             ];

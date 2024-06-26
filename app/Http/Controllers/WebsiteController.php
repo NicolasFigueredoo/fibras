@@ -30,6 +30,7 @@ class WebsiteController extends Controller
             $tituloSeccionProductos = 'Productos';
             $tituloSeccionNovedades = 'novedades';
             $textoBoton = 'Ver todos';
+            $textoBotonNovedad = 'Ver todas';
             $idiomaActive = 'ES';
 
             $opcionesNavegador = [
@@ -43,6 +44,7 @@ class WebsiteController extends Controller
         }else{
             $tituloSeccionProductos = 'Produtos';
             $tituloSeccionNovedades = 'Novidades';
+            $textoBotonNovedad = 'Ver tudo';
             $textoBoton = 'Ver tudo';
             $idiomaActive = 'POR';
 
@@ -71,7 +73,7 @@ class WebsiteController extends Controller
         foreach ($sliders as $slider) {
             $imagenPath = $slider->imagen;
             $extension = pathinfo($imagenPath, PATHINFO_EXTENSION);
-            $validImageExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+            $validImageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
             $validVideoExtensions = ['mp4', 'avi', 'mov', 'wmv'];
     
             if (in_array($extension, $validImageExtensions)) {
@@ -85,19 +87,18 @@ class WebsiteController extends Controller
             }
         }
 
-        return view('home', compact('sliders', 'logo', 'categorias', 'seccion', 'novedades', 'tituloSeccionProductos', 'opcionesNavegador', 'idiomaActive', 'tituloSeccionNovedades', 'textoBoton', 'idiomas', 'productos'));
+        return view('home', compact('sliders', 'logo', 'categorias', 'seccion', 'novedades', 'tituloSeccionProductos', 'opcionesNavegador', 'idiomaActive', 'tituloSeccionNovedades', 'textoBoton', 'idiomas', 'productos', 'textoBotonNovedad'));
     }
 
     public function nosotros()
     {
 
         $seccion = Banner::where('seccion','nosotros')->get();
-        $servicios = Valores::all();
         $idioma = Idioma::where('activo', 1)->first();
         $logo = Logo::all();
         $sliders = Slider::orderBy('orden')->where('seccion', 'nosotros')->get();
         $idiomas = Idioma::all();
-        $servicios = Valores::all();
+        $servicios = Valores::orderBy('orden')->get();
         $currentRoute = url()->current();
         $productos = Producto::with('categorias')->get();
 
@@ -105,7 +106,7 @@ class WebsiteController extends Controller
         foreach ($sliders as $slider) {
             $imagenPath = $slider->imagen;
             $extension = pathinfo($imagenPath, PATHINFO_EXTENSION);
-            $validImageExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+            $validImageExtensions = ['jpg', 'jpeg', 'png', 'gif','webp'];
             $validVideoExtensions = ['mp4', 'avi', 'mov', 'wmv'];
     
             if (in_array($extension, $validImageExtensions)) {

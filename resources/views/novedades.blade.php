@@ -6,74 +6,72 @@
             <p class="indicador"><b>Inicio</b> > Novedades</p>
         @else
             <p class="indicador"><b>Começar</b> > Novidades</p>
-        @endif        
+        @endif
 
-          
 
-                <div class="row flex-wrap sectores" style="margin-top: 50px">
-                    @foreach ($novedades as $novedad)
-                        <div class="col-lg-4">
-                            <a href="{{ route('novedad', ['idNovedad' => $novedad->id]) }}" style="text-decoration: none">
 
-                            <div class="sector">
-                                <div class="sector-imagen">
-                                    <div
-                                        style="background-image: url('{{ url('/getImage/' . basename($novedad->imagen)) }}');
+        <div class="row flex-wrap sectores" style="margin-top: 50px">
+            @foreach ($novedades as $novedad)
+                <div class="col-lg-4">
+                    <a href="{{ route('novedad', ['idNovedad' => $novedad->id]) }}" style="text-decoration: none">
+
+                        <div class="sector">
+                            <div class="sector-imagen">
+                                <div
+                                    style="background-image: url('{{ url('/getImage/' . basename($novedad->imagen)) }}');
                    background-size: cover; 
                    background-position: center;
                     background-repeat: no-repeat;
                     width: 100%;
                     height: 100%;">
-                                    </div>
-                                    <div class="contenedor-textSector p-4">
-                                        @if ($idiomaActive == 'ES')
-                                            <p class="textEtiqueta">{{ $novedad->etiqueta }}</p>
-                                            <p class="textSectores">{{ $novedad->titulo }}</p>
-                                            <p class="textEpigrafe">{{ $novedad->epigrafe }}</p>
-                                            <p class="textLeer">Leer más</p>
-                                        @else
-                                            <p class="textEtiqueta">{{ $novedad->etiquetaAlternativo }}</p>
-                                            <p class="textSectores">{{ $novedad->tituloAlternativo }}</p>
-                                            <p class="textEpigrafe">{{ $novedad->epigrafeAlternativo }}</p>
-                                            <p class="textLeer">ler mais</p>
-                                        @endif
-                                    </div>
+                                </div>
+                                <div class="contenedor-textSector p-4">
+                                    @if ($idiomaActive == 'ES')
+                                        <p class="textEtiqueta">{{ $novedad->etiqueta }}</p>
+                                        <p class="textSectores">{{ $novedad->titulo }}</p>
+                                        <p class="textEpigrafe">{{ $novedad->epigrafe }}</p>
+                                        <p class="textLeer">Leer más</p>
+                                    @else
+                                        <p class="textEtiqueta">{{ $novedad->etiquetaAlternativo }}</p>
+                                        <p class="textSectores">{{ $novedad->tituloAlternativo }}</p>
+                                        <p class="textEpigrafe">{{ $novedad->epigrafeAlternativo }}</p>
+                                        <p class="textLeer">ler mais</p>
+                                    @endif
                                 </div>
                             </div>
-                            </a>
                         </div>
-                    @endforeach
-
-
+                    </a>
                 </div>
+            @endforeach
+
+
+        </div>
 
 
     </div>
 @endsection
 
 <style scoped>
-    
-   
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+    .indicador {
+        color: #000;
+        font-family: 'Poppins';
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 300;
+        line-height: 60px;
+    }
 
-.indicador {
-    color: #000;
-font-family: Montserrat;
-font-size: 14px;
-font-style: normal;
-font-weight: 300;
-line-height: 60px;
-}
-
-.indicador b {
-    color: #000;
-font-family: Montserrat;
-font-size: 14px;
-font-style: normal;
-font-weight: 500;
-line-height: 60px; /* 428.571% */
-}
+    .indicador b {
+        color: #000;
+        font-family: 'Poppins';
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 60px;
+        /* 428.571% */
+    }
 
     .sectores {
         margin-bottom: 100px;
@@ -88,17 +86,17 @@ line-height: 60px; /* 428.571% */
 
     .textSectores {
         color: #000;
-        font-family: "FuturaBook";
-        font-size: 30px;
+        font-family: 'Poppins';
+        font-size: 25px;
         font-style: normal;
-        font-weight: bold !important;
+        font-weight: 400 ;
         line-height: 30px;
         padding-right: 50px;
     }
 
     .textLeer {
         color: rgba(0, 0, 0, 0.57);
-        font-family: "FuturaBook";
+        font-family: 'Poppins';
         font-size: 16px;
         font-style: normal;
         font-weight: 400;
@@ -108,19 +106,19 @@ line-height: 60px; /* 428.571% */
 
     .textEtiqueta {
         color: var(--azul, #00245D);
-        font-family: "FuturaBookMd";
+        font-family: 'Poppins';
         font-size: 16px;
         font-style: normal;
         line-height: normal;
         text-transform: uppercase;
-        font-weight: bold !important;
+        font-weight: 600 !important;
         margin-bottom: 4px;
 
     }
 
     .textEpigrafe {
         color: #000;
-        font-family: "FuturaBook";
+        font-family: 'Poppins';
         font-size: 18px;
         font-style: normal;
         font-weight: 400;
@@ -164,5 +162,4 @@ line-height: 60px; /* 428.571% */
         flex-grow: 1;
         padding: 16px;
     }
-
 </style>

@@ -93,11 +93,11 @@
 
 <style scoped>
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 .indicador {
     color: #000;
-font-family: Montserrat;
+font-family: 'Poppins';
 font-size: 14px;
 font-style: normal;
 font-weight: 300;
@@ -106,7 +106,7 @@ line-height: 60px;
 
 .indicador b {
     color: #000;
-font-family: Montserrat;
+font-family: 'Poppins';
 font-size: 14px;
 font-style: normal;
 font-weight: 500;
@@ -143,7 +143,7 @@ line-height: 60px; /* 428.571% */
 
 
     .contenedor-img {
-        width: 314px;
+        width: 100%;
         height: 314px;
         flex-shrink: 0;
         overflow: hidden;
@@ -156,7 +156,6 @@ line-height: 60px; /* 428.571% */
         background-position: center;
         width: 100%;
         height: 100%;
-        filter: brightness(80%);
         transition: transform 0.8s ease;
     }
 
@@ -171,7 +170,7 @@ line-height: 60px; /* 428.571% */
 
     .textCategoria {
         color: #000;
-        font-family: 'FuturaBook';
+        font-family: 'Poppins';
         font-size: 22px;
         font-style: normal;
         font-weight: 400;
@@ -210,7 +209,15 @@ line-height: 60px; /* 428.571% */
         cursor: pointer;
     }
 
-  
+     @media screen and (max-width: 1400px) {
+        
+        .textCategoria {
+        font-size: 20px;
+            white-space: nowrap;
+
+      
+    }
+    }
 
 
     @media screen and (max-width: 1000px) {

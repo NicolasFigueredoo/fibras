@@ -44,6 +44,8 @@ class Navbar extends Component
                 ['name' => 'Novedades', 'url' => route('novedades')], 
                 ['name' => 'Solicitud de presupuesto', 'url' => route('presupuesto')],  
                 ['name' => 'Contacto', 'url' => route('contacto')],
+                
+
             ];
         }else{
        

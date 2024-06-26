@@ -13,24 +13,17 @@
                 </div>
                 <div class="row col-lg-3">
                     <img class="imagen" :src="getImagen(this.imagen)" alt="">
-
-
                 </div>
-
             </div>
-
 
             <div class="row mt-3">
                 <div class="col-lg-6">
                     <label class="form-label">Título (Español)</label>
-                    <input type="text" class="form-control" id="titulo" :value="this.bannerTitulo">
-
+                    <input type="text" class="form-control" id="titulo" v-model="bannerTitulo">
                 </div>
                 <div class="col-lg-6">
                     <label class="form-label">Título (Portugués)</label>
-                    <input type="text" class="form-control" id="tituloAlternativo"
-                        :value="this.bannerTituloAlternativo">
-
+                    <input type="text" class="form-control" id="tituloAlternativo" v-model="bannerTituloAlternativo">
                 </div>
             </div>
 
@@ -45,19 +38,11 @@
                 </div>
             </div>
 
-
-
             <div class="w-100 d-flex justify-content-end mt-3">
-                <button @click="updateBanner()" type="button" class="btn"
-                    style="background-color: #7F7F7F; color: white;">Guardar</button>
+                <button @click="updateBanner" type="button" class="btn" style="background-color: #7F7F7F; color: white;">Guardar</button>
             </div>
-
         </form>
-
-
-
     </div>
-
 </template>
 
 <script>
@@ -66,8 +51,8 @@ import 'bootstrap';
 import 'summernote';
 import 'summernote/dist/summernote-bs4.css';
 import axios from 'axios';
-export default {
 
+export default {
     data() {
         return {
             foto: null,
@@ -81,8 +66,7 @@ export default {
             calidad: null,
             certificado: null,
             bannerTextoAlternativo: ''
-        }
-
+        };
     },
 
     computed: {
@@ -90,31 +74,32 @@ export default {
             return this.$store.getters['getMostrarComponente'];
         }
     },
+
     methods: {
         getImagen(fileName) {
             if (fileName) {
                 const filePath = fileName.split('/').pop();
-                return '/api/getImage/' + filePath
+                return '/api/getImage/' + filePath;
             }
         },
         guardarFoto() {
             const file = this.$refs.fotoBanner;
-            this.foto = file.files[0]
+            this.foto = file.files[0];
         },
         guardarPolitica() {
             const file = this.$refs.politicaCalidad;
-            this.calidad = file.files[0]
+            this.calidad = file.files[0];
         },
         guardarCertificado() {
             const file = this.$refs.CertificadoAnmat;
-            this.certificado = file.files[0]
+            this.certificado = file.files[0];
         },
         updateBanner() {
             let formData = new FormData();
             formData.append('idBanner', this.idBanner);
             formData.append('foto', this.foto);
-            formData.append('bannerTitulo', $('#titulo').val());
-            formData.append('bannerTituloAlternativo', $('#tituloAlternativo').val());
+            formData.append('bannerTitulo', this.bannerTitulo);
+            formData.append('bannerTituloAlternativo', this.bannerTituloAlternativo);
             formData.append('bannerTexto', $('#editor').summernote('code').toString());
             formData.append('bannerTextoAlternativo', $('#editorAlternativo').summernote('code').toString());
             formData.append('txtBoton', this.calidad);
@@ -135,79 +120,66 @@ export default {
                     this.$store.commit('setClaseAlerta', 2);
                     this.$store.commit('setMensajeAlerta', 'Error al actualizar el banner');
                 });
+        },
+        destroySummernote() {
+            if ($('#editor').data('summernote')) {
+                $('#editor').summernote('destroy');
+            }
+            if ($('#editorAlternativo').data('summernote')) {
+                $('#editorAlternativo').summernote('destroy');
+            }
+        },
+        initializeSummernote() {
+            $('#editor').summernote({
+                height: 300
+            });
+            $('#editorAlternativo').summernote({
+                height: 300
+            });
 
-
+            const noteBar = $('.note-toolbar');
+            noteBar.find('[data-toggle]').each(function () {
+                $(this).attr('data-bs-toggle', $(this).attr('data-toggle')).removeAttr('data-toggle');
+            });
         },
         summerNote() {
-
-
-            $('#editor').summernote({
-                height: 300,
-            });
-         
-
-
-            $('#editorAlternativo').summernote({
-                height: 300,
-            });
-     
-
-
+            this.destroySummernote();
+            this.initializeSummernote();
         },
         obtenerBannerInformacion() {
             axios.get(`/api/obtenerBanner`)
                 .then(response => {
+                    const data = response.data;
+                    const bannerData = data[this.idComponente === 7 ? 0 : 1];
 
-                    if (this.idComponente == 7) {
-                        console.log(response.data[0])
-                        this.bannerTexto = response.data[0].texto
-                        this.bannerTextoAlternativo = response.data[0].textoAlternativo
-                        this.bannerTitulo = response.data[0].titulo
-                        this.bannerTituloAlternativo = response.data[0].tituloAlternativo
-                        this.idBanner = response.data[0].id
-                        this.imagen = response.data[0].imagen
-                        this.seccion = response.data[0].seccion
-                        this.txtBoton = response.data[0].textoboton
-                        this.linkBoton = response.data[0].link
+                    this.bannerTexto = bannerData.texto;
+                    this.bannerTextoAlternativo = bannerData.textoAlternativo;
+                    this.bannerTitulo = bannerData.titulo;
+                    this.bannerTituloAlternativo = bannerData.tituloAlternativo;
+                    this.idBanner = bannerData.id;
+                    this.imagen = bannerData.imagen;
+                    this.seccion = bannerData.seccion;
+                    this.txtBoton = bannerData.textoboton;
+                    this.linkBoton = bannerData.link;
 
-                    } else if (this.idComponente == 122) {
-                        this.bannerTexto = response.data[1].texto
-                        this.bannerTextoAlternativo = response.data[1].textoAlternativo
-                        this.bannerTitulo = response.data[1].titulo
-                        this.idBanner = response.data[1].id
-                        this.imagen = response.data[1].imagen
-                        this.seccion = response.data[1].seccion
-                        this.txtBoton = response.data[1].textoboton
-                        this.linkBoton = response.data[1].link
-                        this.bannerTituloAlternativo = response.data[1].tituloAlternativo
-
-                    }
-
-                    $('#editor').summernote('code', this.bannerTexto);
-                    $('#editorAlternativo').summernote('code', this.bannerTextoAlternativo);
-
-
-
-
+                    this.summerNote();
+                    $('#editor').summernote('code', bannerData.texto);
+                    $('#editorAlternativo').summernote('code', bannerData.textoAlternativo);
                 })
                 .catch(error => {
                     console.error(error);
                 });
         }
     },
-    beforeDestroy() {
 
-        $('#editor').summernote('destroy');
-        $('#editorAlternativo').summernote('destroy');
-   },
     mounted() {
-
         this.summerNote();
         this.obtenerBannerInformacion();
+    },
 
-
+    beforeDestroy() {
+        this.destroySummernote();
     }
-
 }
 </script>
 
