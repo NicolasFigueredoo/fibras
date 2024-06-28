@@ -18,19 +18,19 @@ class EmailsController extends Controller
             'nombre' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'celular' => 'nullable|string|max:20',
-            'empresa' => 'required|string|max:255',
+            'apellido' => 'required|string|max:255',
             'mensaje' => 'nullable|string|max:1000',
         ]);
     
         $nombre = $validatedData['nombre'];
         $email = $validatedData['email'];
         $celular = $validatedData['celular'];
-        $empresa = $validatedData['empresa'];
+        $apellido = $validatedData['apellido'];
         $mensaje = $validatedData['mensaje'];
 
         $contacto = Contacto::first();
 
-        Mail::to($contacto->email)->send(new ContactoMail($nombre, $empresa, $email,$celular,$mensaje));
+        Mail::to($contacto->email)->send(new ContactoMail($nombre, $apellido, $email,$celular,$mensaje));
         return response()->json(['message' => 'mensajes enviados'], 200);
 
 
@@ -49,7 +49,8 @@ class EmailsController extends Controller
 
     }
 
-    public function enviarPresupuesto(Request $request){
+    public function enviarPresupuesto(Request $request)
+    {
         $validatedData = $request->validate([
             'nombre' => 'required|string|max:255',
             'email' => 'required|email|max:255',
@@ -61,20 +62,20 @@ class EmailsController extends Controller
             'mensaje' => 'nullable|string|max:1000',
         ]);
     
-        $nombre = $validatedData['nombre'];
-        $email = $validatedData['email'];
-        $telefono = $validatedData['telefono'];
-        $empresa = $validatedData['empresa'];
-        $producto = $validatedData['producto'];
-        $archivo = $request->file('archivo');
-        $archivoTwo = $request->file('archivoTwo');
-        $mensaje = $validatedData['mensaje'];
-        
         $contacto = Contacto::first();
-        Mail::to($contacto->email)->send(new PresupuestoMail($nombre, $email,$telefono,$empresa,$producto,$archivo,$archivoTwo, $mensaje));
-
+    
+        Mail::to($contacto->email)->send(new PresupuestoMail(
+            $validatedData['nombre'],
+            $validatedData['email'],
+            $validatedData['telefono'],
+            $validatedData['empresa'] ?? null,
+            $validatedData['producto'] ?? null,
+            $request->file('archivo'),
+            $request->file('archivoTwo'),
+            $validatedData['mensaje'] ?? null
+        ));
+    
         return response()->json(['message' => 'mensajes enviados'], 200);
-       
-
     }
+    
 }

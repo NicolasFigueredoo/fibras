@@ -279,7 +279,7 @@ export default {
             axios
                 .post("/enviarCorreo", {
                     nombre: self.nombre,
-                    empresa: self.empresa,
+                    apellido: self.empresa,
                     email: self.email,
                     celular: self.celular,
                     mensaje: self.mensaje

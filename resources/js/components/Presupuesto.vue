@@ -283,6 +283,7 @@ import $ from 'jquery';
 export default {
     data() {
         return {
+
             nombre: "",
             email: "",
             celular: "",
@@ -369,16 +370,37 @@ export default {
         },
         enviarPresupuesto() {
             $('#mensajePresupuesto').html('<p class="textE text-success">Enviando...</p>');
-         
+
             const formData = new FormData();
             formData.append('nombre', this.nombre);
             formData.append('email', this.email);
             formData.append('telefono', this.celular);
-            formData.append('empresa', this.empresa);
-            formData.append('producto', $('#selectProducto').val());
-            formData.append('archivo', this.archivoPrincipal); 
-            formData.append('archivoTwo', this.archivoTwo); 
-            formData.append('mensaje', this.mensaje);
+            if (this.empresa) {
+                formData.append('empresa', this.empresa);
+            }else{
+                formData.append('empresa', null);
+
+            }
+            if ($('#selectProducto').val()) {
+                formData.append('producto', $('#selectProducto').val());
+            }else{
+                formData.append('producto', null);
+
+            }
+
+            if (this.archivoPrincipal) {
+                formData.append('archivo', this.archivoPrincipal);
+            }
+            if (this.archivoTwo) {
+                formData.append('archivoTwo', this.archivoTwo);
+            }
+
+            if (this.mensaje) {
+                formData.append('mensaje', this.mensaje);
+            }else{
+                formData.append('mensaje', null);
+
+            }
 
             axios.post('/api/enviarPresupuesto', formData, {
                 headers: {
@@ -405,7 +427,7 @@ export default {
 </script>
 
 <style scoped>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 
 textarea::placeholder {
@@ -615,19 +637,19 @@ input {
     line-height: normal;
 }
 
-label{
+label {
     color: var(--negro, #000);
-font-family: "Poppins";
-font-size: 16px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
+    font-family: "Poppins";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 }
 
 @media screen and (max-width: 1000px) {
-        .inputs{
-            margin-top: 20px;
-        }
+    .inputs {
+        margin-top: 20px;
+    }
 
 }
 

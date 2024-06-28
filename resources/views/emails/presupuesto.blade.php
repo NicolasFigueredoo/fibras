@@ -8,16 +8,18 @@
 <body>
     <p>¡Hola!</p>
     <p>Cotizacion de presupuesto para {{ $nombre }}</p>
-    @if ($empresa)
+    @if($empresa !== 'null')
     <p> <strong>Empresa: </strong> {{ $empresa }}</p>
-    @endif
-    <p> <strong>Email: </strong>{{ $email }} <strong>Celular: </strong>{{ $telefono }}</p>
-    @if ($producto)
+    @endisset
 
-    <p>Sobre producto:</p>
+
+
+    <p> <strong>Email: </strong>{{ $email }} <strong>Celular: </strong>{{ $telefono }}</p>
+    @if ($producto !== 'null')
+    <p><strong>Sobre producto:</strong></p>
     <p>{{ $producto }}</p>
     @endif
-    @if ($mensaje)
+    @if ($mensaje !== 'null')
 
     <p> <strong>Mensaje: </strong> {{ $mensaje }}</p>
 
